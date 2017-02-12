@@ -32,13 +32,13 @@ header .header-logo {
 }
 #carousel {
 	width: 100%;
-	background-color: rgba(0,0,0,.8);
+	background-color: #5bb;
 }
 .myCarousel-indicators {
 	left: 0px;
 	margin: 0px;
 	width: 100%;
-	background-color: rgba(128,128,128,.5);
+	background-color: rgba(102,204,204,.3);
 }
 .myCarousel-inner {
 	box-sizing: border-box;
@@ -58,7 +58,7 @@ header .header-logo {
 footer {
 	position: relative;
 	padding: 40px;
-	background-color: #444;
+	background-color: #04477c;
 	text-align: center;
 }
 .footer-info h4 {
