@@ -50,6 +50,9 @@ header .header-logo {
 	background-image: none;
 /* 	background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0px, transparent 100%); */
 }
+#main {
+	padding-top: 50px;
+}
 
 /* footer */
 footer {
