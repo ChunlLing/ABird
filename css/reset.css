@@ -16,6 +16,10 @@ a {
 	text-decoration: none;
 }
 
+a:link, a:visited, a:focus, a:hover, a:active {
+	text-decoration: none;
+}
+
 img {
 	border: none;
 	display: block;

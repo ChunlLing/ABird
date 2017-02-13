@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
@@ -47,7 +48,7 @@
 		<div class="container">
 			<a href="index.html" class="header-logo"></a>
 			<div class="pull-right">
-				<a href="javascript:void(0)" id="reg-a" class="text-member">注册</a>
+				<a href="javascript:void(0)" id="reg-a" class="text-member" data-toggle="modal" data-target="#modal-reg">注册</a>
 				<span class="seperate"></span>
 				<a href="javascript:void(0)" id="login-a" class="text-member">登录</a>
 			</div>
@@ -135,7 +136,7 @@
 
 	<!-- 会员注册 -->
 	<div class="container">
-		<div class="modal show">
+		<div class="modal" id="modal-reg">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -143,8 +144,7 @@
 						<h4 class="modal-title">会员注册</h4>
 					</div>
 					<div class="modal-body">
-
-						<form action="" class="form-horizontal">
+						<form action="123.html" id="reg" class="form-horizontal">
 							<div class="form-group">
 								<label for="user" class="col-md-2 col-sm-2 col-xs-12 control-label">昵称</label>
 								<div class="col-md-8 col-sm-8 col-xs-12">
@@ -169,13 +169,10 @@
 									<input type="text" class="form-control" id="email" title="请输入正确的邮箱！">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="" class="col-md-2 col-sm-2 col-xs-12 control-label"></label>
-								<div class="col-md-8 col-sm-8 col-xs-12">
-									<input type="text" class="form-control">
-								</div>
-							</div>
 						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" id="reg-submit">注册</button>
 					</div>
 				</div>
 			</div>
