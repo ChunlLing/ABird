@@ -102,4 +102,88 @@
 			});
 		}
 	});
+
+	// 登录对话框表单验证
+	$('#login').validate({
+		errorElement : 'span',
+		errorClass : 'help-block',
+		rules : {
+			login_user : {
+				required : true,
+				minlength : 2,
+			},
+			login_pass : {
+				required : true,
+				minlength : 6,
+				remote : {
+					url : 'login.php',
+					type : 'POST',
+					data : {
+						login_user : function () {
+							return $('#login_user').val();
+						},
+					},
+				},
+			},
+		},
+		messages : {
+			login_user : {
+				required : '昵称不得为空！',
+				minlength : '昵称不得小于{0}位！',
+			},
+			login_pass : {
+				required : '密码不得为空！',
+				minlength : '密码不得小于{0}位！',
+				remote : '昵称或密码错误！',
+			},
+		},
+		errorPlacement : function(error, element) {
+			element.next().remove();
+			element.after('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+			element.closest('.form-group').append(error);
+		},
+		highlight : function(element) {
+			$(element).closest('.form-group').addClass('has-error has-feedback');
+		},
+		success : function(label) {
+			var el = label.closest('.form-group').find("input");
+			el.next().remove();
+			el.after('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
+			label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
+			label.remove();
+		},
+		submitHandler: function(form) { 
+			$(form).ajaxSubmit({
+				url : 'login.php',
+				type : 'POST',
+				beforeSubmit : function (formData, jqForm, options) {
+					$('#loading-dialog').modal('show');
+					$('#login').find('button').each(function (index) {
+						$(this).addClass('disabled');
+					});
+				},
+				success : function (responseText, statusText) {
+					if (responseText) {
+						$('#loading-dialog').modal('hide');
+						$('#login').find('button').each(function (index) {
+							$(this).removeClass('disabled');
+						});
+						$('#success-dialog').modal('show');
+						$.cookie('user', $('#login_user').val());
+						setTimeout(function () {
+							$('#success-dialog').modal('hide');
+							$('#modal-login').modal('hide');
+							$('#login').resetForm();
+							$('#login').find('input').each(function (index) {
+								$(this).removeClass().addClass('form-control');
+							});
+							$('#reg-a, #login-a').hide();
+							$('#member, #logout').show();
+							$('#member').html($.cookie('user'));
+						}, 1000);
+					}
+				},
+			});
+		}
+	});
 });
