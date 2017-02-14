@@ -1,4 +1,7 @@
 ;$(function () {
+	// 未登录状态隐藏用户和退出
+	$('#member, #logout').hide();
+
 	// 注册对话框表单验证
 	$('#reg').validate({
 		errorElement : 'span',
@@ -53,7 +56,7 @@
 			$(element).closest('.form-group').addClass('has-error has-feedback');
 		},
 		success : function(label) {
-			var el=label.closest('.form-group').find("input");
+			var el = label.closest('.form-group').find("input");
 			el.next().remove();
 			el.after('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
 			label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
@@ -71,54 +74,26 @@
 				},
 				success : function (responseText, statusText) {
 					if (responseText) {
-						$('#loading-dialog').modal('hidden');
+						$('#loading-dialog').modal('hide');
 						$('#reg').find('button').each(function (index) {
-							$(this).remoteClass('disabled');
+							$(this).removeClass('disabled');
 						});
 						$('#success-dialog').modal('show');
+						$.cookie('user', $('#user').val());
+						setTimeout(function () {
+							$('#success-dialog').modal('hide');
+							$('#modal-reg').modal('hide');
+							$('#reg').resetForm();
+							$('#reg').find('input').each(function (index) {
+								$(this).removeClass().addClass('form-control');
+							});
+							$('#reg-a, #login-a').hide();
+							$('#member, #logout').show();
+							$('#member').html($.cookie('user'));
+						}, 1000);
 					}
 				},
 			});
 		}
 	});
-			/*
-	$('#reg').validate({
-		submitHandler : function (form) {
-			$(form).ajaxSubmit({
-				url : 'add_user.php',
-				type : 'POST',
-				beforeSubmit : function (formData, jqForm, options) {
-					alert('beforeSubmit');
-				},
-				success : function (responseText, statusText) {
-					if (responseText) {
-						$.cookie('user', $('#user').val());
-					}
-					else {
-						console.log('error');
-					}
-					setTimeout(function () {
-						$('#reg').hide().resetForm();
-					}, 1000);
-				},
-			});
-			alert('submitHandler');
-		},
-		showError : function (errorMap, errorList) {
-			var errors = this.numberOfInvalids();
-			if (errors > 0) {
-				alert(errors);
-			} else {
-				alert('errors = 0');
-			}
-			this.defaultShowErrors();
-		},
-		hightlight : function (element, errorClass) {
-			$(element).addClass('text-danger');
-		},
-		unhightlight : function (element, errorClass) {
-			$(element).removeClass('text-danger');
-		},
-	});
-			*/
 });
