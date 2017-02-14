@@ -53,7 +53,7 @@
 				<a href="javascript:void(0)" id="reg-a" class="text-member" data-toggle="modal" data-target="#modal-reg">注册</a>
 				<a href="javascript:void(0)" id="member" class="text-member">用户</a>
 				<span class="seperate"></span>
-				<a href="javascript:void(0)" id="login-a" class="text-member">登录</a>
+				<a href="javascript:void(0)" id="login-a" class="text-member" data-toggle="modal" data-target="#modal-login">登录</a>
 				<a href="javascript:void(0)" id="logout" class="text-member">退出</a>
 			</div>
 		</div>
@@ -177,6 +177,41 @@
 								<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
 									<button type="submit" class="btn btn-primary btn-lg">注册</button>
 									<button type="reset" class="btn btn-default btn-lg">重置</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 会员注册 -->
+	<div class="container">
+		<div class="modal" id="modal-login" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+						<h4 class="modal-title">会员登录</h4>
+					</div>
+					<div class="modal-body">
+						<form action="123.html" id="login" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="user" class="col-md-3 col-sm-3 col-xs-12 control-label">昵称</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="text" class="form-control" id="user-login" name="user">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pass" class="col-md-3 col-sm-3 col-xs-12 control-label">密码</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="password" class="form-control" id="pass-login" name="pass">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
+									<button type="submit" class="btn btn-primary btn-lg">登录</button>
 								</div>
 							</div>
 						</form>
