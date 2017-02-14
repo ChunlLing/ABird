@@ -9,10 +9,10 @@
 	define('DB_USER', 'root');
 
 	// mySQL密码
-	define('DB_PWD', 'fwork0310');
+	define('DB_PWD', '123456');
 
 	// mySQL数据库
-	define('DB_NAME', 'abrid');
+	define('DB_NAME', 'abird');
 
 	// 连接MySQL
 	$conn = @mysql_connect(DB_HOST, DB_USER, DB_PWD) or die('数据库连接失败：'.mysql_error());
