@@ -2,6 +2,12 @@
 	// 未登录状态隐藏用户和退出
 	$('#member, #logout').hide();
 
+	// 点击退出
+	$('#logout').click(function () {
+		$.removeCookie('user');
+		window.location.href = '/abird/';
+	});
+
 	// 注册对话框表单验证
 	$('#reg').validate({
 		errorElement : 'span',
