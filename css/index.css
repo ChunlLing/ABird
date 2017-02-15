@@ -34,6 +34,14 @@ header .header-logo {
 }
 
 /* content */
+/* member-dropdown */
+#member-dropdown .dropdown-menu {
+	top: 80px;
+	min-width: 100px;
+}
+#member-dropdown .dropdown-menu li {
+	width: 100px;
+}
 #content {
 	position: relative;
 	margin-bottom: 50px;

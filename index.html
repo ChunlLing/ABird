@@ -51,7 +51,15 @@
 			<a href="index.html" class="header-logo"></a>
 			<div class="pull-right">
 				<a href="javascript:void(0)" id="reg-a" class="text-member" data-toggle="modal" data-target="#modal-reg">注册</a>
-				<a href="javascript:void(0)" id="member" class="text-member">用户</a>
+				<div class="dropdown" id="member-dropdown">
+					<a href="javascript:void(0)" id="member" class="text-member" data-toggle="dropdown">用户</a>
+					<span class="caret"></span>
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="javascript:void(0)">发帖</a></li>
+						<li><a href="javascript:void(0)">我的帖子</a></li>
+						<li><a href="javascript:void(0)">我的收藏</a></li>
+					</ul>
+				</div>
 				<span class="seperate"></span>
 				<a href="javascript:void(0)" id="login-a" class="text-member" data-toggle="modal" data-target="#modal-login">登录</a>
 				<a href="javascript:void(0)" id="logout" class="text-member">退出</a>

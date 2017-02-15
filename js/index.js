@@ -1,6 +1,6 @@
 ;$(function () {
 	// 未登录状态隐藏用户和退出
-	$('#member, #logout').hide();
+	$('#member-dropdown, #logout').hide();
 
 	// 点击退出
 	$('#logout').click(function () {
@@ -94,7 +94,7 @@
 								$(this).removeClass().addClass('form-control');
 							});
 							$('#reg-a, #login-a').hide();
-							$('#member, #logout').show();
+							$('#member-dropdown, #logout').show();
 							$('#member').html($.cookie('user'));
 						}, 1000);
 					}
@@ -178,7 +178,7 @@
 								$(this).removeClass().addClass('form-control');
 							});
 							$('#reg-a, #login-a').hide();
-							$('#member, #logout').show();
+							$('#member-dropdown, #logout').show();
 							$('#member').html($.cookie('user'));
 						}, 1000);
 					}
