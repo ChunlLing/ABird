@@ -33,6 +33,12 @@ header .header-logo {
 	line-height: 100px;
 }
 
+/* editor */
+#post_content {
+	overflow-y: scroll;
+	max-height: 300px;
+}
+
 /* content */
 /* member-dropdown */
 #member-dropdown .dropdown-menu {
