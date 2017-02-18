@@ -59,6 +59,10 @@ header .header-logo {
 .myCarousel-inner {
 	box-sizing: border-box;
 }
+.myCarousel-inner .item {
+	overflow: hidden;
+	height: 120px;
+}
 .myCarousel-inner img {
 	margin: 0 auto;
 }
@@ -92,3 +96,19 @@ footer {
 	display: block;
 }
 
+/* 响应式 */
+@media (min-width: 768px) {
+	.myCarousel-inner .item {
+		height: 260px;
+	}
+}
+@media (min-width: 992px) {
+	.myCarousel-inner .item {
+		height: 320px;
+	}
+}
+@media (min-width: 1200px) {
+	.myCarousel-inner .item {
+		height: 320px;
+	}
+}
