@@ -69,6 +69,9 @@ header .header-logo {
 #main {
 	padding-top: 50px;
 }
+.note-item h2, .note-item h4, .note-item p, .note-item span {
+	line-height: 1.8em;
+}
 
 /* footer */
 footer {
