@@ -187,13 +187,13 @@
 
 	// 发帖对话框
 	$('#post').find(':submit').click(function (e) {
-		// alert('submit');
 		e.preventDefault();
 		$(this).ajaxSubmit({
 			url : 'add_note.php',
 			type : 'POST',
 			data : {
 				user : $.cookie('user'),
+				post_title : $('#post_title').val(),
 				post_content : $('#ueditor_0').contents().find('body').html(),
 				post_label : $('#post').find(':radio:checked').val(),
 			},
@@ -232,5 +232,20 @@
 		elementPathEnabled : false,
 		minFrameWidth : 372,
 		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
+	});
+
+	// 动态添加
+	$.ajax({
+		url : 'show_note.php',
+		type : 'POST',
+		success : function (response, status, xhr) {
+			var json = $.parseJSON(response);
+			var html = '';
+			var arr = [];
+			$.each(json, function (index, value) {
+				html += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + value.content + '</div></div>';
+			});
+			$('.panel-body').append(html);
+		},
 	});
 });
