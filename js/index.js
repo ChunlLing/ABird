@@ -1,6 +1,10 @@
 ;$(function () {
+	// 测试
+	$.cookie('user', '网络');
+	$('#reg-a, #login-a').hide();
+
 	// 未登录状态隐藏用户和退出
-	$('#member-dropdown, #logout').hide();
+	// $('#member-dropdown, #logout').hide();
 
 	// 注册对话框表单验证
 	$('#reg').validate({
@@ -181,6 +185,42 @@
 		}
 	});
 
+	// 发帖对话框
+	$('#post').find(':submit').click(function (e) {
+		// alert('submit');
+		e.preventDefault();
+		$(this).ajaxSubmit({
+			url : 'add_note.php',
+			type : 'POST',
+			data : {
+				user : $.cookie('user'),
+				post_content : $('#ueditor_0').contents().find('body').html(),
+				post_label : $('#post').find(':radio:checked').val(),
+			},
+			beforeSubmit : function (formData, jqForm, options) {
+				$('#loading-dialog').modal('show');
+				$('#post').find('button').each(function (index) {
+					$(this).addClass('disabled');
+				});
+			},
+			success : function (responseText, statusText) {
+				if (responseText) {
+					$('#loading-dialog').modal('hide');
+					$('#post').find('button').each(function (index) {
+						$(this).removeClass('disabled');
+					});
+					$('#success-dialog').modal('show');
+					setTimeout(function () {
+						$('#success-dialog').modal('hide');
+						$('#modal-post').modal('hide');
+						$('#post').resetForm();
+						$('#ueditor_0').contents().find('body').html('请输入内容...');
+					}, 1000);
+				}
+			},
+		});
+	});
+
 	// 点击退出
 	$('#logout').click(function () {
 		$.removeCookie('user');
@@ -191,7 +231,6 @@
 	var ue = UE.getEditor('post_content', {
 		elementPathEnabled : false,
 		minFrameWidth : 372,
-		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']
-],
+		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
 	});
 });
