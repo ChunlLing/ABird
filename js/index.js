@@ -253,7 +253,7 @@
 					html_paper += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
 				} else if (value.label == '厨艺') {
 					html_cooking += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
-				} else if (value.label == '其他') {
+				} else if (value.label == '其它') {
 					html_other += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
 				}
 			});
