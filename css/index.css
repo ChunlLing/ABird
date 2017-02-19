@@ -87,14 +87,15 @@ header .header-logo {
 footer {
 	position: relative;
 	padding: 40px;
-	background-color: #04477c;
+	background-color: #05173b;
 	text-align: center;
 }
 .footer-info h4 {
-	font-size: 22px;
+	color: #999;
+	font-size: 18px;
 }
 .footer-text {
-	font-size: 16px;
+	font-size: 14px;
 	color: #eee;
 	line-height: 1.8em;
 }
@@ -107,14 +108,32 @@ footer {
 	.myCarousel-inner .item {
 		height: 260px;
 	}
+	.footer-info h4 {
+		font-size: 20px;
+	}
+	.footer-text {
+		font-size: 15px;
+	}
 }
 @media (min-width: 992px) {
 	.myCarousel-inner .item {
 		height: 320px;
 	}
+	.footer-info h4 {
+		font-size: 22px;
+	}
+	.footer-text {
+		font-size: 16px;
+	}
 }
 @media (min-width: 1200px) {
 	.myCarousel-inner .item {
 		height: 320px;
+	}
+	.footer-info h4 {
+		font-size: 22px;
+	}
+	.footer-text {
+		font-size: 16px;
 	}
 }

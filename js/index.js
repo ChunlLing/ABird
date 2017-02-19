@@ -194,7 +194,7 @@
 			data : {
 				user : $.cookie('user'),
 				post_title : $('#post_title').val(),
-				post_content : $('#ueditor_0').contents().find('body').html(),
+				post_content : encodeURIComponent(ue.getContent()),
 				post_label : $('#post').find(':radio:checked').val(),
 			},
 			beforeSubmit : function (formData, jqForm, options) {
@@ -239,13 +239,30 @@
 		url : 'show_note.php',
 		type : 'POST',
 		success : function (response, status, xhr) {
+			console.log(response);
 			var json = $.parseJSON(response);
-			var html = '';
+			var html_handicraft = '';
+			var html_paper = '';
+			var html_cooking = '';
+			var html_other = '';
 			var arr = [];
 			$.each(json, function (index, value) {
-				html += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + value.content + '</div></div>';
+				if (value.label == '手艺') {
+					html_handicraft += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+				} else if (value.label == '纸艺') {
+					html_paper += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+				} else if (value.label == '厨艺') {
+					html_cooking += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+				} else if (value.label == '其他') {
+					html_other += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+				}
 			});
-			$('.panel-body').append(html);
+			$('#handicraft .panel-body').append(html_handicraft);
+			$('#paper .panel-body').append(html_paper);
+			$('#cooking .panel-body').append(html_cooking);
+			$('#other .panel-body').append(html_other);
 		},
 	});
 });
+
+// 将文本中的引号、冒号转义

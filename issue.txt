@@ -70,4 +70,4 @@ A : .val()
 14
 0:50 2017/2/19
 Q : 含有英文引号的正文会对json获取产生影响
-A : 
+A : encodeURICompontent编码，decodeURICompontent解码
