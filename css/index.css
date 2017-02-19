@@ -80,6 +80,8 @@ header .header-logo {
 	padding-top: 50px;
 }
 .note-item {
+	padding-bottom: 20px;
+	overflow: hidden;
 	border-bottom: 1px solid #ccc;
 }
 .note-item:last-child {

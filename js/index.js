@@ -239,30 +239,64 @@
 		url : 'show_note.php',
 		type : 'POST',
 		success : function (response, status, xhr) {
-			console.log(response);
 			var json = $.parseJSON(response);
+			var html = new Array(4);
+			$(html).each(function (index, value) {
+				html[index] = '';
+			});
 			var html_handicraft = '';
 			var html_paper = '';
 			var html_cooking = '';
 			var html_other = '';
 			var arr = [];
+			var summary = [];
 			$.each(json, function (index, value) {
 				if (value.label == '手艺') {
-					html_handicraft += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+					html[0] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				} else if (value.label == '纸艺') {
-					html_paper += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+					html[1] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				} else if (value.label == '厨艺') {
-					html_cooking += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+					html[2] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				} else if (value.label == '其它') {
-					html_other += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div></div>';
+					html[3] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				}
 			});
-			$('#handicraft .panel-body').append(html_handicraft);
-			$('#paper .panel-body').append(html_paper);
-			$('#cooking .panel-body').append(html_cooking);
-			$('#other .panel-body').append(html_other);
+			$('#handicraft .panel-body').append(html[0]);
+			$('#paper .panel-body').append(html[1]);
+			$('#cooking .panel-body').append(html[2]);
+			$('#other .panel-body').append(html[3]);
+			$.each($('.note-content'), function (index, value) {
+				arr[index] = $(value).html();
+				summary[index] = arr[index].substr(0, 100);
+				if (summary[index].substring(99, 100) == '<') {
+					summary[index] = replascePos(summary[index], 100, '');
+				}
+				if (summary[index].substring(98, 100) == '</') {
+					summary[index] = replascePos(summary[index], 100, '');
+					summary[index] = replascePos(summary[index], 99, '');
+				}
+				if (arr[index].length > 100) {
+					summary[index] += '……';
+					$(value).html(summary[index]);
+				}
+				$('button.up').addClass('hidden');
+				$('button.down').removeClass('hidden');
+			});
+			$.each($('.note-content'), function (index, value) {
+				$(this).on('click', '.down', function () {
+					alert($(this));
+					$('.note-content').eq(index).html(arr[index]);
+					$(this).addClass('hidden');
+					$('button.up').eq(index).removeClass('hidden');
+				});
+			});
 		},
 	});
 });
 
-// 将文本中的引号、冒号转义
+
+// 显示概要
+function replascePos(strObj, pos, replaceText) {
+	var str = strObj.substr(0, pos - 1) + replaceText + strObj.substring(pos, strObj.length);
+	return str;
+}
