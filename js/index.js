@@ -1,12 +1,17 @@
 ;$(function () {
+
 	// 未登录状态隐藏用户和退出
 	$('#member-dropdown, #logout').hide();
 
-	// 点击退出
-	$('#logout').click(function () {
-		$.removeCookie('user');
-		window.location.href = '/abird/';
-	});
+	// 如果有user名的cookie存在即用户登录
+	if ($.cookie('user')) {
+		$('#reg-a, #login-a').hide();
+		$('#member-dropdown, #logout').show();
+		$('#member').html($.cookie('user'));
+	} else {
+		$('#member-dropdown, #logout').hide();
+		$('#reg-a, #login-a').show();
+	}
 
 	// 注册对话框表单验证
 	$('#reg').validate({
@@ -169,7 +174,11 @@
 							$(this).removeClass('disabled');
 						});
 						$('#success-dialog').modal('show');
-						$.cookie('user', $('#login_user').val());
+						if ($('#expires').is(':checked')) {
+							$.cookie('user', $('#login_user').val(), {expires : 7});
+						} else {
+							$.cookie('user', $('#login_user').val());
+						}
 						setTimeout(function () {
 							$('#success-dialog').modal('hide');
 							$('#modal-login').modal('hide');
@@ -186,4 +195,162 @@
 			});
 		}
 	});
+
+	// 发帖对话框
+	var number = 0;
+	$('#post').find(':submit').click(function (e) {
+		e.preventDefault();
+		$(this).ajaxSubmit({
+			url : 'add_note.php',
+			type : 'POST',
+			data : {
+				user : $.cookie('user'),
+				post_title : $('#post_title').val(),
+				post_content : encodeURIComponent(ue.getContent()),
+				post_label : $('#post').find(':radio:checked').val(),
+			},
+			beforeSubmit : function (formData, jqForm, options) {
+				$('#loading-dialog').modal('show');
+				$('#post').find('button').each(function (index) {
+					$(this).addClass('disabled');
+				});
+			},
+			success : function (responseText, statusText) {
+				if (responseText) {
+					$('#loading-dialog').modal('hide');
+					$('#post').find('button').each(function (index) {
+						$(this).removeClass('disabled');
+					});
+					$('#success-dialog').modal('show');
+					setTimeout(function () {
+						$('#success-dialog').modal('hide');
+						$('#modal-post').modal('hide');
+						$('#post').resetForm();
+						$('#ueditor_0').contents().find('body').html('请输入内容...');
+					}, 1000);
+					$('#newTip').removeClass('hidden');
+					number += 1;
+				}
+			},
+		});
+	});
+
+	// 点击退出
+	$('#logout').click(function () {
+		$.removeCookie('user');
+		window.location.href = '/abird/';
+	});
+
+	// 编辑器初始化
+	var ue = UE.getEditor('post_content', {
+		elementPathEnabled : false,
+		minFrameWidth : 372,
+		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
+	});
+
+	// 动态添加
+	$.ajax({
+		url : 'show_note.php',
+		type : 'POST',
+		success : function (response, status, xhr) {
+			addNote(response, status, xhr);
+		},
+	});
+
+	// 点击刷新内容
+	$('#newTip').click(function () {
+		$.ajax({
+		url : 'show_note.php',
+		type : 'POST',
+		success : function (response, status, xhr) {
+			addNote(response, status, xhr, number);
+			number = 0;
+		},
+	});
+		$(this).addClass('hidden');
+	});
 });
+
+
+// 显示概要
+function replascePos(strObj, pos, replaceText) {
+	var str = strObj.substr(0, pos - 1) + replaceText + strObj.substring(pos, strObj.length);
+	return str;
+}
+
+// 动态添加内容
+function addNote(response, status, xhr, num) {
+	var json = $.parseJSON(response);
+	var jsonRefresh = json.slice(0, num);
+	var html = new Array(4);
+	$(html).each(function (index, value) {
+		html[index] = '';
+	});
+	var html_handicraft = '';
+	var html_paper = '';
+	var html_cooking = '';
+	var html_other = '';
+	var arr = [];
+	var summary = [];
+	if (num) {
+		$.each(jsonRefresh, function (index, value) {
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			switch (value.label) {
+				case '手艺' : html[0] += templateHtml;break;
+				case '纸艺' : html[1] += templateHtml;break;
+				case '厨艺' : html[2] += templateHtml;break;
+				case '其它' : html[3] += templateHtml;break;
+			}
+		});
+		$('#handicraft .panel-body').prepend(html[0]);
+		$('#paper .panel-body').prepend(html[1]);
+		$('#cooking .panel-body').prepend(html[2]);
+		$('#other .panel-body').prepend(html[3]);
+	} else {
+		$.each(json, function (index, value) {
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			switch (value.label) {
+				case '手艺' : html[0] += templateHtml;break;
+				case '纸艺' : html[1] += templateHtml;break;
+				case '厨艺' : html[2] += templateHtml;break;
+				case '其它' : html[3] += templateHtml;break;
+			}
+		});
+		$('#handicraft .panel-body').append(html[0]);
+		$('#paper .panel-body').append(html[1]);
+		$('#cooking .panel-body').append(html[2]);
+		$('#other .panel-body').append(html[3]);
+	}
+	$.each($('.note-content'), function (index, value) {
+		arr[index] = $(value).html();
+		summary[index] = arr[index].substr(0, 100);
+		if (summary[index].substring(99, 100) == '<') {
+			summary[index] = replascePos(summary[index], 100, '');
+		}
+		if (summary[index].substring(98, 100) == '</') {
+			summary[index] = replascePos(summary[index], 100, '');
+			summary[index] = replascePos(summary[index], 99, '');
+		}
+		console.log(arr[index].length);
+		if (arr[index].length > 100) {
+			summary[index] += '<span><b>……</b></span>';
+			$(value).html(summary[index]);
+			$(value).next('button.down').removeClass('hidden');
+		}
+		$('button.up').addClass('hidden');
+	});
+	$.each($('.down'), function (index, value) {
+		$(this).on('click', function () {
+			$('.note-content').eq(index).html(arr[index]);
+			$(this).addClass('hidden');
+			$('button.up').eq(index).removeClass('hidden');
+		});
+	});
+	$.each($('.up'), function (index, value) {
+		$(this).on('click', function () {
+			$('.note-content').eq(index).html(summary[index]);
+			$(this).addClass('hidden');
+			$('button.down').eq(index).removeClass('hidden');
+		});
+	});
+}

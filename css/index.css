@@ -33,6 +33,12 @@ header .header-logo {
 	line-height: 100px;
 }
 
+/* editor */
+#post_content {
+	overflow-y: scroll;
+	max-height: 250px;
+}
+
 /* content */
 /* member-dropdown */
 #member-dropdown .dropdown-menu {
@@ -59,6 +65,10 @@ header .header-logo {
 .myCarousel-inner {
 	box-sizing: border-box;
 }
+.myCarousel-inner .item {
+	overflow: hidden;
+	height: 180px;
+}
 .myCarousel-inner img {
 	margin: 0 auto;
 }
@@ -69,19 +79,34 @@ header .header-logo {
 #main {
 	padding-top: 50px;
 }
+#newTip {
+	cursor: pointer;
+}
+.note-item {
+	padding-bottom: 20px;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+}
+.note-item:last-child {
+	border-bottom: none;
+}
+.note-item h2, .note-item h4, .note-item h5, .note-item p, .note-item span {
+	line-height: 1.8em;
+}
 
 /* footer */
 footer {
 	position: relative;
 	padding: 40px;
-	background-color: #04477c;
+	background-color: #05173b;
 	text-align: center;
 }
 .footer-info h4 {
-	font-size: 22px;
+	color: #999;
+	font-size: 18px;
 }
 .footer-text {
-	font-size: 16px;
+	font-size: 14px;
 	color: #eee;
 	line-height: 1.8em;
 }
@@ -89,3 +114,37 @@ footer {
 	display: block;
 }
 
+/* 响应式 */
+@media (min-width: 768px) {
+	.myCarousel-inner .item {
+		height: 260px;
+	}
+	.footer-info h4 {
+		font-size: 20px;
+	}
+	.footer-text {
+		font-size: 15px;
+	}
+}
+@media (min-width: 992px) {
+	.myCarousel-inner .item {
+		height: 320px;
+	}
+	.footer-info h4 {
+		font-size: 22px;
+	}
+	.footer-text {
+		font-size: 16px;
+	}
+}
+@media (min-width: 1200px) {
+	.myCarousel-inner .item {
+		height: 320px;
+	}
+	.footer-info h4 {
+		font-size: 22px;
+	}
+	.footer-text {
+		font-size: 16px;
+	}
+}

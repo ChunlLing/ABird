@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>一只鸟 分享手工生活</title>
 	<link rel="shortcut icon" type="images/x-icon" href="favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -11,12 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="js/jquery.form.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/ueditor.config.js"></script>
 	<script type="text/javascript" src="js/ueditor.all.min.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/test.js"></script>
 </head>
 <body>
 	<!-- 导航条 -->
@@ -52,20 +48,16 @@
 	<header>
 		<div class="container">
 			<a href="index.html" class="header-logo"></a>
-			<!-- <a href="test.html" class="btn btn-default pull-left" id="test">模拟登陆</a> -->
 			<div class="pull-right">
-				<a href="javascript:void(0)" id="reg-a" class="text-member" data-toggle="modal" data-target="#modal-reg">注册</a>
 				<div class="dropdown" id="member-dropdown" style="display: inline-block;">
-					<a href="javascript:void(0)" id="member" class="text-member" data-toggle="dropdown">用户</a>
-					<span class="caret"></span>
+					<a href="javascript:void(0)" id="member" class="text-member" data-toggle="dropdown">用户<span class="caret"></span></a>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="javascript:void(0)" id="postNote" data-toggle="modal" data-target="#modal-post">发帖</a></li>
-						<li><a href="javascript:void(0)" id="myNote">我的帖子</a></li>
-						<li><a href="javascript:void(0)" id="myFavorite">我的收藏</a></li>
+						<li><a id="postNote" data-toggle="modal" data-target="#modal-post">发帖</a></li>
+						<li><a id="myNote">我的帖子</a></li>
+						<li><a id="myFavorite">我的收藏</a></li>
 					</ul>
 				</div>
 				<span class="seperate"></span>
-				<a href="javascript:void(0)" id="login-a" class="text-member" data-toggle="modal" data-target="#modal-login">登录</a>
 				<a href="javascript:void(0)" id="logout" class="text-member">退出</a>
 			</div>
 		</div>
@@ -82,9 +74,9 @@
 					<li data-target="#carousel" data-slide-to="2"></li>
 				</ol>
 				<div class="carousel-inner myCarousel-inner">
-					<div class="item active"><img src="image/banner-0.jpg" alt="" class=""></div>
-					<div class="item"><img src="image/banner-1.jpg" alt="" class=""></div>
-					<div class="item"><img src="image/banner-2.jpg" alt="" class=""></div>
+					<div class="item active"><img src="image/banner-0.jpg" alt="" class="img-responsive"></div>
+					<div class="item"><a href="#"><img src="image/banner-1.jpg" alt="" class="img-responsive"></a></div>
+					<div class="item"><a href="#"><img src="image/banner-2.jpg" alt="" class="img-responsive"></a></div>
 				</div>
 				<a href="#carousel" data-slide="prev" class="carousel-control left myCarousel-control">
 					<span class="glyphicon glyphicon-chevron-left"></span>
@@ -97,13 +89,13 @@
 			<div id="main">
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12">
-						<div class="text-center alert alert-info hidden" id="newTip">有新的内容啦 点击刷新~</div>
 						<!-- 手艺 -->
 						<div id="handicraft" class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">手艺</h4>
 							</div>
 							<div class="panel-body">
+								<p>123</p>
 							</div>
 						</div>
 						<!-- 纸艺 -->
@@ -112,6 +104,7 @@
 								<h4 class="panel-title">纸艺</h4>
 							</div>
 							<div class="panel-body">
+								<p>123</p>
 							</div>
 						</div>
 						<!-- 厨艺 -->
@@ -120,6 +113,7 @@
 								<h4 class="panel-title">厨艺</h4>
 							</div>
 							<div class="panel-body">
+								<p>123</p>
 							</div>
 						</div>
 						<!-- 其他 -->
@@ -128,110 +122,20 @@
 								<h4 class="panel-title">其他</h4>
 							</div>
 							<div class="panel-body">
+								<p>123</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-3 hidden-xs col-md-offset-1 col-sm-offset-1">
-						<!-- 待设计 -->
+						<!-- 问题 -->
 						<div id="question" class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">待设计</h4>
+								<h4 class="panel-title">热门问题</h4>
 							</div>
 							<div class="panel-body">
-								<p>待设计</p>
+								<p>123</p>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 会员注册 -->
-	<div class="container">
-		<div class="modal" id="modal-reg" tabindex="-1" role="dialog" data-backdrop="static">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-						<h4 class="modal-title">会员注册</h4>
-					</div>
-					<div class="modal-body">
-						<form action="123.html" id="reg" class="form-horizontal" role="form">
-							<div class="form-group">
-								<label for="user" class="col-md-3 col-sm-3 col-xs-12 control-label">昵称</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" class="form-control" id="user" name="user" title="请设置不小于两位的昵称！">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="pass" class="col-md-3 col-sm-3 col-xs-12 control-label">密码</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="password" class="form-control" id="pass" name="pass" title="请设置不小于6位的密码！">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="notpass" class="col-md-3 col-sm-3 col-xs-12 control-label">确认密码</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="password" class="form-control" id="notpass" name="notpass" title="密码输入不一致，请重新输入！">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-md-3 col-sm-3 col-xs-12 control-label">邮箱</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" class="form-control" id="email" name="email" title="请输入正确的邮箱！">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
-									<button type="submit" class="btn btn-primary btn-lg">注册</button>
-									<button type="reset" class="btn btn-default btn-lg">重置</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 会员登陆 -->
-	<div class="container">
-		<div class="modal" id="modal-login" tabindex="-1" role="dialog" data-backdrop="static">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-						<h4 class="modal-title">会员登录</h4>
-					</div>
-					<div class="modal-body">
-						<form action="123.html" id="login" class="form-horizontal" role="form">
-							<div class="form-group">
-								<label for="login_user" class="col-md-3 col-sm-3 col-xs-12 control-label">昵称</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" class="form-control" id="login_user" name="login_user">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="login_pass" class="col-md-3 col-sm-3 col-xs-12 control-label">密码</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="password" class="form-control" id="login_pass" name="login_pass">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-									<label for="expires" class="control-label">
-										<input type="checkbox" id="expires" name="expires">
-										记住我一周
-									</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
-									<button type="submit" class="btn btn-primary btn-lg">登录</button>
-								</div>
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>
@@ -248,20 +152,11 @@
 						<h4 class="modal-title">发帖</h4>
 					</div>
 					<div class="modal-body">
-						<form action="123.html" id="post" class="form-horizontal" role="form">
+						<form action="" id="post" class="form-horizontal" role="form">
 							<div class="form-group">
 								<label for="post_title" class="col-md-1 col-sm-1 col-xs-12 control-label">标题</label>
 								<div class="col-md-10 col-sm-10 col-xs-12">
 									<input type="text" class="form-control" id="post_title" name="post_title">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="classification" class="col-md-1 col-sm-1 col-xs-12 control-label">分类</label>
-								<div class="col-md-10 col-sm-10 col-xs-12" id="classification">
-									<label class="radio-inline"><input type="radio" name="post_label" value="手艺"> 手艺</label>
-									<label class="radio-inline"><input type="radio" name="post_label" value="纸艺"> 纸艺</label>
-									<label class="radio-inline"><input type="radio" name="post_label" value="厨艺"> 厨艺</label>
-									<label class="radio-inline"><input type="radio" name="post_label" value="其它" checked="checked"> 其他</label>
 								</div>
 							</div>
 							<div class="form-group">
@@ -272,7 +167,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-md-offset-2 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
-									<button type="submit" class="btn btn-primary">发布</button>
+									<button type="submit" class="btn btn-primary" id="post-button">发布</button>
 								</div>
 							</div>
 						</form>
@@ -284,7 +179,7 @@
 
 	<!-- 提交等待对话框 -->
 	<div class="container">
-		<div class="modal" tabindex="-1" role="modal" id="loading-dialog">
+		<div class="modal" tabindex="-1" role="modal" id="success-dialog">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content" role="document">
 					<div class="modal-body">
@@ -296,18 +191,7 @@
 	</div>
 
 	<!-- 提交成功对话框 -->
-	<div class="container">
-		<div class="modal" tabindex="-1" role="modal" id="success-dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content" role="document">
-					<div class="modal-body">
-						<p class="text-center text-info">提交成功&nbsp;&nbsp;:&nbsp;)</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+			
 	<!--footer区-->
 	<footer>
 		<div class="container">
@@ -320,8 +204,8 @@
 				</div>
 				<div class="col-sm-4 col-md-4 footer-info">
 					<h4 class="footer-text">联系方式</h4>
-					<p class="footer-text">邮箱：xcl8202@qq.com</p>
 					<p class="footer-text">地址：XX省 XX市 XX区</p>
+					<p class="footer-text">邮箱：123456@qq.com</p>
 				</div>
 				<div class="col-sm-4 col-md-4">
 					<img class="footer-logo img-responsive center-block" src="image/logo-footer.png"></img>
