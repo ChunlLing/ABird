@@ -331,7 +331,6 @@ function addNote(response, status, xhr, num) {
 			summary[index] = replascePos(summary[index], 100, '');
 			summary[index] = replascePos(summary[index], 99, '');
 		}
-		console.log(arr[index].length);
 		if (arr[index].length > 100) {
 			summary[index] += '<span><b>……</b></span>';
 			$(value).html(summary[index]);
