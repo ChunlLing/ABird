@@ -1,10 +1,10 @@
 ;$(function () {
 	// 测试
-	$.cookie('user', '网络');
-	$('#reg-a, #login-a').hide();
+	// $.cookie('user', '网络');
+	// $('#reg-a, #login-a').hide();
 
 	// 未登录状态隐藏用户和退出
-	// $('#member-dropdown, #logout').hide();
+	$('#member-dropdown, #logout').hide();
 
 	// 注册对话框表单验证
 	$('#reg').validate({
@@ -167,7 +167,11 @@
 							$(this).removeClass('disabled');
 						});
 						$('#success-dialog').modal('show');
-						$.cookie('user', $('#login_user').val());
+						if ($('#expires').is(':checked')) {
+							$.cookie('user', $('#login_user').val(), {expires : 7});
+						} else {
+							$.cookie('user', $('#login_user').val());
+						}
 						setTimeout(function () {
 							$('#success-dialog').modal('hide');
 							$('#modal-login').modal('hide');
