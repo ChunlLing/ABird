@@ -258,7 +258,7 @@
 				} else if (value.label == '厨艺') {
 					html[2] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				} else if (value.label == '其它') {
-					html[3] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+					html[3] += '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 				}
 			});
 			$('#handicraft .panel-body').append(html[0]);
@@ -282,12 +282,18 @@
 				$('button.up').addClass('hidden');
 				$('button.down').removeClass('hidden');
 			});
-			$.each($('.note-content'), function (index, value) {
-				$(this).on('click', '.down', function () {
-					alert($(this));
+			$.each($('.down'), function (index, value) {
+				$(this).on('click', function () {
 					$('.note-content').eq(index).html(arr[index]);
 					$(this).addClass('hidden');
 					$('button.up').eq(index).removeClass('hidden');
+				});
+			});
+			$.each($('.up'), function (index, value) {
+				$(this).on('click', function () {
+					$('.note-content').eq(index).html(summary[index]);
+					$(this).addClass('hidden');
+					$('button.down').eq(index).removeClass('hidden');
 				});
 			});
 		},
