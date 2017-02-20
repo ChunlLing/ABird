@@ -6,6 +6,16 @@
 	// 未登录状态隐藏用户和退出
 	$('#member-dropdown, #logout').hide();
 
+	// 如果有user名的cookie存在即用户登录
+	if ($.cookie('user')) {
+		$('#reg-a, #login-a').hide();
+		$('#member-dropdown, #logout').show();
+		$('#member').html($.cookie('user'));
+	} else {
+		$('#member-dropdown, #logout').hide();
+		$('#reg-a, #login-a').show();
+	}
+
 	// 注册对话框表单验证
 	$('#reg').validate({
 		errorElement : 'span',
