@@ -294,7 +294,7 @@ function addNote(response, status, xhr, num) {
 	var summary = [];
 	if (num) {
 		$.each(jsonRefresh, function (index, value) {
-			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 			switch (value.label) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
@@ -308,7 +308,7 @@ function addNote(response, status, xhr, num) {
 		$('#other .panel-body').prepend(html[3]);
 	} else {
 		$.each(json, function (index, value) {
-			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 			switch (value.label) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
@@ -331,12 +331,13 @@ function addNote(response, status, xhr, num) {
 			summary[index] = replascePos(summary[index], 100, '');
 			summary[index] = replascePos(summary[index], 99, '');
 		}
+		console.log(arr[index].length);
 		if (arr[index].length > 100) {
-			summary[index] += '<span class="badge">……</span>';
+			summary[index] += '<span><b>……</b></span>';
 			$(value).html(summary[index]);
+			$(value).next('button.down').removeClass('hidden');
 		}
 		$('button.up').addClass('hidden');
-		$('button.down').removeClass('hidden');
 	});
 	$.each($('.down'), function (index, value) {
 		$(this).on('click', function () {
