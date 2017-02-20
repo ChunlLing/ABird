@@ -1,7 +1,7 @@
 <?php
 	require 'config.php';
 	
-	$query = mysql_query("SELECT title, content, user, label, date FROM note ORDER BY date DESC LIMIT 0,10") or die('SQL 错误！');
+	$query = mysql_query("SELECT title, content, user, label, date FROM note ORDER BY date DESC LIMIT 0,100") or die('SQL 错误！');
 	
 	$json = '';
 	

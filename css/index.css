@@ -79,6 +79,9 @@ header .header-logo {
 #main {
 	padding-top: 50px;
 }
+#newTip {
+	cursor: pointer;
+}
 .note-item {
 	padding-bottom: 20px;
 	overflow: hidden;
