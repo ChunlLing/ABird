@@ -13,6 +13,9 @@
 		$('#reg-a, #login-a').show();
 	}
 
+	// 邮箱补全
+	$('');
+
 	// 注册对话框表单验证
 	$('#reg').validate({
 		errorElement : 'span',

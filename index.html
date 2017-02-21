@@ -149,7 +149,7 @@
 
 	<!-- 会员注册 -->
 	<div class="container">
-		<div class="modal" id="modal-reg" tabindex="-1" role="dialog" data-backdrop="static">
+		<div class="modal show" id="modal-reg" tabindex="-1" role="dialog" data-backdrop="static">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -178,8 +178,16 @@
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-md-3 col-sm-3 col-xs-12 control-label">邮箱</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" class="form-control" id="email" name="email" title="请输入正确的邮箱！">
+								<div class="col-md-6 col-sm-6 col-xs-12 dropdown">
+									<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" id="email" name="email" title="请输入正确的邮箱！" autocomplete="off">
+									<ul class="dropdown-menu all-email">
+										<li><a href="javascript:void(0)"><span></span>@qq.com</a></li>
+										<li><a href="javascript:void(0)"><span></span>@163.com</a></li>
+										<li><a href="javascript:void(0)"><span></span>@126.com</a></li>
+										<li><a href="javascript:void(0)"><span></span>@gmail.com</a></li>
+										<li><a href="javascript:void(0)"><span></span>@sina.com</a></li>
+										<li><a href="javascript:void(0)"><span></span>@sohu.com</a></li>
+									</ul>
 								</div>
 							</div>
 							<div class="form-group">

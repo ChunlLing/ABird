@@ -114,6 +114,14 @@ footer {
 	display: block;
 }
 
+/* 邮箱补全 */
+.all-email {
+	left: 15px;
+	box-sizing: border-box;
+	padding-right: 30px;
+	width: 100%;
+}
+
 /* 响应式 */
 @media (min-width: 768px) {
 	.myCarousel-inner .item {
