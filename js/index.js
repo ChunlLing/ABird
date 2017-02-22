@@ -14,7 +14,20 @@
 	}
 
 	// 邮箱补全
-	$('');
+	// 电子邮件选定补全
+	$('.all-email li').mousedown(function () {
+		$(this).prev('input').val($(this).text());
+		checkEmail();
+	});
+	// 电子邮件键入补全
+	$('#email').keyup(function (e) {
+		if ($(this).val().indexOf('@') == -1) {
+			$('.all-email').addClass('show');
+			$('.all-email li span').html($(this).val());
+		} else {
+			$('.all-email').removeClass('show');
+		}
+	});
 
 	// 注册对话框表单验证
 	$('#reg').validate({
@@ -355,4 +368,14 @@ function addNote(response, status, xhr, num) {
 			$('button.down').eq(index).removeClass('hidden');
 		});
 	});
+}
+
+function checkEmail() {
+	if (!trim($('#email').val()) == '') {
+		if (/^[\w-\.]+@[\w-]+(\.[a-zA-Z]{2,4}){1,2}$/.test($('#email').val())) {
+			alert('success');
+		} else {
+			alert('error');
+		}
+	}
 }
