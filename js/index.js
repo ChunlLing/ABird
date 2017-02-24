@@ -14,17 +14,25 @@
 	}
 
 	// 邮箱补全
-	// var hosts = ['qq.com', '163.com', 'sina.com.cn', 'gmail.com', 'sohu.com', '139.com'];
-	// for (var i = 0; i < hosts.length; i++) {
-	// 	var liElement = '<li><a href="#"><span class="inputName"></span>' + '@<span class="emailHost">' + hosts[i] + '</span></a></li>';
-	// 	$('.all-email').append(liElement);
-	// }
+	var hosts = ['qq.com', '163.com', 'sina.com.cn', 'gmail.com', 'sohu.com', '139.com'];
+	for (var i = 0; i < hosts.length; i++) {
+		var liElement = '<li><span class="inputName"></span>' + '@<span class="emailHost">' + hosts[i] + '</span></li>';
+		$('.all-email').append(liElement);
+	}
+	$('.all-email').hide();
 	$('#email').keyup(function (e) {
 		if (e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 13) {
 			if ($.trim($(this).val()) != '' && $.trim($(this).val()).match(/^@/) == null) {
-				$('.all-email').addClass('show');
+				$('.all-email').show();
+				if ($('.all-email li:visible').hasClass('highlight')) {
+					$('.all-email li').removeClass('highlight');
+				}
+				if ($('.all-email li:visible')) {
+					$('.all-email li:visible:eq(0)').addClass('highlight');
+				}
 			} else {
-				$('.all-email').removeClass('show');
+				$('.all-email').hide();
+				$('.all-email li').removeClass('highlight');
 			}
 			if ($.trim($(this).val()).match(/.*@/) == null) {
 				$('.all-email li .inputName').text($(this).val());
@@ -44,16 +52,31 @@
 				}
 			}
 		}
-		if (e.keyCode == 13) {
-			$('#email').val($('.all-email li:visible').text());
-			$('.all-email').removeClass('show');
-		}
 	});
 	$('#email').keydown(function (e) {
+		if (e.keyCode == 13) {
+			e.preventDefault();
+			$('#email').val($('.all-email li.highlight:visible').text());
+			$('.all-email').hide();
+		}
 		if (e.keyCode == 40) {
-			if ($('.all-email')) {}
+			e.preventDefault();
+			if ($('.all-email li').is('.highlight')) {
+				if ($('.all-email li.highlight').nextAll().is('li:visible')) {
+					$('.all-email li.highlight').removeClass('highlight').next('li').addClass('highlight');
+				}
+			}
+		}
+		if (e.keyCode == 38) {
+			e.preventDefault();
+			if ($('.all-email li').is('.highlight')) {
+				if ($('.all-email li.highlight').prevAll().is('li:visible')) {
+					$('.all-email li.highlight').removeClass('highlight').prev('li').addClass('highlight');
+				}
+			}
 		}
 	});
+
 
 	// 注册对话框表单验证
 	$('#reg').validate({
