@@ -116,10 +116,21 @@ footer {
 
 /* 邮箱补全 */
 .all-email {
-	left: 15px;
-	box-sizing: border-box;
-	padding-right: 30px;
+	position: absolute;
+	top: 5px;
 	width: 100%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	z-index: 99;
+}
+.all-email li {
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.all-email li.highlight {
+	background-color: #eee;
+	color: #369;
 }
 
 /* 响应式 */

@@ -76,3 +76,20 @@ A : encodeURICompontent编码，decodeURICompontent解码
 10:17 2017/2/20
 Q : 部分帖子摘要显示不出正文
 A : 第一个html元素标签属性名值对太长，使得文本出现位置超过限制（显示100个字符）
+
+16
+11:14 2017/2/23
+Q : 下拉列表的键盘选择
+A : 如果是<button>可以使用键盘选择下拉项，如果是<a><input type="button">使用键盘方向键不会选择下拉项<(－︿－)>
+
+17
+15:52 2017/2/23
+Q : 邮箱键入会重复添加结点
+A : 因！为！添！加！新！节！点！的！函！数！写！在！keyup！函！数！里！了！(ノ?益?)ノ彡┻━┻
+
+18
+23:46 2017/2/24
+Q : 【邮箱自动补全UI】如果只是在input后加上ul会存在问题：1 如果ul不设置position: absolute，可以自适应，但会占空间；2 如果ul设置position: absolute，不会占空间，但不可以自适应
+A : 在ul外再包裹一层<div style="position: relative"></div>。原理：对于width: 100%元素，如果其没有position，则对应其直接父元素；如果设置position: absolute，对应其最近position: relative的父元素，无则对应body
+
+

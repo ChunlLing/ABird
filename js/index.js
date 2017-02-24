@@ -14,7 +14,46 @@
 	}
 
 	// 邮箱补全
-	$('');
+	// var hosts = ['qq.com', '163.com', 'sina.com.cn', 'gmail.com', 'sohu.com', '139.com'];
+	// for (var i = 0; i < hosts.length; i++) {
+	// 	var liElement = '<li><a href="#"><span class="inputName"></span>' + '@<span class="emailHost">' + hosts[i] + '</span></a></li>';
+	// 	$('.all-email').append(liElement);
+	// }
+	$('#email').keyup(function (e) {
+		if (e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 13) {
+			if ($.trim($(this).val()) != '' && $.trim($(this).val()).match(/^@/) == null) {
+				$('.all-email').addClass('show');
+			} else {
+				$('.all-email').removeClass('show');
+			}
+			if ($.trim($(this).val()).match(/.*@/) == null) {
+				$('.all-email li .inputName').text($(this).val());
+			} else {
+				var str = $(this).val();
+				var strs = str.split('@');
+				$('.all-email li .inputName').text(strs[0]);
+				if ($(this).val().length >= strs[0].length + 1) {
+					var emailHost = str.substr(strs[0].length + 1);
+					$('.all-email li .emailHost').each(function () {
+						if (!($(this).text().match(emailHost) != null && $(this).text().indexOf(emailHost) == 0)) {
+							$(this).parent().hide();
+						} else {
+							$(this).parent().show();
+						}
+					});
+				}
+			}
+		}
+		if (e.keyCode == 13) {
+			$('#email').val($('.all-email li:visible').text());
+			$('.all-email').removeClass('show');
+		}
+	});
+	$('#email').keydown(function (e) {
+		if (e.keyCode == 40) {
+			if ($('.all-email')) {}
+		}
+	});
 
 	// 注册对话框表单验证
 	$('#reg').validate({
