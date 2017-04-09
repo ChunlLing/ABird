@@ -373,6 +373,7 @@ function addNote(response, status, xhr, num) {
 		$('#other .panel-body').prepend(html[3]);
 	} else {
 		$.each(json, function (index, value) {
+			console.log('"title" : "' + value.title + '",\n' + '"user" : "' + value.user + '",\n' + '"content" : "' + value.content + '",\n' + '"label" : "' + value.label + '",\n' + '"date" : "' + value.date + '"');
 			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + decodeURIComponent(value.content) + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 			switch (value.label) {
 				case '手艺' : html[0] += templateHtml;break;
