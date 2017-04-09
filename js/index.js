@@ -307,31 +307,31 @@
 	});
 
 	// 编辑器初始化
-	var ue = UE.getEditor('post_content', {
-		elementPathEnabled : false,
-		minFrameWidth : 372,
-		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
-	});
+	// var ue = UE.getEditor('post_content', {
+	// 	elementPathEnabled : false,
+	// 	minFrameWidth : 372,
+	// 	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
+	// });
 
 	// 动态添加
-	$.ajax({
-		url : 'show_note.php',
-		type : 'POST',
-		success : function (response, status, xhr) {
-			addNote(response, status, xhr);
-		},
-	});
+	// $.ajax({
+	// 	url : 'show_note.php',
+	// 	type : 'POST',
+	// 	success : function (response, status, xhr) {
+	// 		addNote(response, status, xhr);
+	// 	},
+	// });
 
 	// 点击刷新内容
 	$('#newTip').click(function () {
 		$.ajax({
-		url : 'show_note.php',
-		type : 'POST',
-		success : function (response, status, xhr) {
-			addNote(response, status, xhr, number);
-			number = 0;
-		},
-	});
+			url : 'show_note.php',
+			type : 'POST',
+			success : function (response, status, xhr) {
+				addNote(response, status, xhr, number);
+				number = 0;
+			},
+		});
 		$(this).addClass('hidden');
 	});
 });
@@ -418,3 +418,65 @@ function addNote(response, status, xhr, num) {
 		});
 	});
 }
+
+function add(data) {
+	var html = new Array(4);
+	$(html).each(function (index, value) {
+		html[index] = '';
+	});
+	var html_handicraft = '';
+	var html_paper = '';
+	var html_cooking = '';
+	var html_other = '';
+	var arr = [];
+	var summary = [];
+	for (let key in data) {
+		$.each(data[key], function (index, value) {
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + value.content + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			switch (value.label) {
+				case '手艺' : html[0] += templateHtml;break;
+				case '纸艺' : html[1] += templateHtml;break;
+				case '厨艺' : html[2] += templateHtml;break;
+				case '其它' : html[3] += templateHtml;break;
+			}
+		});
+	}
+
+	$('#handicraft .panel-body').append(html[0]);
+	$('#paper .panel-body').append(html[1]);
+	$('#cooking .panel-body').append(html[2]);
+	$('#other .panel-body').append(html[3]);
+
+	$.each($('.note-content'), function (index, value) {
+		arr[index] = $(value).html();
+		summary[index] = arr[index].substr(0, 100);
+		if (summary[index].substring(99, 100) == '<') {
+			summary[index] = replascePos(summary[index], 100, '');
+		}
+		if (summary[index].substring(98, 100) == '</') {
+			summary[index] = replascePos(summary[index], 100, '');
+			summary[index] = replascePos(summary[index], 99, '');
+		}
+		if (arr[index].length > 100) {
+			summary[index] += '<span><b>……</b></span>';
+			$(value).html(summary[index]);
+			$(value).next('button.down').removeClass('hidden');
+		}
+		$('button.up').addClass('hidden');
+	});
+	$.each($('.down'), function (index, value) {
+		$(this).on('click', function () {
+			$('.note-content').eq(index).html(arr[index]);
+			$(this).addClass('hidden');
+			$('button.up').eq(index).removeClass('hidden');
+		});
+	});
+	$.each($('.up'), function (index, value) {
+		$(this).on('click', function () {
+			$('.note-content').eq(index).html(summary[index]);
+			$(this).addClass('hidden');
+			$('button.down').eq(index).removeClass('hidden');
+		});
+	});
+}
+
