@@ -326,7 +326,8 @@
 	$('#logout').click(function (e) {
 		e.preventDefault();
 		// $.removeCookie('user');
-		window.location.href = '/abird/';
+		// window.location.href = '/ABird/';
+		alert('模拟退出，页面不跳转');
 	});
 
 	// 编辑器初始化
