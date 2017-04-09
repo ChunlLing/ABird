@@ -327,7 +327,8 @@
 		e.preventDefault();
 		// $.removeCookie('user');
 		// window.location.href = '/ABird/';
-		alert('模拟退出，页面不跳转');
+		alert('模拟退出，页面跳转到初始状态');
+		window.location.href = 'https://chunlling.github.io/ABird/';
 	});
 
 	// 编辑器初始化
