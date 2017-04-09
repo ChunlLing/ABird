@@ -323,8 +323,9 @@
 	});
 
 	// 点击退出
-	$('#logout').click(function () {
-		$.removeCookie('user');
+	$('#logout').click(function (e) {
+		e.preventDefault();
+		// $.removeCookie('user');
 		window.location.href = '/abird/';
 	});
 
