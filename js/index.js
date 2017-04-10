@@ -82,47 +82,47 @@
 	$('#reg').validate({
 		errorElement : 'span',
 		errorClass : 'help-block',
-		// rules : {
-		// 	user : {
-		// 		required : true,
-		// 		minlength : 2,
-		// 		// remote : {
-		// 		// 	url : 'is-user.php',
-		// 		// 	type : 'POST',
-		// 		// },
-		// 	},
-		// 	pass : {
-		// 		required : true,
-		// 		minlength : 6,
-		// 	},
-		// 	notpass : {
-		// 		required : true,
-		// 		equalTo : '#pass',
-		// 	},
-		// 	email : {
-		// 		required : true,
-		// 		email : true,
-		// 	},
-		// },
-		// messages : {
-		// 	user : {
-		// 		required : '昵称不得为空！',
-		// 		minlength : '昵称不得小于{0}位！',
-		// 		// remote : '昵称被占用！',
-		// 	},
-		// 	pass : {
-		// 		required : '密码不得为空！',
-		// 		minlength : '密码不得小于{0}位！',
-		// 	},
-		// 	notpass : {
-		// 		required : '请再输入密码',
-		// 		equalTo : '两次密码不一致',
-		// 	},
-		// 	email : {
-		// 		required : '邮箱不得为空！',
-		// 		email : '请输入正确的邮箱格式！',
-		// 	},
-		// },
+		rules : {
+			user : {
+				required : true,
+				minlength : 2,
+				// remote : {
+				// 	url : 'is-user.php',
+				// 	type : 'POST',
+				// },
+			},
+			pass : {
+				required : true,
+				minlength : 6,
+			},
+			notpass : {
+				required : true,
+				equalTo : '#pass',
+			},
+			email : {
+				required : true,
+				email : true,
+			},
+		},
+		messages : {
+			user : {
+				required : '昵称不得为空！',
+				minlength : '昵称不得小于{0}位！',
+				// remote : '昵称被占用！',
+			},
+			pass : {
+				required : '密码不得为空！',
+				minlength : '密码不得小于{0}位！',
+			},
+			notpass : {
+				required : '请再输入密码',
+				equalTo : '两次密码不一致',
+			},
+			email : {
+				required : '邮箱不得为空！',
+				email : '请输入正确的邮箱格式！',
+			},
+		},
 		errorPlacement : function(error, element) {
 			element.next().remove();
 			element.after('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
@@ -307,41 +307,65 @@
 
 	// 发帖对话框
 	var number = 0;
+	var newPost = {};
 	$('#post').find(':submit').click(function (e) {
 		e.preventDefault();
-		$(this).ajaxSubmit({
-			url : 'add_note.php',
-			type : 'POST',
-			data : {
-				user : $.cookie('user'),
-				post_title : $('#post_title').val(),
-				post_content : encodeURIComponent(ue.getContent()),
-				post_label : $('#post').find(':radio:checked').val(),
-			},
-			beforeSubmit : function (formData, jqForm, options) {
-				$('#loading-dialog').modal('show');
-				$('#post').find('button').each(function (index) {
-					$(this).addClass('disabled');
-				});
-			},
-			success : function (responseText, statusText) {
-				if (responseText) {
-					$('#loading-dialog').modal('hide');
-					$('#post').find('button').each(function (index) {
-						$(this).removeClass('disabled');
-					});
-					$('#success-dialog').modal('show');
-					setTimeout(function () {
-						$('#success-dialog').modal('hide');
-						$('#modal-post').modal('hide');
-						$('#post').resetForm();
-						$('#ueditor_0').contents().find('body').html('请输入内容...');
-					}, 1000);
-					$('#newTip').removeClass('hidden');
-					number += 1;
-				}
-			},
+		// alert('模拟发帖，页面有新内容提示，并不对数据进行后台提交处理');
+		$('#loading-dialog').modal('show');
+		$('#post').find('button').each(function (index) {
+			$(this).addClass('disabled');
 		});
+		$('#loading-dialog').modal('hide');
+		$('#post').find('button').each(function (index) {
+			$(this).removeClass('disabled');
+		});
+		$('#success-dialog').modal('show');
+		setTimeout(function () {
+			$('#success-dialog').modal('hide');
+			$('#modal-post').modal('hide');
+			$('#post').resetForm();
+			$('#ueditor_0').contents().find('body').html('请输入内容...');
+		}, 1000);
+		$('#newTip').removeClass('hidden');
+		number += 1;
+		newPost.user = '用户';
+		newPost.title = $('#post_title').val();
+		newPost.content = encodeURIComponent(ue.getContent());
+		newPost.label = $('#post').find(':radio:checked').val();
+		newPost.date = new Date().toLocaleDateString();
+		// $(this).ajaxSubmit({
+		// 	url : 'add_note.php',
+		// 	type : 'POST',
+		// 	data : {
+		// 		user : $.cookie('user'),
+		// 		post_title : $('#post_title').val(),
+		// 		post_content : encodeURIComponent(ue.getContent()),
+		// 		post_label : $('#post').find(':radio:checked').val(),
+		// 	},
+		// 	beforeSubmit : function (formData, jqForm, options) {
+		// 		$('#loading-dialog').modal('show');
+		// 		$('#post').find('button').each(function (index) {
+		// 			$(this).addClass('disabled');
+		// 		});
+		// 	},
+		// 	success : function (responseText, statusText) {
+		// 		if (responseText) {
+		// 			$('#loading-dialog').modal('hide');
+		// 			$('#post').find('button').each(function (index) {
+		// 				$(this).removeClass('disabled');
+		// 			});
+		// 			$('#success-dialog').modal('show');
+		// 			setTimeout(function () {
+		// 				$('#success-dialog').modal('hide');
+		// 				$('#modal-post').modal('hide');
+		// 				$('#post').resetForm();
+		// 				$('#ueditor_0').contents().find('body').html('请输入内容...');
+		// 			}, 1000);
+		// 			$('#newTip').removeClass('hidden');
+		// 			number += 1;
+		// 		}
+		// 	},
+		// });
 	});
 
 	// 点击退出
@@ -354,11 +378,11 @@
 	});
 
 	// 编辑器初始化
-	// var ue = UE.getEditor('post_content', {
-	// 	elementPathEnabled : false,
-	// 	minFrameWidth : 372,
-	// 	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
-	// });
+	var ue = UE.getEditor('post_content', {
+		elementPathEnabled : false,
+		minFrameWidth : 372,
+		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
+	});
 
 	// 动态添加
 	// $.ajax({
@@ -371,14 +395,25 @@
 
 	// 点击刷新内容
 	$('#newTip').click(function () {
-		$.ajax({
-			url : 'show_note.php',
-			type : 'POST',
-			success : function (response, status, xhr) {
-				addNote(response, status, xhr, number);
-				number = 0;
-			},
-		});
+		var newObj = {};
+		var newArr = [];
+		newArr[0] = newPost;
+		switch (newPost.label) {
+			case '手艺' : newObj["handicraft"] = newArr;break;
+			case '纸艺' : newObj["paper"] = newArr;break;
+			case '厨艺' : newObj["cooking"] = newArr;break;
+			case '其他' : newObj["other"] = newArr;break;
+		}
+		add(newObj);
+		number = 0;
+		// $.ajax({
+		// 	url : 'show_note.php',
+		// 	type : 'POST',
+		// 	success : function (response, status, xhr) {
+		// 		addNote(response, status, xhr, number);
+		// 		number = 0;
+		// 	},
+		// });
 		$(this).addClass('hidden');
 	});
 
@@ -412,7 +447,7 @@ function addNote(response, status, xhr, num) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
 				case '厨艺' : html[2] += templateHtml;break;
-				case '其它' : html[3] += templateHtml;break;
+				case '其他' : html[3] += templateHtml;break;
 			}
 		});
 		$('#handicraft .panel-body').prepend(html[0]);
@@ -427,7 +462,7 @@ function addNote(response, status, xhr, num) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
 				case '厨艺' : html[2] += templateHtml;break;
-				case '其它' : html[3] += templateHtml;break;
+				case '其他' : html[3] += templateHtml;break;
 			}
 		});
 		$('#handicraft .panel-body').append(html[0]);
@@ -487,7 +522,7 @@ function add(data) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
 				case '厨艺' : html[2] += templateHtml;break;
-				case '其它' : html[3] += templateHtml;break;
+				case '其他' : html[3] += templateHtml;break;
 			}
 		});
 	}
