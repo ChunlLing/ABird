@@ -207,15 +207,15 @@
 			login_pass : {
 				required : true,
 				minlength : 6,
-				remote : {
-					url : 'login.php',
-					type : 'POST',
-					data : {
-						login_user : function () {
-							return $('#login_user').val();
-						},
-					},
-				},
+				// remote : {
+				// 	url : 'login.php',
+				// 	type : 'POST',
+				// 	data : {
+				// 		login_user : function () {
+				// 			return $('#login_user').val();
+				// 		},
+				// 	},
+				// },
 			},
 		},
 		messages : {
@@ -226,7 +226,7 @@
 			login_pass : {
 				required : '密码不得为空！',
 				minlength : '密码不得小于{0}位！',
-				remote : '昵称或密码错误！',
+				// remote : '昵称或密码错误！',
 			},
 		},
 		errorPlacement : function(error, element) {
@@ -245,41 +245,63 @@
 			label.remove();
 		},
 		submitHandler: function(form) { 
-			$(form).ajaxSubmit({
-				url : 'login.php',
-				type : 'POST',
-				beforeSubmit : function (formData, jqForm, options) {
-					$('#loading-dialog').modal('show');
-					$('#login').find('button').each(function (index) {
-						$(this).addClass('disabled');
-					});
-				},
-				success : function (responseText, statusText) {
-					if (responseText) {
-						$('#loading-dialog').modal('hide');
-						$('#login').find('button').each(function (index) {
-							$(this).removeClass('disabled');
-						});
-						$('#success-dialog').modal('show');
-						if ($('#expires').is(':checked')) {
-							$.cookie('user', $('#login_user').val(), {expires : 7});
-						} else {
-							$.cookie('user', $('#login_user').val());
-						}
-						setTimeout(function () {
-							$('#success-dialog').modal('hide');
-							$('#modal-login').modal('hide');
-							$('#login').resetForm();
-							$('#login').find('input').each(function (index) {
-								$(this).removeClass().addClass('form-control');
-							});
-							$('#reg-a, #login-a').hide();
-							$('#member-dropdown, #logout').show();
-							$('#member').html($.cookie('user'));
-						}, 1000);
-					}
-				},
+			$('#loading-dialog').modal('show');
+			$('#login').find('button').each(function (index) {
+				$(this).addClass('disabled');
 			});
+			alert('此处仅为实现表单验证，并不对表单数据作后台提交处理，关闭此弹窗后进入模拟登陆状态');
+			setTimeout(function () {
+				$('#loading-dialog').modal('hide');
+				$('#login').find('button').each(function (index) {
+					$(this).removeClass('disabled');
+				});
+				$('#success-dialog').modal('show');
+			}, 2000)
+			setTimeout(function () {
+				$('#success-dialog').modal('hide');
+				$('#modal-login').modal('hide');
+				$('#login').resetForm();
+				$('#login').find('input').each(function (index) {
+					$(this).removeClass().addClass('form-control');
+				});
+				$('#reg-a, #login-a').hide();
+				$('#member-dropdown, #logout').show();
+			}, 4000);
+			// $(form).ajaxSubmit({
+			// 	url : 'login.php',
+			// 	type : 'POST',
+			// 	beforeSubmit : function (formData, jqForm, options) {
+			// 		$('#loading-dialog').modal('show');
+			// 		$('#login').find('button').each(function (index) {
+			// 			$(this).addClass('disabled');
+			// 		});
+			// 	},
+			// 	success : function (responseText, statusText) {
+			// 		if (responseText) {
+			// 			$('#loading-dialog').modal('hide');
+			// 			$('#login').find('button').each(function (index) {
+			// 				$(this).removeClass('disabled');
+			// 			});
+			// 			$('#success-dialog').modal('show');
+			// 			if ($('#expires').is(':checked')) {
+			// 				$.cookie('user', $('#login_user').val(), {expires : 7});
+			// 			} else {
+			// 				$.cookie('user', $('#login_user').val());
+			// 			}
+			// 			setTimeout(function () {
+			// 				$('#success-dialog').modal('hide');
+			// 				$('#modal-login').modal('hide');
+			// 				$('#login').resetForm();
+			// 				$('#login').find('input').each(function (index) {
+			// 					$(this).removeClass().addClass('form-control');
+			// 				});
+			// 				$('#reg-a, #login-a').hide();
+			// 				$('#member-dropdown, #logout').show();
+			// 				$('#member').html($.cookie('user'));
+			// 			}, 1000);
+			// 		}
+			// 	},
+			// });
 		}
 	});
 
