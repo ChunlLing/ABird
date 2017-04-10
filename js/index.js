@@ -354,11 +354,11 @@
 	});
 
 	// 编辑器初始化
-	var ue = UE.getEditor('post_content', {
-		elementPathEnabled : false,
-		minFrameWidth : 372,
-		toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
-	});
+	// var ue = UE.getEditor('post_content', {
+	// 	elementPathEnabled : false,
+	// 	minFrameWidth : 372,
+	// 	toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'selectall', 'cleardoc', 'undo', 'redo']],
+	// });
 
 	// 动态添加
 	// $.ajax({
@@ -381,6 +381,7 @@
 		});
 		$(this).addClass('hidden');
 	});
+
 });
 
 
@@ -480,7 +481,8 @@ function add(data) {
 	var summary = [];
 	for (let key in data) {
 		$.each(data[key], function (index, value) {
-			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + value.content + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
+			var content = decodeURIComponent(value.content);
+			var templateHtml = '<div class="note-item"><h2>' + value.title + '</h2><h5>来源：' + value.user + '</h5><span class="label label-info">' + value.label + '</span><div class="note-content">' + content + '</div><button class="btn btn-default pull-right hidden down"><span class="glyphicon glyphicon-triangle-bottom"> 全文</span></button><button class="btn btn-default pull-right hidden up"><span class="glyphicon glyphicon-triangle-top"> 收起</span></button></div>';
 			switch (value.label) {
 				case '手艺' : html[0] += templateHtml;break;
 				case '纸艺' : html[1] += templateHtml;break;
