@@ -52,30 +52,6 @@ header .header-logo {
 	position: relative;
 	margin-bottom: 50px;
 }
-#carousel {
-	width: 100%;
-	background-color: #5bb;
-}
-.myCarousel-indicators {
-	left: 0px;
-	margin: 0px;
-	width: 100%;
-	background-color: rgba(102,204,204,.3);
-}
-.myCarousel-inner {
-	box-sizing: border-box;
-}
-.myCarousel-inner .item {
-	overflow: hidden;
-	height: 180px;
-}
-.myCarousel-inner img {
-	margin: 0 auto;
-}
-#carousel .myCarousel-control {
-	background-image: none;
-/* 	background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0px, transparent 100%); */
-}
 #main {
 	padding-top: 50px;
 }
@@ -135,9 +111,6 @@ footer {
 
 /* 响应式 */
 @media (min-width: 768px) {
-	.myCarousel-inner .item {
-		height: 260px;
-	}
 	.footer-info h4 {
 		font-size: 20px;
 	}
@@ -146,9 +119,6 @@ footer {
 	}
 }
 @media (min-width: 992px) {
-	.myCarousel-inner .item {
-		height: 320px;
-	}
 	.footer-info h4 {
 		font-size: 22px;
 	}
@@ -157,9 +127,6 @@ footer {
 	}
 }
 @media (min-width: 1200px) {
-	.myCarousel-inner .item {
-		height: 320px;
-	}
 	.footer-info h4 {
 		font-size: 22px;
 	}
