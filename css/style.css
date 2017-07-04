@@ -1,10 +1,11 @@
 body {
 	width: 100%;
+	background-image: url('../image/bg.jpg');
 }
 nav#navbar-top {
 	padding-right: 20px;
 	padding-left: 20px;
-}
+	border: none;}
 nav#navbar-top .navbar-header {
 	float: left;
 }
@@ -19,4 +20,29 @@ nav#navbar-top ul.nav {
 }
 nav#navbar-top ul.nav li {
 	float: left;
+}
+nav#navbar-top ul.nav li a {
+	font-size: 1em;
+	color: #1d709d;
+}
+#main {
+	padding-top: 100px;
+}
+#main .container-right {
+	border-left: 1px solid #1d709d;
+}
+#main .container-right .userInfo-title {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #1d709d;
+}
+#main .container-right .setting {
+	margin-top: -8px;
+}
+#main .container-right meter {
+	/* -webkit-appearance: none; */
+	width: 100%;
+	height: 20px;
+	border-radius: 10%;
+}
+#main .container-right meter::-webkit-meter-bar {
 }
