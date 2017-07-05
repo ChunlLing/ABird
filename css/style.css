@@ -5,9 +5,6 @@ body {
 nav#navbar-top {
 	padding-right: 20px;
 	padding-left: 20px;
-	border: none;}
-nav#navbar-top .navbar-header {
-	float: left;
 }
 nav#navbar-top a.navbar-brand {
 	padding: 25px;
@@ -15,34 +12,64 @@ nav#navbar-top a.navbar-brand {
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
-nav#navbar-top ul.nav {
-	float: right;
+nav#navbar-top ul.nav li.active {
+	border-bottom: 2px solid #1d709d;
+	background-color: rgba(64,155,205,.2);
 }
-nav#navbar-top ul.nav li {
-	float: left;
+nav#navbar-top ul.nav li.active a {
+	color: #454545;
 }
 nav#navbar-top ul.nav li a {
 	font-size: 1em;
 	color: #1d709d;
+	background-color: transparent;
 }
 #main {
 	padding-top: 100px;
 }
+#main .container-left .panel-heading {
+	height: 48px;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+#main .container-left .panel-body {
+}
+#main .container-left .panel-body .row div.col-xs-12 {
+	height: 60px;
+}
 #main .container-right {
 	border-left: 1px solid #1d709d;
 }
-#main .container-right .userInfo-title {
-	padding-bottom: 10px;
+#main .container-right .info-title {
+	padding-bottom: 15px;
 	border-bottom: 1px solid #1d709d;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: 2px;
 }
-#main .container-right .setting {
-	margin-top: -8px;
+#userInfo {
+	margin-bottom: 50px;
+}
+#userSetting {
+	top: -10px;
+}
+#userName, #userSpace-total {
+	font-size: 1.5em;
+	color: #1d709d;
+}
+#userSpace-used {
+	font-size: 1.5em;
+	color: #1d709d;
 }
 #main .container-right meter {
-	/* -webkit-appearance: none; */
 	width: 100%;
 	height: 20px;
 	border-radius: 10%;
 }
-#main .container-right meter::-webkit-meter-bar {
+#main .container-right meter::-webkit-meter-optimum-value {
+	background: linear-gradient(to bottom, #3098d0, #2a8ec2, #18648e, #1d709d);
+}
+#main .container-right meter::-webkit-meter-suboptimum-value {
+	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }

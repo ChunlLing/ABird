@@ -18,43 +18,84 @@
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"></a>
+				<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-list">
+					<span class="icon-reorder"></span>
+				</button>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-			</ul>
+			<div id="nav-list" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li id="nav-home" class="active"><a href="#" title="">首页</a></li>
+					<li id="nav-myNote"><a href="#" title="">我的笔记</a>
+					<li id="nav-groupNotes"><a href="#" title=""> 群组合作</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 	<div id="main" class="container">
 		<div class="row">
 			<div class="container-left col-md-7 col-sm-7">
-				<div id="myNote" class="panel panel-default">
-					<div class="panel-heading"><span class="icon-group"></span> 我的笔记</div>
+				<div id="myNote" class="panel panel-primary">
+					<div class="panel-heading"><span class="icon-bookmark"></span> 我的笔记</div>
 					<div class="panel-body">
-						<button class="btn btn-default btn-lg">
-							<span class="icon-file"> 快速记事</span>
-						</button>
-						<button class="btn btn-default btn-lg">
-							<span class="icon-eye-open"> 浏览笔记</span>
-						</button>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<button class="btn btn-primary btn-lg center-block">
+									<span class="icon-file"> 快速记事</span>
+								</button>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<button class="btn btn-primary btn-lg center-block">
+									<span class="icon-eye-open"> 浏览笔记</span>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div id="groupNote" class="panel panel-primary">
+				<div id="groupNotes" class="panel panel-primary">
 					<div class="panel-heading"><span class="icon-group"></span> 群组笔记</div>
 					<div class="panel-body">
-						<button class="btn btn-default btn-lg">
-							<span class="icon-commentsk"> 群组记事</span>
-						</button>
-						<button class="btn btn-default btn-lg">
-							<span class="icon-cogs"> 管理群组</span>
-						</button>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<button class="btn btn-primary btn-lg center-block">
+									<span class="icon-comments"> 群组记事</span>
+								</button>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<button class="btn btn-primary btn-lg center-block">
+									<span class="icon-cogs"> 管理群组</span>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div id="userInfo" class="container-right col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1">
-				<h4 class="userInfo-title"><span class="icon-user"></span> 个人信息<button class="btn btn-primary pull-right setting"><span class="icon-cog"></span></button></h4>
-				<p>Hi <span id="userName"></span></p>
-				<p><meter class="userSpace" min="1" max="1000" value="920" high=900></meter></p>
+			<div class="container-right col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1">
+				<div id="userInfo">
+					<h4 class="info-title">
+						<span class="icon-user"></span>
+						 个人信息
+						<div id="userSetting" class="btn-group pull-right">
+							<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="icon-cog"></span></button>
+							<ul class="dropdown-menu">
+								<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+								<li class="text-center"><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+							</ul>
+						</div>
+					</h4>
+					<p>Hi <span id="userName">12</span></p>
+					<p><meter id="userSpace" min="1" max="1000" value="920" high=900></meter></p>
+					<p>总空间：<span id="userSpace-total">12</span>MB，已用<span id="userSpace-used">12</span>MB</p>
+				</div>
+				<div id="newInfo">
+					<h4 class="info-title">
+						<span class="icon-bell-alt"></span>
+						 最新动态
+					</h4>
+					<ul>
+						<li>官方</li>
+						<li>个人</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		
