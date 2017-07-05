@@ -7,10 +7,11 @@ nav#navbar-top {
 	padding-left: 20px;
 }
 nav#navbar-top a.navbar-brand {
-	padding: 25px;
-	background-image: url('../image/bird_32.png');
+	padding: 0px 50px;
+	background-image: url('../image/bird_195_100.png');
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+	background-size: 100px;
 }
 nav#navbar-top ul.nav li.active {
 	border-bottom: 2px solid #1d709d;
