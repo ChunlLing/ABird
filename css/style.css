@@ -102,13 +102,18 @@ nav#navbar-top ul.nav li a {
 #userSetting-modal .modal-dialog .modal-header button {
 	margin-right: 15px;
 }
-#userInfo-btn {
+#userInfo-btn, #newInfo-btn {
 	position: fixed;
-	top: 45%;
 	right: 0;
 	border-radius: 50%;
 }
-#userInfo-btn .btn {
+#userInfo-btn {
+	top: 45%;
+}
+#newInfo-btn {
+	top: 55%;
+}
+#userInfo-btn .btn, #newInfo-btn .btn {
 	border-radius: 50% 50% 2% 50%;
 }
 #userInfo-modal-view p {
