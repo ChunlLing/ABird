@@ -31,6 +31,7 @@
 			</div>
 		</div>
 	</nav>
+	<!-- 内容区 -->
 	<div id="main" class="container">
 		<div class="row">
 			<div class="container-left col-md-7 col-sm-7">
@@ -75,7 +76,7 @@
 						<span class="icon-user"></span>
 						 个人信息
 						<div id="userSetting" class="btn-group pull-right">
-							<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="icon-cog"></span></button>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#userSetting-modal"><span class="icon-cog"></span></button>
 							<ul class="dropdown-menu">
 								<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
 								<li class="text-center"><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
@@ -98,7 +99,66 @@
 				</div>
 			</div>
 		</div>
-		
+	</div>
+	<!-- 设置对话框 -->
+	<div class="modal fade" id="userSetting-modal" role="modal" aria-labelledby="userSetting-modal-label">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal"><span class="icon-remove-circle"></span></button>
+					<ul id="userSetting-modal-label" class="nav nav-tabs" role="tablist">
+						<li class="active"><a href="#userInfo-view">基本信息</a></li>
+						<li><a href="#userInfo-modify">修改信息</a></li>
+					</ul>
+				</div>
+				<div class="modal-body tab-content">
+					<div id="userInfo-view" class="tab-pane active" role="tabpanel">
+						<dl class="dl-horizontal">
+							<dt>用户名</dt>
+							<dd>12</dd>
+						</dl>
+						<dl class="dl-horizontal">
+							<dt>注册邮箱</dt>
+							<dd>12</dd>
+						</dl>
+						<dl class="dl-horizontal">
+							<dt>总空间</dt>
+							<dd>12</dd>
+						</dl>
+						<dl class="dl-horizontal">
+							<dt>已使用空间</dt>
+							<dd>12</dd>
+						</dl>
+					</div>
+					<div id="userInfo-modify" class="tab-pane" role="tabpanel">
+						<p class="well text-info"><span class="icon-info-sign"></span> 修改用户名/密码/邮箱需正确回答密保问题</p>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="validate-question" class="col-sm-2 control-label">密保问题</label>
+								<div class="col-sm-10">
+									<select id="validate-question" class="form-control">
+										<option>请选择一个密保问题</option>
+										<option>你的名字是？</option>
+										<option>你最喜欢的食物是？</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="validate-answer" class="col-sm-2 control-label">答案</label>
+								<div class="col-sm-10">
+									<input type="text" id="validate-answer" class="form-control" placeholder="请输入你的答案">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-10 col-sm-offset-2">
+									<input type="button" id="validate-submit" class="btn btn-primary" value="确定">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
