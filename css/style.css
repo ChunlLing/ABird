@@ -91,6 +91,9 @@ nav#navbar-top ul.nav li a {
 #main .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
+#userInfo-modal {
+	margin-right: -17px;
+}
 #userSetting-modal .modal-dialog .modal-header {
 	padding-right: 0px;
 	padding-left: 0px;
@@ -98,9 +101,6 @@ nav#navbar-top ul.nav li a {
 }
 #userSetting-modal .modal-dialog .modal-header button {
 	margin-right: 15px;
-}
-#userSetting-modal .modal-dialog .modal-header ul {
-	padding-left: 15px;
 }
 #userInfo-btn {
 	position: fixed;
@@ -112,7 +112,7 @@ nav#navbar-top ul.nav li a {
 	border-radius: 50% 50% 2% 50%;
 }
 #userInfo-modal-view p {
-	text-indent: 15px;
+	text-indent: 5px;
 }
 #userInfo-modal .form-horizontal .form-group {
 	margin-left: 15px;
