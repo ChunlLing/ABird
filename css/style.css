@@ -1,3 +1,4 @@
+@charset "utf8";
 body {
 	width: 100%;
 	background-image: url('../image/bg.jpg');
@@ -55,6 +56,17 @@ nav#navbar-top ul.nav li a {
 }
 #userInfo {
 	margin-bottom: 50px;
+}
+#userInfo a[title="退出"] {
+	margin-left: 5px;
+	font-size: 1.2em;
+	color: #333;
+}
+#userInfo a[title="退出"]:hover {
+	text-decoration: none;
+}
+#userInfo a[title="退出"]:hover span {
+	color: #a94442;
 }
 #userSetting {
 	top: -10px;
