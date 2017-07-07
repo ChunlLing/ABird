@@ -36,7 +36,7 @@ nav#navbar-top ul.nav li a {
 	color: #1d709d;
 	background-color: transparent;
 }
-#main {
+#main, #myNote-tabpanel, #groupNote-tabpanel {
 	padding-top: 100px;
 }
 #main .container-left .panel-heading {
@@ -91,8 +91,8 @@ nav#navbar-top ul.nav li a {
 #main .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
-#userInfo-modal {
-	margin-right: -17px;
+#userInfo-modal, #newInfo-modal {
+	/* margin-right: -17px; */
 }
 #userSetting-modal .modal-dialog .modal-header {
 	padding-right: 0px;
