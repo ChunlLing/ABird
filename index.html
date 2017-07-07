@@ -23,7 +23,7 @@
 				</button>
 			</div>
 			<div id="nav-list" class="collapse navbar-collapse">
-				<ul class="nav nav-tabs navbar-nav navbar-right" role="tablist">
+				<ul class="nav navbar-nav navbar-right" role="tablist">
 					<li id="nav-home" class="active" role="presentation"><a href="#main" title="" role="tab" data-toggle="tab">首页</a></li>
 					<li id="nav-myNote" role="presentation"><a href="#myNote-tabpanel" title="" role="tab" data-toggle="tab">我的笔记</a>
 					<li id="nav-groupNotes" role="presentation"><a href="#groupNote-tabpanel" title="" role="tab" data-toggle="tab"> 群组合作</a></li>
@@ -99,7 +99,7 @@
 			<div id="userInfo-btn" class="visible-xs-block" data-toggle="modal" data-target="#userInfo-modal"><botton class="btn btn-default"><span class="icon-user"></span></botton></div>
 			<div id="newInfo-btn" class="visible-xs-block" data-toggle="modal" data-target="#newInfo-modal"><botton class="btn btn-default"><span class="icon-bell-alt"></span></botton></div>
 		</div>
-		<div id="myNote-tabpanel" class="container tab-pane active" role="tabpanel">
+		<div id="myNote-tabpanel" class="container tab-pane" role="tabpanel">
 			<div class="row">
 				<div class="addNote col-md-2 col-sm-4 col-xs-6 box"><span class="icon-plus"></span></div>
 				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
@@ -128,7 +128,34 @@
 				</div>
 			</div>
 		</div>
-		<div id="groupNote-tabpanel" class="container tab-pane" role="tabpanel">123</div>
+		<div id="groupNote-tabpanel" class="container tab-pane active" role="tabpanel">
+			<div class="row groupNote-container">
+				<div class="col-sm-4 groupNote-tabpanel-left">
+					<p class="top">
+						<button class="btn btn-default pull-left createGroup">新建群组</button>
+						<button class="btn btn-default pull-right joinGroup">加入群组</button>
+					</p>
+					<ul class="nav nav-pills nav-stacked" role="tablist">
+						<li class="active" role="presentation"><a href="#myGroup1" role="tab" data-toggle="tab">我的第一个群</a></li>
+						<li role="presentation"><a href="#myGroup2" role="tab" data-toggle="tab">我的第一个群</a></li>
+						<li role="presentation"><a href="#myGroup3" role="tab" data-toggle="tab">我的第一个群</a></li>
+					</ul>
+					<p class="bottom">
+						<botton class="btn btn-default pull-right setting"><span class="icon-cog"></span></botton>
+					</p>
+				</div>
+				<div class="col-sm-8 groupNote-tabpanel-right">
+					<div class="tab-content">
+						<div id="myGroup1" class="tab-pane active">
+							<div class="notes"></div>
+							<div class="notes"></div>
+						</div>
+						<div id="myGroup2" class="tab-pane active"></div>
+						<div id="myGroup3" class="tab-pane active"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- 设置模态框 -->
 	<div class="modal fade" id="userSetting-modal" role="modal" aria-labelledby="userSetting-modal-label">

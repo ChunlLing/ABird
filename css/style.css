@@ -150,6 +150,42 @@ nav#navbar-top ul.nav li a {
 	line-height: 145px;
 	font-size: 120px;
 }
+#groupNote-tabpanel .groupNote-container {
+	margin: 10px auto;
+	width: 95%;
+	height: 500px;
+	border: 1px solid #1d709d;
+}
+#groupNote-tabpanel .groupNote-tabpanel-left {
+	padding: 0px;
+	height: inherit;
+	border-right: 1px solid #1d709d;
+	overflow: hidden;
+}
+#groupNote-tabpanel .groupNote-tabpanel-left p.top {
+	overflow: hidden;
+	padding: 10px 20px;
+	border-bottom: 1px solid #1d709d;
+}
+#groupNote-tabpanel .groupNote-tabpanel-left p.bottom {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	overflow: hidden;
+	padding: 10px 20px 0px;
+	border-top: 1px solid #1d709d;
+}
+#groupNote-tabpanel .groupNote-tabpanel-left ul.nav {
+	padding: 0px 20px;
+}
+#groupNote-tabpanel .groupNote-tabpanel-right .notes {
+	margin: 10px auto;
+	width: 90%;
+	height: 40px;
+	border: 1px solid #1d709d;
+}
+
 @media screen and (min-width: 768px) {
 	#myNote-tabpanel .row {
 		padding-left: 20px;
