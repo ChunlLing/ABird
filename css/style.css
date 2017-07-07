@@ -126,3 +126,55 @@ nav#navbar-top ul.nav li a {
 #userInfo-modal-modify p.bg-info {
 	padding-left: 5px;
 }
+/* 我的笔记 */
+#myNote-tabpanel .row {
+	padding-left: 1px;
+}
+#myNote-tabpanel .box {
+	margin: 10px 3px;
+	width: 145px;
+	height: 145px;
+	padding: 0px;
+	cursor: pointer;
+}
+#myNote-tabpanel .box.addNote {
+	border: 2px dashed #1d709d;
+	border-radius: 5px;
+	text-align: center;
+	color: rgba(29,112,157,.5);
+}
+#myNote-tabpanel .box.addNote:hover {
+	color: rgba(29,112,157,1);
+}
+#myNote-tabpanel .box.addNote span {
+	line-height: 145px;
+	font-size: 120px;
+}
+@media screen and (min-width: 768px) {
+	#myNote-tabpanel .row {
+		padding-left: 20px;
+	}
+	#myNote-tabpanel .box {
+		margin: 10px 20px;
+		width: 200px;
+		height: 200px;
+	}
+	#myNote-tabpanel .box.addNote span {
+		line-height: 200px;
+		font-size: 140px;
+	}
+}
+@media screen and (min-width: 992px) {
+	#myNote-tabpanel .row {
+		padding-left: 40px;
+	}
+	#myNote-tabpanel .box {
+		margin: 10px;
+		width: 200px;
+		height: 200px;
+	}
+	#myNote-tabpanel .box.addNote span {
+		line-height: 200px;
+		font-size: 160px;
+	}
+}
