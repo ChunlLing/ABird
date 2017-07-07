@@ -9,6 +9,20 @@ a:link, a:visited, a:hover, a:active{
 a:hover {
 	color: #1d709d;
 }
+::-webkit-scrollbar {
+	width: 15px;
+}
+::-webkit-scrollbar-track {
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: rgba(29,112,157,.1);
+	-webkit-box-shadow: inset 0 0 5px rgba(29,112,157,.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
 nav#navbar-top {
 	padding-right: 20px;
 	padding-left: 20px;
@@ -155,6 +169,7 @@ nav#navbar-top ul.nav li a {
 	width: 95%;
 	height: 500px;
 	border: 1px solid #1d709d;
+	background-color: #f8f8f8;
 }
 #groupNote-tabpanel .groupNote-tabpanel-left {
 	padding: 0px;
@@ -165,6 +180,7 @@ nav#navbar-top ul.nav li a {
 #groupNote-tabpanel .groupNote-tabpanel-left p.top {
 	overflow: hidden;
 	padding: 10px 20px;
+	margin: 0px;
 	border-bottom: 1px solid #1d709d;
 }
 #groupNote-tabpanel .groupNote-tabpanel-left p.bottom {
@@ -173,11 +189,15 @@ nav#navbar-top ul.nav li a {
 	bottom: 0px;
 	width: 100%;
 	overflow: hidden;
-	padding: 10px 20px 0px;
+	padding: 10px 20px;
+	margin: 0px;
 	border-top: 1px solid #1d709d;
 }
 #groupNote-tabpanel .groupNote-tabpanel-left ul.nav, #groupNote-tabpanel .groupNote-tabpanel-left .panel-group.visible-xs-block {
+	height: 390px;
 	padding: 0px 20px;
+	margin: 0px;
+	overflow-y: scroll;
 }
 #groupNote-tabpanel .groupNote-tabpanel-right .notes {
 	margin: 10px auto;
