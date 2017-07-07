@@ -176,7 +176,7 @@ nav#navbar-top ul.nav li a {
 	padding: 10px 20px 0px;
 	border-top: 1px solid #1d709d;
 }
-#groupNote-tabpanel .groupNote-tabpanel-left ul.nav {
+#groupNote-tabpanel .groupNote-tabpanel-left ul.nav, #groupNote-tabpanel .groupNote-tabpanel-left .panel-group.visible-xs-block {
 	padding: 0px 20px;
 }
 #groupNote-tabpanel .groupNote-tabpanel-right .notes {
