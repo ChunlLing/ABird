@@ -50,22 +50,22 @@ nav#navbar-top ul.nav li a {
 	color: #1d709d;
 	background-color: transparent;
 }
-#main, #myNote-tabpanel, #groupNote-tabpanel {
+#home, #myNote-tabpanel, #groupNote-tabpanel {
 	padding-top: 100px;
 }
-#main .container-left .panel-heading {
+#home .container-left .panel-heading {
 	height: 48px;
 	font-size: 1.2em;
 	font-weight: bold;
 	letter-spacing: 2px;
 }
-#main .container-left .panel-body .row div.col-xs-12 {
+#home .container-left .panel-body .row div.col-xs-12 {
 	height: 60px;
 }
-#main .container-right {
+#home .container-right {
 	border-left: 1px solid #1d709d;
 }
-#main .container-right .info-title {
+#home .container-right .info-title {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #1d709d;
 	font-size: 1.2em;
@@ -94,15 +94,15 @@ nav#navbar-top ul.nav li a {
 	font-size: 1.5em;
 	color: #1d709d;
 }
-#main .container-right meter {
+#home .container-right meter {
 	width: 100%;
 	height: 20px;
 	border-radius: 10%;
 }
-#main .container-right meter::-webkit-meter-optimum-value {
+#home .container-right meter::-webkit-meter-optimum-value {
 	background: linear-gradient(to bottom, #3098d0, #2a8ec2, #18648e, #1d709d);
 }
-#main .container-right meter::-webkit-meter-suboptimum-value {
+#home .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
 #userInfo-modal, #newInfo-modal {
@@ -195,7 +195,7 @@ nav#navbar-top ul.nav li a {
 }
 #groupNote-tabpanel .groupNote-tabpanel-left ul.nav, #groupNote-tabpanel .groupNote-tabpanel-left .panel-group.visible-xs-block {
 	height: 390px;
-	padding: 0px 20px;
+	padding: 10px 20px;
 	margin: 0px;
 	overflow-y: scroll;
 }
