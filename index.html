@@ -72,15 +72,22 @@
 				<div class="container-right col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1 hidden-xs">
 					<div id="userInfo">
 						<h4 class="info-title">
-							<span class="icon-user"></span>
-							 个人信息
+							<span><i class="icon-user"></i> 个人信息</span>
 							<div id="userSetting" class="btn-group pull-right">
-								<button class="btn btn-primary" data-toggle="modal" data-target="#userSetting-modal" href="tpl/userSetting-modal.html"><span class="icon-cog"></span></button>
+								<button class="btn btn-primary disabled" data-toggle="modal" data-target="#userSetting-modal" href="tpl/userSetting-modal.html"><span class="icon-cog"></span></button>
 							</div>
 						</h4>
-						<p>Hi <span class="userName">12</span> <a href="#" title="退出"><span class="icon-signout"></span></a></p>
-						<p><meter class="userSpace" min="1" max="1000" value="" high=900></meter></p>
-						<p>总空间：<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
+						<div id="hasLogin" class="hide">
+							<p>Hi <span class="userName">12</span> <a href="#" title="退出"><span class="icon-signout"></span></a></p>
+							<p><meter class="userSpace" min="1" max="1000" value="" high=900></meter></p>
+							<p>总空间：<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
+						</div>
+						<div id="unlogin">
+							<p>
+								<a id="login-btn" class="btn btn-info" data-toggle="modal" data-target="#login-modal" href="tpl/login-modal.html">登录</a>
+								<a id="reg-btn" class="btn btn-info" data-toggle="modal" data-target="#reg-modal">注册</a>
+							</p>
+						</div>
 					</div>
 					<div id="newInfo">
 						<h4 class="info-title">
@@ -270,23 +277,50 @@
 		</div>
 	</div>
 	<!-- 登录框 -->
-	<div id="loginModal" class="modal fade" role="dialog" data-backdrop="static">
+	<div id="login-modal" class="modal fade" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+	<div id="reg-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">用户登录</h4>
+					<button class="close" data-dismiss="modal"><span class="icon-remove-circle"></span></button>
+					<h4 class="modal-title">用户注册</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="username" class="col-sm-2 control-label">用户名</label>
-							<div class="col-sm-10">
-								<input type="text" id="username" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-						</div>
-					</form>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="username" class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" id="username" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="useremail" class="col-sm-2 control-label">邮箱</label>
+			<div class="col-sm-10">
+				<input type="email" id="useremail" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="userPSW" class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+				<input type="password" id="userPSW" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="userPSWAgain" class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+				<input type="password" id="userPSWAgain" class="form-control">
+			</div>
+		</div>
+	</form>
+<div class="modal-footer">
+	<button class="btn btn-info" data-toggle="modal" data-target="#login-modal" href="tpl/login-modal.html" data-dismiss="modal">登录</button>
+	<button class="btn btn-primary" data-dismiss="modal">确定</button>
+</div>
 				</div>
 			</div>
 		</div>

@@ -27,16 +27,16 @@ nav#navbar-top {
 	padding-right: 20px;
 	padding-left: 20px;
 }
-nav#navbar-top .nav li:hover {
-	border-bottom: 2px solid rgba(242,234,246,1);
-	background-color: rgba(242,234,246,1);
-}
 nav#navbar-top a.navbar-brand {
 	padding: 0px 50px;
 	background-image: url('../image/bird_195_100.png');
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-size: 100px;
+}
+nav#navbar-top ul.nav li:hover {
+	border-bottom: 2px solid rgba(242,234,246,1);
+	background-color: rgba(242,234,246,1);
 }
 nav#navbar-top ul.nav li.active {
 	border-bottom: 2px solid #1d709d;
