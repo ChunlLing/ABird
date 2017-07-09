@@ -30,6 +30,7 @@
 	</nav>
 	<!-- 内容区 -->
 	<div class="tab-content">
+		<!-- 首页 -->
 		<div id="home" class="container tab-pane active" role="tabpanel">
 			<div class="row">
 				<div class="container-left col-md-7 col-sm-7">
@@ -38,7 +39,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-sm-6 col-xs-12">
-									<button class="btn btn-primary btn-lg center-block addNote" data-toggle="modal" data-target="#addNote-panel">
+									<button class="btn btn-primary btn-lg center-block addNote" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">
 										<span class="icon-file"> 快速记事</span>
 									</button>
 								</div>
@@ -74,11 +75,11 @@
 							<span class="icon-user"></span>
 							 个人信息
 							<div id="userSetting" class="btn-group pull-right">
-								<button class="btn btn-primary" data-toggle="modal" data-target="#userSetting-modal"><span class="icon-cog"></span></button>
+								<button class="btn btn-primary" data-toggle="modal" data-target="#userSetting-modal" href="tpl/userSetting-modal.html"><span class="icon-cog"></span></button>
 							</div>
 						</h4>
 						<p>Hi <span class="userName">12</span> <a href="#" title="退出"><span class="icon-signout"></span></a></p>
-						<p><meter class="userSpace" min="1" max="1000" value="920" high=900></meter></p>
+						<p><meter class="userSpace" min="1" max="1000" value="" high=900></meter></p>
 						<p>总空间：<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
 					</div>
 					<div id="newInfo">
@@ -94,9 +95,12 @@
 				</div>
 			</div>
 		</div>
+		<!-- 我的笔记 -->
 		<div id="myNote-tabpanel" class="container tab-pane" role="tabpanel">
 			<div class="row">
-				<div class="addNote col-md-2 col-sm-4 col-xs-6 box"><span class="icon-plus"></span></div>
+				<div class="addNote col-md-2 col-sm-4 col-xs-6 box" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">
+					<span class="icon-plus"></span>
+				</div>
 				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
 					<div class="panel-heading">
 						<h3 class="panel-title">我的第一篇笔记</h3>
@@ -123,6 +127,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 群组合作 -->
 		<div id="groupNote-tabpanel" class="container tab-pane" role="tabpanel">
 			<div class="row groupNote-container">
 				<div class="col-sm-4 groupNote-tabpanel-left">
@@ -233,66 +238,13 @@
 				</div>
 			</div>
 		</div>
-		<div id="userInfo-btn" class="visible-xs-block" data-toggle="modal" data-target="#userInfo-modal"><botton class="btn btn-default"><span class="icon-user"></span></botton></div>
-		<div id="newInfo-btn" class="visible-xs-block" data-toggle="modal" data-target="#newInfo-modal"><botton class="btn btn-default"><span class="icon-bell-alt"></span></botton></div>
+		<div id="userInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal" href="tpl/userInfo-modal.html"><span class="icon-user"></span></botton></div>
+		<div id="newInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#newInfo-modal" href="tpl/newInfo-modal.html"><span class="icon-bell-alt"></span></botton></div>
 	</div>
 	<!-- 设置模态框 -->
 	<div class="modal fade" id="userSetting-modal" role="modal" aria-labelledby="userSetting-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" data-dismiss="modal"><span class="icon-remove-circle"></span></button>
-					<ul id="userSetting-modal-label" class="nav nav-tabs" role="tablist">
-						<li class="active"><a href="#userInfo-view" role="tab" data-toggle="tab">基本信息</a></li>
-						<li><a href="#userInfo-modify" role="tab" data-toggle="tab">修改信息</a></li>
-					</ul>
-				</div>
-				<div class="modal-body tab-content">
-					<div id="userInfo-view" class="tab-pane active" role="tabpanel">
-						<dl class="dl-horizontal">
-							<dt>用户名</dt>
-							<dd><span class="userName">12</span></dd>
-						</dl>
-						<dl class="dl-horizontal">
-							<dt>注册邮箱</dt>
-							<dd><span class="userEmail">12</span></dd>
-						</dl>
-						<dl class="dl-horizontal">
-							<dt>总空间</dt>
-							<dd>12</dd>
-						</dl>
-						<dl class="dl-horizontal">
-							<dt>已使用空间</dt>
-							<dd>12</dd>
-						</dl>
-					</div>
-					<div id="userInfo-modify" class="tab-pane" role="tabpanel">
-						<p class="well text-info"><span class="icon-info-sign"></span> 修改用户名/密码/邮箱需正确回答密保问题</p>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<label for="validate-question" class="col-sm-2 control-label">密保问题</label>
-								<div class="col-sm-10">
-									<select id="validate-question" class="form-control">
-										<option>请选择一个密保问题</option>
-										<option>你的名字是？</option>
-										<option>你最喜欢的食物是？</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="validate-answer" class="col-sm-2 control-label">答案</label>
-								<div class="col-sm-10">
-									<input type="text" id="validate-answer" class="form-control" placeholder="请输入你的答案">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-10 col-sm-offset-2">
-									<input type="button" class="btn btn-primary validate-submit" value="确定">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -300,46 +252,6 @@
 	<div id="userInfo-modal" class="modal fade" role="modal" aria-labelledby="userInfo-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 id="userInfo-modal-label" class="modal-title">用户信息</h4>
-				</div>
-				<div id="userInfo-modal-body" class="modal-body panel-group" role="tablist">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab">
-							<h4 class="panel-title"><a href="#userInfo-modal-view" role="button" data-toggle="collapse" data-parent="#userInfo-modal-body">基本信息</a></h4>
-						</div>
-						<div id="userInfo-modal-view" class="collapse panel-collapse" role="tabpanel">
-							<div class="row">
-								<p class="col-xs-6"><span class="icon-user"></span> <span class="userName">12</span></p>
-								<p class="col-xs-6"><span class="icon-envelope"></span> <span class="userEmail">12</span></p>
-							</div>
-							<p><span class="icon-inbox"></span> 总空间<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab">
-							<h4 class="panel-title"><a href="#userInfo-modal-modify" role="button" data-toggle="collapse" data-parent="#userInfo-modal-body">修改信息</a></h4>
-						</div>
-						<div id="userInfo-modal-modify" class="collapse panel-collapse" role="tabpanel">
-							<p class="bg-info text-info"><span class="icon-info-sign"></span> 修改用户名/密码/邮箱需正确回答密保问题</p>
-							<form class="form-horizontal">
-								<div class="form-group">
-									<select class="form-control">
-										<option>请选择一个密保问题</option>
-										<option>你的名字是？</option>
-										<option>你最喜欢的食物是？</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="请输入你的答案">
-								</div>
-								<div class="form-group">
-									<input type="button" class="btn btn-primary validate-submit" value="确定">
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -347,28 +259,34 @@
 	<div id="newInfo-modal" class="modal fade" role="modal" aria-labelledby="userInfo-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 id="newInfo-modal-label" class="modal-title">最新动态</h4>
-				</div>
-				<div id="newInfo-modal-body" class="modal-body panel-group" role="tablist">
-					
-				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 编辑面板 -->
-	<div id="addNote-panel" class="modal fade" role="dialog" data-backdrop="">
+	<div id="addNote-panel" class="modal fade" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+	<!-- 登录框 -->
+	<div id="loginModal" class="modal fade" role="dialog" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">未命名</h4>
+					<h4 class="modal-title">用户登录</h4>
 				</div>
 				<div class="modal-body">
-						<script id="editor-container" name="content" type="text/plain"></script>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal">取消</button>
-					<button class="btn btn-primary">保存</button>
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">用户名</label>
+							<div class="col-sm-10">
+								<input type="text" id="username" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
