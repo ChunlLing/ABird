@@ -105,17 +105,6 @@ nav#navbar-top ul.nav li a {
 #home .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
-#userInfo-modal, #newInfo-modal {
-	/* margin-right: -17px; */
-}
-#userSetting-header {
-	padding-right: 0px;
-	padding-left: 0px;
-	border: none;
-}
-#userSetting-header button {
-	margin-right: 15px;
-}
 #userInfo-btn, #newInfo-btn {
 	position: fixed;
 	right: 0;
@@ -210,31 +199,5 @@ nav#navbar-top ul.nav li a {
 	border: 1px solid #1d709d;
 }
 
-@media screen and (min-width: 768px) {
-	#myNote-tabpanel .row {
-		padding-left: 20px;
-	}
-	#myNote-tabpanel .box {
-		margin: 10px 20px;
-		width: 200px;
-		height: 200px;
-	}
-	#myNote-tabpanel .box.addNote span {
-		line-height: 200px;
-		font-size: 140px;
-	}
-}
-@media screen and (min-width: 992px) {
-	#myNote-tabpanel .row {
-		padding-left: 40px;
-	}
-	#myNote-tabpanel .box {
-		margin: 10px;
-		width: 200px;
-		height: 200px;
-	}
-	#myNote-tabpanel .box.addNote span {
-		line-height: 200px;
-		font-size: 160px;
-	}
-}
+
+

@@ -18,7 +18,6 @@ $(function () {
 		});
 	});
 	$('#nav-home a').tab('show');
-	// $('#login-modal').modal('show');
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
 	});
