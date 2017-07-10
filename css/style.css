@@ -105,18 +105,18 @@ nav#navbar-top ul.nav li a {
 #home .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
-#userInfo-btn, #newInfo-btn {
+#userInfo-btn, #user-unlogin-btn, #newInfo-btn {
 	position: fixed;
 	right: 0;
 	border-radius: 50%;
 }
-#userInfo-btn {
+#userInfo-btn, #user-unlogin-btn {
 	top: 45%;
 }
 #newInfo-btn {
 	top: 55%;
 }
-#userInfo-btn .btn, #newInfo-btn .btn {
+#userInfo-btn .btn, #user-unlogin-btn .btn, #newInfo-btn .btn {
 	border-radius: 50% 50% 2% 50%;
 }
 #userInfo-modal-view p {
