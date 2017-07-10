@@ -1,0 +1,70 @@
+<!-- 首页 -->
+<div class="row">
+	<div class="container-left col-md-7 col-sm-7">
+		<div id="myNote" class="panel panel-primary">
+			<div class="panel-heading"><span class="icon-bookmark"></span> 我的笔记</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6 col-xs-12">
+						<button class="btn btn-primary btn-lg center-block addNote" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">
+						<span class="icon-file"> 快速记事</span>
+						</button>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<button class="btn btn-primary btn-lg center-block">
+						<span class="icon-eye-open"> 浏览笔记</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="groupNotes" class="panel panel-primary">
+			<div class="panel-heading"><span class="icon-group"></span> 群组笔记</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6 col-xs-12">
+						<button class="btn btn-primary btn-lg center-block">
+						<span class="icon-comments"> 群组消息</span>
+						</button>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<button class="btn btn-primary btn-lg center-block">
+						<span class="icon-cogs"> 管理群组</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-right col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1 hidden-xs">
+		<div id="userInfo">
+			<h4 class="info-title">
+			<span><i class="icon-user"></i> 个人信息</span>
+			<div id="userSetting" class="btn-group pull-right">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#userSetting-modal" href="tpl/userSetting-modal.html"><span class="icon-cog"></span></button>
+			</div>
+			</h4>
+			<div id="hasLogin" class="hide">
+				<p>Hi <span class="userName">12</span> <a href="#" title="退出"><span class="icon-signout"></span></a></p>
+				<p><meter class="userSpace" min="1" max="1000" value="" high=900></meter></p>
+				<p>总空间：<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
+			</div>
+			<div id="unlogin">
+				<p>
+					<a id="login-btn" class="btn btn-info" data-toggle="modal" data-target="#login-modal" href="tpl/login-modal.html">登录</a>
+					<a id="reg-btn" class="btn btn-info" data-toggle="modal" data-target="#reg-modal" href="tpl/reg-modal.html">注册</a>
+				</p>
+			</div>
+		</div>
+		<div id="newInfo">
+			<h4 class="info-title">
+			<span class="icon-bell-alt"></span>
+			最新动态
+			</h4>
+			<ul>
+				<li>官方</li>
+				<li>个人</li>
+			</ul>
+		</div>
+	</div>
+</div>
