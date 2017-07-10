@@ -1,0 +1,14 @@
+@media screen and (min-width: 992px) {
+	#myNote-tabpanel .row {
+		padding-left: 40px;
+	}
+	#myNote-tabpanel .box {
+		margin: 10px;
+		width: 200px;
+		height: 200px;
+	}
+	#myNote-tabpanel .box.addNote span {
+		line-height: 200px;
+		font-size: 160px;
+	}
+}
