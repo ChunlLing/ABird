@@ -45,27 +45,21 @@
 		<!-- 群组合作 -->
 		<div id="groupNote-tabpanel" class="container tab-pane" role="tabpanel">
 		</div>
-
-		<div id="userInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal" href="tpl/userInfo-modal.html"><span class="icon-user"></span></botton></div>
-		<div id="newInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#newInfo-modal" href="tpl/newInfo-modal.html"><span class="icon-bell-alt"></span></botton></div>
-	</div>
-
-	<!-- 设置模态框 -->
-	<div class="modal fade" id="userSetting-modal" role="dialog" aria-labelledby="userSetting-modal-label">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			</div>
+		<!-- 小屏显示 -->
+		<div id="userInfo-btn" class="visible-xs-block">
+			<botton class="btn btn-default" data-toggle="modal" data-target="#remote-modal" href="tpl/userInfo-modal.html">
+				<span class="icon-user"></span>
+			</botton>
+		</div>
+		<div id="newInfo-btn" class="visible-xs-block">
+			<botton class="btn btn-default" data-toggle="modal" data-target="#remote-modal" href="tpl/newInfo-modal.html">
+				<span class="icon-bell-alt"></span>
+			</botton>
 		</div>
 	</div>
-	<!-- 用户信息模态框 -->
-	<div id="userInfo-modal" class="modal fade" role="dialog" aria-labelledby="userInfo-modal-label">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			</div>
-		</div>
-	</div>
-	<!-- 新信息模态框 -->
-	<div id="newInfo-modal" class="modal fade" role="dialog" aria-labelledby="userInfo-modal-label">
+
+	<!-- 模态框 -->
+	<div id="remote-modal" class="modal fade" role="dialog" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			</div>
@@ -73,20 +67,6 @@
 	</div>
 	<!-- 编辑面板 -->
 	<div id="addNote-panel" class="modal fade" role="dialog" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			</div>
-		</div>
-	</div>
-	<!-- 登录框 -->
-	<div id="login-modal" class="modal fade" role="dialog" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			</div>
-		</div>
-	</div>
-	<!-- 注册框 -->
-	<div id="reg-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			</div>

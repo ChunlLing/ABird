@@ -92,4 +92,12 @@ A : Òò£¡Îª£¡Ìí£¡¼Ó£¡ĞÂ£¡½Ú£¡µã£¡µÄ£¡º¯£¡Êı£¡Ğ´£¡ÔÚ£¡keyup£¡º¯£¡Êı£¡Àï£¡ÁË£¡(¥Î?Ò
 Q : ¡¾ÓÊÏä×Ô¶¯²¹È«UI¡¿Èç¹ûÖ»ÊÇÔÚinputºó¼ÓÉÏul»á´æÔÚÎÊÌâ£º1 Èç¹ûul²»ÉèÖÃposition: absolute£¬¿ÉÒÔ×ÔÊÊÓ¦£¬µ«»áÕ¼¿Õ¼ä£»2 Èç¹ûulÉèÖÃposition: absolute£¬²»»áÕ¼¿Õ¼ä£¬µ«²»¿ÉÒÔ×ÔÊÊÓ¦
 A : ÔÚulÍâÔÙ°ü¹üÒ»²ã<div style="position: relative"></div>¡£Ô­Àí£º¶ÔÓÚwidth: 100%ÔªËØ£¬Èç¹ûÆäÃ»ÓĞposition£¬Ôò¶ÔÓ¦ÆäÖ±½Ó¸¸ÔªËØ£»Èç¹ûÉèÖÃposition: absolute£¬¶ÔÓ¦Æä×î½üposition: relativeµÄ¸¸ÔªËØ£¬ÎŞÔò¶ÔÓ¦body
 
+19
+19:21 2017/7/10
+Q : Ê¹ÓÃbootstrap£¬¶ÔÓÚrole="dialog"£¬¿ÉÒÔÔÚ´¥·¢ÔªËØÉèÖÃhref="Íâ²¿ÎÄ¼ş"¶¯Ì¬¼ÓÔØ£¬µ«¶ÔÓÚrole="tab"ÎŞĞ§
+A : https://stackoverflow.com/questions/35241057/bootstrap-3-data-target-attribute-on-tab-not-working
 
+20
+21:39 2017/7/10
+Q : Ä£Ì¬¿òµÚÒ»´ÎÊµÀı»¯ºó£¬¼´Ê¹hrefÖ¸ÏòÁ´½Ó²»Í¬£¬ÔÙ´Îµ÷ÓÃÄ£Ì¬¿ò¶¼ÏÔÊ¾µÚÒ»´ÎµÄ×´Ì¬
+A : https://stackoverflow.com/questions/12286332/twitter-bootstrap-remote-modal-shows-same-content-everytime

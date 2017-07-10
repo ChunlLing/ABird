@@ -108,12 +108,12 @@ nav#navbar-top ul.nav li a {
 #userInfo-modal, #newInfo-modal {
 	/* margin-right: -17px; */
 }
-#userSetting-modal .modal-dialog .modal-header {
+#userSetting-header {
 	padding-right: 0px;
 	padding-left: 0px;
 	border: none;
 }
-#userSetting-modal .modal-dialog .modal-header button {
+#userSetting-header button {
 	margin-right: 15px;
 }
 #userInfo-btn, #newInfo-btn {
@@ -139,6 +139,10 @@ nav#navbar-top ul.nav li a {
 }
 #userInfo-modal-modify p.bg-info {
 	padding-left: 5px;
+}
+#userInfo-modal-modify .form-horizontal .form-group {
+	margin-left: 5px;
+	margin-right: 5px;
 }
 /* 我的笔记 */
 #myNote-tabpanel .row {
