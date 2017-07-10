@@ -14,16 +14,22 @@
 	<nav id="navbar-top" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"></a>
+				<a class="navbar-brand" href="index.html"></a>
 				<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-list">
 					<span class="icon-reorder"></span>
 				</button>
 			</div>
 			<div id="nav-list" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right" role="tablist">
-					<li id="nav-home" class="active" role="presentation"><a href="#home" title="" role="tab" data-toggle="tab">首页</a></li>
-					<li id="nav-myNote" role="presentation"><a href="#myNote-tabpanel" title="" role="tab" data-toggle="tab">我的笔记</a>
-					<li id="nav-groupNotes" role="presentation"><a href="#groupNote-tabpanel" title="" role="tab" data-toggle="tab"> 群组合作</a></li>
+					<li id="nav-home" role="presentation">
+						<a href="tpl/home.html" role="tab" data-toggle="tab" data-target="#home">首页</a>
+					</li>
+					<li id="nav-myNote" role="presentation">
+						<a href="tpl/myNote-tabpanel.html" role="tab" data-toggle="tab" data-target="#myNote-tabpanel">我的笔记</a>
+					</li>
+					<li id="nav-groupNotes" role="presentation">
+						<a href="tpl/groupNote-tabpanel.html" role="tab" data-toggle="tab" data-target="#groupNote-tabpanel"> 群组合作</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -32,238 +38,34 @@
 	<div class="tab-content">
 		<!-- 首页 -->
 		<div id="home" class="container tab-pane active" role="tabpanel">
-			<div class="row">
-				<div class="container-left col-md-7 col-sm-7">
-					<div id="myNote" class="panel panel-primary">
-						<div class="panel-heading"><span class="icon-bookmark"></span> 我的笔记</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-sm-6 col-xs-12">
-									<button class="btn btn-primary btn-lg center-block addNote" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">
-										<span class="icon-file"> 快速记事</span>
-									</button>
-								</div>
-								<div class="col-sm-6 col-xs-12">
-									<button class="btn btn-primary btn-lg center-block">
-										<span class="icon-eye-open"> 浏览笔记</span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="groupNotes" class="panel panel-primary">
-						<div class="panel-heading"><span class="icon-group"></span> 群组笔记</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-sm-6 col-xs-12">
-									<button class="btn btn-primary btn-lg center-block">
-										<span class="icon-comments"> 群组消息</span>
-									</button>
-								</div>
-								<div class="col-sm-6 col-xs-12">
-									<button class="btn btn-primary btn-lg center-block">
-										<span class="icon-cogs"> 管理群组</span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container-right col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1 hidden-xs">
-					<div id="userInfo">
-						<h4 class="info-title">
-							<span><i class="icon-user"></i> 个人信息</span>
-							<div id="userSetting" class="btn-group pull-right">
-								<button class="btn btn-primary disabled" data-toggle="modal" data-target="#userSetting-modal" href="tpl/userSetting-modal.html"><span class="icon-cog"></span></button>
-							</div>
-						</h4>
-						<div id="hasLogin" class="hide">
-							<p>Hi <span class="userName">12</span> <a href="#" title="退出"><span class="icon-signout"></span></a></p>
-							<p><meter class="userSpace" min="1" max="1000" value="" high=900></meter></p>
-							<p>总空间：<span class="userSpace-total">12</span>MB，已用<span class="userSpace-used">12</span>MB</p>
-						</div>
-						<div id="unlogin">
-							<p>
-								<a id="login-btn" class="btn btn-info" data-toggle="modal" data-target="#login-modal" href="tpl/login-modal.html">登录</a>
-								<a id="reg-btn" class="btn btn-info" data-toggle="modal" data-target="#reg-modal">注册</a>
-							</p>
-						</div>
-					</div>
-					<div id="newInfo">
-						<h4 class="info-title">
-							<span class="icon-bell-alt"></span>
-							 最新动态
-						</h4>
-						<ul>
-							<li>官方</li>
-							<li>个人</li>
-						</ul>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- 我的笔记 -->
 		<div id="myNote-tabpanel" class="container tab-pane" role="tabpanel">
-			<div class="row">
-				<div class="addNote col-md-2 col-sm-4 col-xs-6 box" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">
-					<span class="icon-plus"></span>
-				</div>
-				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
-					<div class="panel-heading">
-						<h3 class="panel-title">我的第一篇笔记</h3>
-					</div>
-					<div class="panel-body"></div>
-				</div>
-				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
-					<div class="panel-heading">
-						<h3 class="panel-title">我的第一篇笔记</h3>
-					</div>
-					<div class="panel-body"></div>
-				</div>
-				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
-					<div class="panel-heading">
-						<h3 class="panel-title">我的第一篇笔记</h3>
-					</div>
-					<div class="panel-body"></div>
-				</div>
-				<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box">
-					<div class="panel-heading">
-						<h3 class="panel-title">我的第一篇笔记</h3>
-					</div>
-					<div class="panel-body"></div>
-				</div>
-			</div>
 		</div>
 		<!-- 群组合作 -->
 		<div id="groupNote-tabpanel" class="container tab-pane" role="tabpanel">
-			<div class="row groupNote-container">
-				<div class="col-sm-4 groupNote-tabpanel-left">
-					<p class="top">
-						<button class="btn btn-default pull-left createGroup">新建群组</button>
-						<button class="btn btn-default pull-right joinGroup">加入群组</button>
-					</p>
-					<ul class="nav nav-pills nav-stacked hidden-xs" role="tablist">
-						<li class="active" role="presentation"><a href="#myGroup1" role="tab" data-toggle="tab">我的第一个群</a></li>
-						<li role="presentation"><a href="#myGroup2" role="tab" data-toggle="tab">我的第一个群</a></li>
-						<li role="presentation"><a href="#myGroup3" role="tab" data-toggle="tab">我的第一个群</a></li>
-					</ul>
-					<div id="groupNotes-sm" class="panel-group visible-xs-block" role="tablist">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup2" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup2" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab">
-								<h4 class="panel-title"><a href="#myGroup3" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
-							</div>
-							<div id="myGroup3" class="panel-collapse collapse in" role="tabpanel">
-								<div class="panel-body"></div>
-							</div>
-						</div>
-					</div>
-					<p class="bottom">
-						<botton class="btn btn-default pull-right setting"><span class="icon-cog"></span></botton>
-					</p>
-				</div>
-				<div class="col-sm-8 groupNote-tabpanel-right hidden-xs">
-					<div class="tab-content">
-						<div id="myGroup1" class="tab-pane active">
-							<div class="notes"></div>
-							<div class="notes"></div>
-						</div>
-						<div id="myGroup2" class="tab-pane active"></div>
-						<div id="myGroup3" class="tab-pane active"></div>
-					</div>
-				</div>
-			</div>
 		</div>
+
 		<div id="userInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal" href="tpl/userInfo-modal.html"><span class="icon-user"></span></botton></div>
 		<div id="newInfo-btn" class="visible-xs-block"><botton class="btn btn-default" data-toggle="modal" data-target="#newInfo-modal" href="tpl/newInfo-modal.html"><span class="icon-bell-alt"></span></botton></div>
 	</div>
+
 	<!-- 设置模态框 -->
-	<div class="modal fade" id="userSetting-modal" role="modal" aria-labelledby="userSetting-modal-label">
+	<div class="modal fade" id="userSetting-modal" role="dialog" aria-labelledby="userSetting-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			</div>
 		</div>
 	</div>
 	<!-- 用户信息模态框 -->
-	<div id="userInfo-modal" class="modal fade" role="modal" aria-labelledby="userInfo-modal-label">
+	<div id="userInfo-modal" class="modal fade" role="dialog" aria-labelledby="userInfo-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			</div>
 		</div>
 	</div>
 	<!-- 新信息模态框 -->
-	<div id="newInfo-modal" class="modal fade" role="modal" aria-labelledby="userInfo-modal-label">
+	<div id="newInfo-modal" class="modal fade" role="dialog" aria-labelledby="userInfo-modal-label">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			</div>
@@ -283,45 +85,10 @@
 			</div>
 		</div>
 	</div>
+	<!-- 注册框 -->
 	<div id="reg-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" data-dismiss="modal"><span class="icon-remove-circle"></span></button>
-					<h4 class="modal-title">用户注册</h4>
-				</div>
-				<div class="modal-body">
-	<form class="form-horizontal">
-		<div class="form-group">
-			<label for="username" class="col-sm-2 control-label">用户名</label>
-			<div class="col-sm-10">
-				<input type="text" id="username" class="form-control">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="useremail" class="col-sm-2 control-label">邮箱</label>
-			<div class="col-sm-10">
-				<input type="email" id="useremail" class="form-control">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="userPSW" class="col-sm-2 control-label">密码</label>
-			<div class="col-sm-10">
-				<input type="password" id="userPSW" class="form-control">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="userPSWAgain" class="col-sm-2 control-label">密码</label>
-			<div class="col-sm-10">
-				<input type="password" id="userPSWAgain" class="form-control">
-			</div>
-		</div>
-	</form>
-<div class="modal-footer">
-	<button class="btn btn-info" data-toggle="modal" data-target="#login-modal" href="tpl/login-modal.html" data-dismiss="modal">登录</button>
-	<button class="btn btn-primary" data-dismiss="modal">确定</button>
-</div>
-				</div>
 			</div>
 		</div>
 	</div>
