@@ -15,6 +15,9 @@ $(function () {
 				});
 				console.log('12');
 			});
+			$('#to-myNote').click(function () {
+				$('#nav-myNote a').tab('show');
+			});
 		});
 	});
 	$('#nav-home a').tab('show');
