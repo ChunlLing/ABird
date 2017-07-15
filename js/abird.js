@@ -6,27 +6,21 @@ $(function () {
 		var tab = $(this);
 		$(target).load(url, function (result) {
 			tab.tab('show');
-			$('#to-myNote').click(function () {
-				$('#nav-myNote a').tab('show');
-			});
-
 		});
 	});
 	$('#nav-home a').tab('show');
 
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
-	});
-
-	$('body').on('click', '.addNote', function () {
+	}).on('click', '.addNote', function () {
 		// 获取编辑器
 		var ue = UE.getEditor('editor-container');
 		ue.ready(function () {
 			var html = ue.getContent();
 		});
-	});
-
-	$('body').on('click', '#submit', function () {
+	}).on('click', '#to-myNote', function () {
+		$('#nav-myNote a').tab('show');
+	}).on('click', '#reg-submit', function () {
 		alert();
 		return false;
 	});
