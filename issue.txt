@@ -101,3 +101,8 @@ A : https://stackoverflow.com/questions/35241057/bootstrap-3-data-target-attribu
 21:39 2017/7/10
 Q : 模态框第一次实例化后，即使href指向链接不同，再次调用模态框都显示第一次的状态
 A : https://stackoverflow.com/questions/12286332/twitter-bootstrap-remote-modal-shows-same-content-everytime
+
+21
+21:41 2017/7/16
+Q : 邮箱自动补全中对于下拉列表的click事件和input的blur事件会先触发后者
+A : https://zjy.name/archives/click-on-dropdown-and-blur-on-text.html
