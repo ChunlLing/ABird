@@ -96,9 +96,11 @@ $(function () {
 				$('#has-login-btn').removeClass('hidden');
 				$('#no-login-btn').addClass('hidden');
 				$('#remote-modal').modal('hide');
+				setInterval(function () {
+					$('.userName').text(temp);
+				}, 100)
+				
 				resetForm($('#reg-form'));
-				$('#userInfo-modal-view .userName').text(temp);
-				alert($('#userInfo-modal-view .userName').text());
 				// $('#reg-form').ajaxForm(option);
 			}
 		}
