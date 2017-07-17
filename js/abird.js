@@ -32,7 +32,7 @@ $(function () {
 	}).on('keyup', '#reg-useremail', function (e) {
 		e.preventDefault();
 		if (e.keyCode != 13 || e.keyCode != 38 || e.keyCode != 40) {
-			emailList();
+			// emailList();
 		}
 	}).on('keydown', '#reg-useremail', function (e) {
 		switch (e.keyCode) {
@@ -52,12 +52,15 @@ $(function () {
 				if (!$('.email-list-item').is('.highlight')) {
 					$('.email-list-item').first().addClass('highlight');
 				} else {
-				console.log(e.keyCode);
 					if (!$('.email-list-item.highlight').is($('.email-list-item').last())) {
 						$('.email-list-item.highlight').removeClass('highlight').next().addClass('highlight');
 					}
 				}
 				break;
+			default:
+				setTimeout(function () {
+					emailList();
+				}, 50);
 		}
 	}).on('mousedown', '.email-list-item', function () {
 		$('#reg-useremail').val($(this).text());
@@ -102,8 +105,8 @@ function validityBlur(obj, reg, errorText) {
 	} else {
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
+		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
 	}
-	obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
 }
 
 function emailList() {

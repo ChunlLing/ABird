@@ -106,3 +106,13 @@ A : https://stackoverflow.com/questions/12286332/twitter-bootstrap-remote-modal-
 21:41 2017/7/16
 Q : 邮箱自动补全中对于下拉列表的click事件和input的blur事件会先触发后者
 A : https://zjy.name/archives/click-on-dropdown-and-blur-on-text.html
+
+22
+20:15 2017/7/17
+Q : 邮箱补全功能中遇到的几点问题：
+	1. 按键事件。对于上下键绑定keyup并不能奏效，具体表现为第一次点击有效？
+	2. 如果限定补全框的高度，如何实现input不失去焦点同时补全框滚动轴可动？
+	3. 在案例中先清除补全列表的所有元素会导致按方向键失效？
+		A : 不算是一个好的方法。退而求其次，用了延时╭(╯^╰)╮
+	4. 对补全框设置position:absolute应如何设置width才与input等宽？
+		A : 在外层包了一个容器设置position:relative;width:100%;￣へ￣
