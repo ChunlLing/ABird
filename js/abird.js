@@ -27,7 +27,7 @@ $(function () {
 		emailList();
 		validityFocus($(this));
 	}).on('blur', '#reg-useremail', function () {
-		$('.email-list').addClass('hide');
+		$('.email-list').addClass('hidden');
 		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 	}).on('keyup', '#reg-useremail', function (e) {
 		e.preventDefault();
@@ -39,7 +39,7 @@ $(function () {
 			case 13:
 				e.preventDefault();
 				$(this).val($('.email-list-item.highlight').text());
-				$('.email-list').addClass('hide');
+				$('.email-list').addClass('hidden');
 				break;
 			case 38:
 				e.preventDefault();
@@ -64,7 +64,7 @@ $(function () {
 		}
 	}).on('mousedown', '.email-list-item', function () {
 		$('#reg-useremail').val($(this).text());
-		$('.email-list').addClass('hide');
+		$('.email-list').addClass('hidden');
 	}).on('focus', '#reg-userPSW', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSW', function () {
@@ -73,20 +73,43 @@ $(function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSWAgain', function () {
 		validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
+	}).on('focus', '#reg-userAnswer', function () {
+		validityFocus($(this));
+	}).on('blur', '#reg-userAnswer', function () {
+		validityBlur($(this), 'true');
 	}).on('click', '#reg-submit', function () {
 		var option = {
 			type: 'POST',
 			data: $('#reg-form').serialize(),
 			url: 'data/add_user.php',
 			success: function (response) {
-				console.log(response);
+				$('#has-login-btn').removeClass('hidden');
+				$('#no-login-btn').addClass('hidden');
+				$('#userInfo-modal-view .userName').text($('#reg-username').val());
 			}
 		};
-		// $('#reg-form').ajaxForm(option);
+		if (!$('#reg-form .form-group').is('.has-error')) {
+			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
+				var temp = $('#reg-username').val();
+				$('#has-login-btn').removeClass('hidden');
+				$('#no-login-btn').addClass('hidden');
+				$('#remote-modal').modal('hide');
+				resetForm($('#reg-form'));
+				$('#userInfo-modal-view .userName').text(temp);
+				alert($('#userInfo-modal-view .userName').text());
+				// $('#reg-form').ajaxForm(option);
+			}
+		}
 		return  false;
 	});
 
 });
+
+function resetForm(form) {
+	form.trigger('reset');
+	form.find('.form-group').removeClass('has-success');
+	form.find('input:not([type="submit"])').next('span').remove();
+}
 
 function validityFocus(obj) {
 	if (obj.next('span')) {
@@ -111,7 +134,6 @@ function validityBlur(obj, reg, errorText) {
 
 function emailList() {
 	$('.email-list').empty();
-	// $('.email-list-item').detach();
 	var hosts = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
 	if ($('#reg-useremail').val().indexOf('@') != -1) {
 		hosts = hosts.filter(function (host) {
@@ -119,7 +141,7 @@ function emailList() {
 		});
 	}
 	if (hosts.length != 0) {
-		$('.email-list').removeClass('hide');
+		$('.email-list').removeClass('hidden');
 		for (let i = 0; i < hosts.length; i++) {
 			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + hosts[i] + '</li>');
 		}
@@ -129,6 +151,6 @@ function emailList() {
 			$('.userinput').text($('#reg-useremail').val().slice(0,$('#reg-useremail').val().indexOf('@')));
 		}
 	} else {
-		$('.email-list').addClass('hide');
+		$('.email-list').addClass('hidden');
 	}
 }
