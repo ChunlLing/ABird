@@ -20,39 +20,19 @@ $(function () {
 	}).on('click', '#to-myNote', function () {
 		$('#nav-myNote a').tab('show');
 	}).on('focus', '#reg-username', function () {
-		if ($(this).next('span')) {
-			$(this).next('span').remove();
-		}
-		$(this).parents('.form-group').attr('class', 'form-group has-feedback');
+		validityFocus($(this));
 	}).on('blur', '#reg-username', function () {
-		var pattern = /[\w\u4e00-\u9fa5]/;
-		if (pattern.test($(this).val())) {
-			$(this).after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-success');
-		} else {
-			$(this).after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-error');
-		}
+		validityBlur($(this), /[\w\u4e00-\u9fa5]/);
 	}).on('focus', '#reg-useremail', function () {
 		var host = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
 		for (var i = 0; i < host.length; i++) {
 			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + host[i] + '</li>');
 		}
-		if ($(this).next('span')) {
-			$(this).next('span').remove();
-		}
-		$(this).parents('.form-group').attr('class', 'form-group has-feedback');
+		validityFocus($(this));
 		$('.email-list').removeClass('hide');
 	}).on('blur', '#reg-useremail', function () {
 		$('.email-list').addClass('hide');
-		var pattern = /^[\w]+@[\w]{2,4}\.[\w]{2,3}$/;
-		if (pattern.test($(this).val())) {
-			$(this).after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-success');
-		} else {
-			$(this).after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-error');
-		}
+		validityBlur($(this), /^[\w]+@[\w]{2,4}\.[\w]{2,3}$/);
 	}).on('keyup', '#reg-useremail', function (e) {
 		e.preventDefault();
 		if (e.keyCode != 13 || e.keyCode != 38 || e.keyCode != 40) {
@@ -86,32 +66,13 @@ $(function () {
 		$('#reg-useremail').val($(this).text());
 		$('.email-list').addClass('hide');
 	}).on('focus', '#reg-userPSW', function () {
-		if ($(this).next('span')) {
-			$(this).next('span').remove();
-		}
-		$(this).parents('.form-group').attr('class', 'form-group has-feedback');
+		validityFocus($(this));
 	}).on('blur', '#reg-userPSW', function () {
-		var pattern = /^[\w]{6,20}$/;
-		if (pattern.test($(this).val())) {
-			$(this).after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-success');
-		} else {
-			$(this).after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-error');
-		}
+		validityBlur($(this), /^[\w]{6,20}$/);
 	}).on('focus', '#reg-userPSWAgain', function () {
-		if ($(this).next('span')) {
-			$(this).next('span').remove();
-		}
-		$(this).parents('.form-group').attr('class', 'form-group has-feedback');
+		validityFocus($(this));
 	}).on('blur', '#reg-userPSWAgain', function () {
-		if ($(this).val() == $('#reg-userPSW').val()) {
-			$(this).after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-success');
-		} else {
-			$(this).after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-			$(this).parents('.form-group').addClass('has-error');
-		}
+		validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()");
 	}).on('click', '#reg-submit', function () {
 		var option = {
 			type: 'POST',
@@ -126,3 +87,22 @@ $(function () {
 	});
 
 });
+
+function validityFocus(obj) {
+	if (obj.next('span')) {
+		obj.next('span').remove();
+	}
+	obj.parents('.form-group').attr('class', 'form-group has-feedback');
+}
+
+function validityBlur(obj, reg) {
+	var pattern = reg;
+	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
+	if (condition) {
+		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+		obj.parents('.form-group').addClass('has-success');
+	} else {
+		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+		obj.parents('.form-group').addClass('has-error');
+	}
+}
