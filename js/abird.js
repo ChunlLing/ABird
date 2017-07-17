@@ -24,19 +24,15 @@ $(function () {
 	}).on('blur', '#reg-username', function () {
 		validityBlur($(this), /[\w\u4e00-\u9fa5]/);
 	}).on('focus', '#reg-useremail', function () {
-		var host = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
-		for (var i = 0; i < host.length; i++) {
-			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + host[i] + '</li>');
-		}
+		emailList();
 		validityFocus($(this));
-		$('.email-list').removeClass('hide');
 	}).on('blur', '#reg-useremail', function () {
-		$('.email-list').addClass('hide');
-		validityBlur($(this), /^[\w]+@[\w]{2,4}\.[\w]{2,3}$/);
+		// $('.email-list').addClass('hide');
+		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/);
 	}).on('keyup', '#reg-useremail', function (e) {
 		e.preventDefault();
 		if (e.keyCode != 13 || e.keyCode != 38 || e.keyCode != 40) {
-			$('.userinput').text($(this).val());
+			emailList();
 		}
 	}).on('keydown', '#reg-useremail', function (e) {
 		switch (e.keyCode) {
@@ -56,6 +52,7 @@ $(function () {
 				if (!$('.email-list-item').is('.highlight')) {
 					$('.email-list-item').first().addClass('highlight');
 				} else {
+				console.log(e.keyCode);
 					if (!$('.email-list-item.highlight').is($('.email-list-item').last())) {
 						$('.email-list-item.highlight').removeClass('highlight').next().addClass('highlight');
 					}
@@ -104,5 +101,29 @@ function validityBlur(obj, reg) {
 	} else {
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
+	}
+}
+
+function emailList() {
+	$('.email-list').empty();
+	// $('.email-list-item').detach();
+	var hosts = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
+	if ($('#reg-useremail').val().indexOf('@') != -1) {
+		hosts = hosts.filter(function (host) {
+			return !host.indexOf($('#reg-useremail').val().slice($('#reg-useremail').val().indexOf('@')+1));
+		});
+	}
+	if (hosts.length != 0) {
+		$('.email-list').removeClass('hide');
+		for (let i = 0; i < hosts.length; i++) {
+			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + hosts[i] + '</li>');
+		}
+		if ($('#reg-useremail').val().indexOf('@') == -1) {
+			$('.userinput').text($('#reg-useremail').val());
+		} else {
+			$('.userinput').text($('#reg-useremail').val().slice(0,$('#reg-useremail').val().indexOf('@')));
+		}
+	} else {
+		$('.email-list').addClass('hide');
 	}
 }
