@@ -91,6 +91,8 @@ $(function () {
 		if (!$('#reg-form .form-group').is('.has-error')) {
 			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
 				var temp = $('#reg-username').val();
+				$('#hasLogin').removeClass('hidden');
+				$('#unlogin').addClass('hidden');
 				$('#has-login-btn').removeClass('hidden');
 				$('#no-login-btn').addClass('hidden');
 				$('#remote-modal').modal('hide');
