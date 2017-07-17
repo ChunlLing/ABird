@@ -22,13 +22,13 @@ $(function () {
 	}).on('focus', '#reg-username', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-username', function () {
-		validityBlur($(this), /[\w\u4e00-\u9fa5]/);
+		validityBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
 	}).on('focus', '#reg-useremail', function () {
 		emailList();
 		validityFocus($(this));
 	}).on('blur', '#reg-useremail', function () {
-		// $('.email-list').addClass('hide');
-		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/);
+		$('.email-list').addClass('hide');
+		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 	}).on('keyup', '#reg-useremail', function (e) {
 		e.preventDefault();
 		if (e.keyCode != 13 || e.keyCode != 38 || e.keyCode != 40) {
@@ -65,11 +65,11 @@ $(function () {
 	}).on('focus', '#reg-userPSW', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSW', function () {
-		validityBlur($(this), /^[\w]{6,20}$/);
+		validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 	}).on('focus', '#reg-userPSWAgain', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSWAgain', function () {
-		validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()");
+		validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
 	}).on('click', '#reg-submit', function () {
 		var option = {
 			type: 'POST',
@@ -89,19 +89,21 @@ function validityFocus(obj) {
 	if (obj.next('span')) {
 		obj.next('span').remove();
 	}
+	obj.parents('.col-sm-10').next('div.col-sm-8').remove();
 	obj.parents('.form-group').attr('class', 'form-group has-feedback');
 }
 
-function validityBlur(obj, reg) {
+function validityBlur(obj, reg, errorText) {
 	var pattern = reg;
 	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
-	if (condition) {
+	if (condition && obj.val()) {
 		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-success');
 	} else {
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
 	}
+	obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
 }
 
 function emailList() {
