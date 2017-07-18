@@ -49,12 +49,10 @@
 		</div>
 		<!-- 小屏显示 -->
 		<div id="userInfo-btn" class="visible-xs-block">
-			<botton class="btn btn-default" data-toggle="modal" data-target="#remote-modal" href="tpl/userInfo-modal.html">
+			<botton id="has-login-btn" class="btn btn-default hidden" data-toggle="modal" data-target="#remote-modal" href="tpl/userInfo-modal.html">
 				<span class="icon-user"></span>
 			</botton>
-		</div>
-		<div id="user-unlogin-btn" class="visible-xs-block">
-			<botton class="btn btn-default" data-toggle="modal" data-target="#remote-modal" href="tpl/user-login-reg-modal.html">
+			<botton id="no-login-btn" class="btn btn-default" data-toggle="modal" data-target="#remote-modal" href="tpl/user-login-reg-modal.html">
 				<span class="icon-user"></span>
 			</botton>
 		</div>
@@ -79,10 +77,12 @@
 			</div>
 		</div>
 	</div>
+
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/ueditor.config.js"></script>
 	<script type="text/javascript" src="js/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/abird.js"></script>
 </body>
 </html>
