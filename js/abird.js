@@ -7,6 +7,10 @@ $(function () {
 		$(target).load(url, function (result) {
 			tab.tab('show');
 		});
+	}).ready(function (e) {
+		if (sessionStorage.getItem('user')) {
+			isLogin();
+		}
 	});
 	$('#nav-home a').tab('show');
 
@@ -29,11 +33,6 @@ $(function () {
 	}).on('blur', '#reg-useremail', function () {
 		$('.email-list').addClass('hidden');
 		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
-	}).on('keyup', '#reg-useremail', function (e) {
-		e.preventDefault();
-		if (e.keyCode != 13 || e.keyCode != 38 || e.keyCode != 40) {
-			// emailList();
-		}
 	}).on('keydown', '#reg-useremail', function (e) {
 		switch (e.keyCode) {
 			case 13:
@@ -90,22 +89,17 @@ $(function () {
 		};
 		if (!$('#reg-form .form-group').is('.has-error')) {
 			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
-				var temp = $('#reg-username').val();
-				$('#hasLogin').removeClass('hidden');
-				$('#unlogin').addClass('hidden');
-				$('#has-login-btn').removeClass('hidden');
-				$('#no-login-btn').addClass('hidden');
+				sessionStorage.setItem('user', $('#reg-username').val());
+				isLogin();
 				$('#remote-modal').modal('hide');
-				setInterval(function () {
-					$('.userName').text(temp);
-				}, 100)
-				
 				resetForm($('#reg-form'));
 				// $('#reg-form').ajaxForm(option);
 			}
 		}
 		return  false;
 	});
+
+	
 
 });
 
@@ -157,4 +151,16 @@ function emailList() {
 	} else {
 		$('.email-list').addClass('hidden');
 	}
+}
+
+function isLogin() {
+	$('#hasLogin').removeClass('hidden');
+	$('#unlogin').addClass('hidden');
+	$('#has-login-btn').removeClass('hidden');
+	$('#no-login-btn').addClass('hidden');
+	
+	$('.userName').text(sessionStorage.getItem('user'));
+	// setInterval(function () {
+	// 	$('.userName').text(sessionStorage.user);
+	// }, 100)
 }
