@@ -97,6 +97,9 @@ $(function () {
 			}
 		}
 		return  false;
+	}).on('click', '.exit', function () {
+		sessionStorage.removeItem('user');
+		isExit();
 	});
 
 	
@@ -158,9 +161,16 @@ function isLogin() {
 	$('#unlogin').addClass('hidden');
 	$('#has-login-btn').removeClass('hidden');
 	$('#no-login-btn').addClass('hidden');
-	
-	$('.userName').text(sessionStorage.getItem('user'));
-	// setInterval(function () {
-	// 	$('.userName').text(sessionStorage.user);
-	// }, 100)
+
+	setInterval(function () {
+		$('.userName').text(sessionStorage.user);
+	}, 100);
+}
+
+
+function isExit() {
+	$('#hasLogin').addClass('hidden');
+	$('#unlogin').removeClass('hidden');
+	$('#has-login-btn').addClass('hidden');
+	$('#no-login-btn').removeClass('hidden');
 }

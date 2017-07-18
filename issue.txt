@@ -116,3 +116,8 @@ Q : 邮箱补全功能中遇到的几点问题：
 		A : 不算是一个好的方法。退而求其次，用了延时╭(╯^╰)╮
 	4. 对补全框设置position:absolute应如何设置width才与input等宽？
 		A : 在外层包了一个容器设置position:relative;width:100%;￣へ￣
+
+23
+22:46 2017/7/18
+Q : 使用sessionStorage存储时遇到一个问题：在$()函数内直接判断是否有sessionStorage时由于#home远程标签页的内容还没下载导致login函数无效
+A : ready大法好ヽ(￣▽￣)?
