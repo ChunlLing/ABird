@@ -8,7 +8,7 @@ $(function () {
 			tab.tab('show');
 		});
 	}).ready(function (e) {
-		if (sessionStorage.getItem('user')) {
+		if (sessionStorage.getItem('name')) {
 			isLogin();
 		}
 	});
@@ -89,7 +89,10 @@ $(function () {
 		};
 		if (!$('#reg-form .form-group').is('.has-error')) {
 			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
-				sessionStorage.setItem('user', $('#reg-username').val());
+				sessionStorage.setItem('name', $('#reg-username').val());
+				sessionStorage.setItem('email', $('#reg-useremail').val());
+				sessionStorage.setItem('total', '100');
+				sessionStorage.setItem('used', '0');
 				isLogin();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
@@ -98,7 +101,7 @@ $(function () {
 		}
 		return  false;
 	}).on('click', '.exit', function () {
-		sessionStorage.removeItem('user');
+		sessionStorage.clear();
 		isExit();
 	});
 
@@ -163,7 +166,10 @@ function isLogin() {
 	$('#no-login-btn').addClass('hidden');
 
 	setInterval(function () {
-		$('.userName').text(sessionStorage.user);
+		$('.userName').text(sessionStorage.name);
+		$('.userEmail').text(sessionStorage.email);
+		$('.userSpace-total').text(sessionStorage.total);
+		$('.userSpace-used').text(sessionStorage.used);
 	}, 100);
 }
 
