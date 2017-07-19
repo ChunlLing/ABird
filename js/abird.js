@@ -12,8 +12,8 @@ $(function () {
 			isLogin();
 		}
 	});
-	$('#nav-groupNotes a').tab('show');
-	// $('#nav-home a').tab('show');
+	// $('#nav-groupNotes a').tab('show');
+	$('#nav-home a').tab('show');
 
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
