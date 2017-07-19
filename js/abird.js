@@ -90,7 +90,6 @@ $(function () {
 				isLogin();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
-				console.log(response['user']);
 			}
 		};
 		if (!$('#reg-form .form-group').is('.has-error')) {
@@ -101,77 +100,32 @@ $(function () {
 	}).on('click', '.exit', function () {
 		sessionStorage.clear();
 		isExit();
+	}).on('click', '#login-submit', function () {
+		var option = {
+			type: 'POST',
+			data: $('#login-form').serialize(),
+			dataType: 'json',
+			url: 'data/login.php',
+			success: function (response) {
+				if (response['status']) {
+					sessionStorage.setItem('name', response['user']);
+					sessionStorage.setItem('email', response['email']);
+					sessionStorage.setItem('total', '100');
+					sessionStorage.setItem('used', '0');
+					isLogin();
+					$('#remote-modal').modal('hide');
+					resetForm($('#login-form'));
+				} else {
+					$('#login-form .form-group').addClass('has-feedback');
+					validityBlur($('#username'), 'false', '');
+					validityBlur($('#userPSW'), 'false', '用户名或密码错误，请重新输入！');
+				}
+			}
+		};
+		if ($('#username').val() && $('#userPSW').val()) {
+			$('#login-form').ajaxForm(option);
+		}
 	});
 
 });
 
-function resetForm(form) {
-	form.trigger('reset');
-	form.find('.form-group').removeClass('has-success');
-	form.find('input:not([type="submit"])').next('span').remove();
-}
-
-function validityFocus(obj) {
-	if (obj.next('span')) {
-		obj.next('span').remove();
-	}
-	obj.parents('.col-sm-10').next('div.col-sm-8').remove();
-	obj.parents('.form-group').attr('class', 'form-group has-feedback');
-}
-
-function validityBlur(obj, reg, errorText) {
-	var pattern = reg;
-	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
-	if (condition && obj.val()) {
-		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-		obj.parents('.form-group').addClass('has-success');
-	} else {
-		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-		obj.parents('.form-group').addClass('has-error');
-		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
-	}
-}
-
-function emailList() {
-	$('.email-list').empty();
-	var hosts = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
-	if ($('#reg-useremail').val().indexOf('@') != -1) {
-		hosts = hosts.filter(function (host) {
-			return !host.indexOf($('#reg-useremail').val().slice($('#reg-useremail').val().indexOf('@')+1));
-		});
-	}
-	if (hosts.length != 0) {
-		$('.email-list').removeClass('hidden');
-		for (let i = 0; i < hosts.length; i++) {
-			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + hosts[i] + '</li>');
-		}
-		if ($('#reg-useremail').val().indexOf('@') == -1) {
-			$('.userinput').text($('#reg-useremail').val());
-		} else {
-			$('.userinput').text($('#reg-useremail').val().slice(0,$('#reg-useremail').val().indexOf('@')));
-		}
-	} else {
-		$('.email-list').addClass('hidden');
-	}
-}
-
-function isLogin() {
-	$('#hasLogin').removeClass('hidden');
-	$('#unlogin').addClass('hidden');
-	$('#has-login-btn').removeClass('hidden');
-	$('#no-login-btn').addClass('hidden');
-
-	setInterval(function () {
-		$('.userName').text(sessionStorage.name);
-		$('.userEmail').text(sessionStorage.email);
-		$('.userSpace-total').text(sessionStorage.total);
-		$('.userSpace-used').text(sessionStorage.used);
-	}, 100);
-}
-
-function isExit() {
-	$('#hasLogin').addClass('hidden');
-	$('#unlogin').removeClass('hidden');
-	$('#has-login-btn').addClass('hidden');
-	$('#no-login-btn').removeClass('hidden');
-}
