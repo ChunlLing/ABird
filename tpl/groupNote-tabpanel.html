@@ -6,12 +6,28 @@
 			<button class="btn btn-default pull-right joinGroup">加入群组</button>
 		</p>
 		<ul class="nav nav-pills nav-stacked hidden-xs" role="tablist">
-			<li class="active" role="presentation"><a href="#myGroup1" role="tab" data-toggle="tab">我的第一个群</a></li>
+			<li class="group-item active">
+				<a href="#myGroup1" role="tab" data-toggle="tab">我的第一个群
+				</a>
+				<div class="btn-group pull-right">
+					<button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-horizontal"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">邀请成员</a></li>
+						<li><a href="#">管理群组</a></li>
+						<li><a href="#">删除群组</a></li>
+						<li><a href="#">重命名</a></li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 		<div id="groupNotes-sm" class="panel-group visible-xs-block" role="tablist">
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab">
-					<h4 class="panel-title"><a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a></h4>
+					<h4 class="panel-title">
+						<a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a>
+					</h4>
 				</div>
 				<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
 					<div class="panel-body"></div>

@@ -3,6 +3,12 @@ body {
 	width: 100%;
 	background-image: url('../image/bg.jpg');
 }
+ul, li {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	text-indent: 10px;
+}
 a:link, a:visited, a:hover, a:active{
 	text-decoration: none;
 }
@@ -39,7 +45,7 @@ nav#navbar-top ul.nav li:hover {
 	background-color: rgba(242,234,246,1);
 }
 nav#navbar-top ul.nav li.active {
-	border-bottom: 2px solid #1d709d;
+	border-left: 2px solid #1d709d;
 	background-color: rgba(64,155,205,.2);
 }
 nav#navbar-top ul.nav li.active a {
@@ -90,6 +96,9 @@ nav#navbar-top ul.nav li a {
 	font-size: 1.5em;
 	color: #1d709d;
 }
+#userInfo-view .dl-horizontal dt {
+	line-height: 2;
+}
 .userSpace-used {
 	font-size: 1.5em;
 	color: #1d709d;
@@ -105,18 +114,18 @@ nav#navbar-top ul.nav li a {
 #home .container-right meter::-webkit-meter-suboptimum-value {
 	background: linear-gradient(to top, #aa1520, #b51b23, #cb1f26, #d32128);
 }
-#userInfo-btn, #user-unlogin-btn, #newInfo-btn {
+#userInfo-btn, #newInfo-btn {
 	position: fixed;
 	right: 0;
 	border-radius: 50%;
 }
-#userInfo-btn, #user-unlogin-btn {
+#userInfo-btn {
 	top: 45%;
 }
 #newInfo-btn {
 	top: 55%;
 }
-#userInfo-btn .btn, #user-unlogin-btn .btn, #newInfo-btn .btn {
+#userInfo-btn .btn, #newInfo-btn .btn {
 	border-radius: 50% 50% 2% 50%;
 }
 #userInfo-modal-view p {
@@ -157,6 +166,7 @@ nav#navbar-top ul.nav li a {
 	line-height: 145px;
 	font-size: 120px;
 }
+/* 群组笔记 */
 #groupNote-tabpanel .groupNote-container {
 	margin: 10px auto;
 	width: 95%;
@@ -188,9 +198,14 @@ nav#navbar-top ul.nav li a {
 }
 #groupNote-tabpanel .groupNote-tabpanel-left ul.nav, #groupNote-tabpanel .groupNote-tabpanel-left .panel-group.visible-xs-block {
 	height: 390px;
-	padding: 10px 20px;
+	padding: 10px 0px 10px 15px;
 	margin: 0px;
 	overflow-y: scroll;
+}
+#groupNote-tabpanel .group-item .btn-group {
+	position: absolute;
+	right: 15px;
+	top: 10px;
 }
 #groupNote-tabpanel .groupNote-tabpanel-right .notes {
 	margin: 10px auto;
@@ -200,4 +215,25 @@ nav#navbar-top ul.nav li a {
 }
 
 
-
+/* 邮箱提示框 */
+.email-container {
+	position: relative;
+	width: 100%;
+}
+.email-list {
+	position: absolute;
+	margin-top: 5px;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	z-index: 1;
+}
+.email-list .email-list-item {
+	height: 30px;
+	line-height: 30px;
+	cursor: default;
+}
+.email-list .email-list-item:hover, .email-list .email-list-item.highlight {
+	background-color: #23b5f9;
+}
