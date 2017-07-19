@@ -53,13 +53,14 @@ function isLogin() {
 	$('#unlogin').addClass('hidden');
 	$('#has-login-btn').removeClass('hidden');
 	$('#no-login-btn').addClass('hidden');
+	$('#userSetting .btn').removeClass('disabled');
 
 	setInterval(function () {
 		$('.userName').text(sessionStorage.name);
 		$('.userEmail').text(sessionStorage.email);
 		$('.userSpace-total').text(sessionStorage.total);
 		$('.userSpace-used').text(sessionStorage.used);
-	}, 100);
+	}, 10);
 }
 
 function isExit() {
@@ -67,4 +68,5 @@ function isExit() {
 	$('#unlogin').removeClass('hidden');
 	$('#has-login-btn').addClass('hidden');
 	$('#no-login-btn').removeClass('hidden');
+	$('#userSetting .btn').addClass('disabled');
 }

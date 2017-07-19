@@ -11,4 +11,4 @@
 	mysqli_query($conn, $query);
 	echo json_encode($user);
 	mysqli_close($conn);
- ?>
+?>
