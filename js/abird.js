@@ -80,15 +80,17 @@ $(function () {
 		var option = {
 			type: 'POST',
 			data: $('#reg-form').serialize(),
+			dataType: 'json',
 			url: 'data/add_user.php',
 			success: function (response) {
-				sessionStorage.setItem('name', $('#reg-username').val());
-				sessionStorage.setItem('email', $('#reg-useremail').val());
+				sessionStorage.setItem('name', response['user']);
+				sessionStorage.setItem('email', response['email']);
 				sessionStorage.setItem('total', '100');
 				sessionStorage.setItem('used', '0');
 				isLogin();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
+				console.log(response['user']);
 			}
 		};
 		if (!$('#reg-form .form-group').is('.has-error')) {

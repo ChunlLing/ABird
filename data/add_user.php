@@ -1,9 +1,14 @@
 <?php 
 	require 'config.php';
-	$query = "INSERT INTO usertable (name, password, email, date, problem, answer) VALUES ('{$_POST['user']}', sha1('{$_POST['password']}'), '{$_POST['email']}', NOW(), '{$_POST['problem']}', '{$_POST['answer']}')";
+	$user = array(
+			'user' => $_POST['user'],
+			'password' => $_POST['password'],
+			'email' => $_POST['email'],
+			'problem' => $_POST['problem'],
+			'answer' => $_POST['answer']
+		);
+	$query = "INSERT INTO usertable (name, password, email, date, problem, answer) VALUES ('{$user['user']}', sha1('{$user['password']}'), '{$user['email']}', NOW(), '{$user['problem']}', '{$user['answer']}')";
 	mysqli_query($conn, $query);
-	// die('error: '.mysqli_error($conn));
-	echo mysqli_affected_rows($conn);
+	echo json_encode($user);
 	mysqli_close($conn);
-
  ?>
