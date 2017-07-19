@@ -85,8 +85,8 @@ $(function () {
 			success: function (response) {
 				sessionStorage.setItem('name', response['user']);
 				sessionStorage.setItem('email', response['email']);
-				sessionStorage.setItem('total', '100');
-				sessionStorage.setItem('used', '0');
+				sessionStorage.setItem('total', '1000');
+				sessionStorage.setItem('used', Math.floor(Math.random()*1000));
 				isLogin();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
@@ -110,8 +110,8 @@ $(function () {
 				if (response['status']) {
 					sessionStorage.setItem('name', response['user']);
 					sessionStorage.setItem('email', response['email']);
-					sessionStorage.setItem('total', '100');
-					sessionStorage.setItem('used', '0');
+					sessionStorage.setItem('total', '1000');
+					sessionStorage.setItem('used', Math.floor(Math.random()*1000));
 					isLogin();
 					$('#remote-modal').modal('hide');
 					resetForm($('#login-form'));
