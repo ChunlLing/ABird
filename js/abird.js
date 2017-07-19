@@ -82,13 +82,6 @@ $(function () {
 			data: $('#reg-form').serialize(),
 			url: 'data/add_user.php',
 			success: function (response) {
-				$('#has-login-btn').removeClass('hidden');
-				$('#no-login-btn').addClass('hidden');
-				$('#userInfo-modal-view .userName').text($('#reg-username').val());
-			}
-		};
-		if (!$('#reg-form .form-group').is('.has-error')) {
-			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
 				sessionStorage.setItem('name', $('#reg-username').val());
 				sessionStorage.setItem('email', $('#reg-useremail').val());
 				sessionStorage.setItem('total', '100');
@@ -96,16 +89,17 @@ $(function () {
 				isLogin();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
-				// $('#reg-form').ajaxForm(option);
+			}
+		};
+		if (!$('#reg-form .form-group').is('.has-error')) {
+			if ($('#reg-form  input').filter(function () {return !$(this).val()}).length == 0) {
+				$('#reg-form').ajaxForm(option);
 			}
 		}
-		return  false;
 	}).on('click', '.exit', function () {
 		sessionStorage.clear();
 		isExit();
 	});
-
-	
 
 });
 
@@ -172,7 +166,6 @@ function isLogin() {
 		$('.userSpace-used').text(sessionStorage.used);
 	}, 100);
 }
-
 
 function isExit() {
 	$('#hasLogin').addClass('hidden');
