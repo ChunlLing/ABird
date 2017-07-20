@@ -60,6 +60,7 @@ function isLogin() {
 		$('.userEmail').text(sessionStorage.email);
 		$('.userSpace-total').text(sessionStorage.total);
 		$('.userSpace-used').text(sessionStorage.used);
+		$('.userSpace').val(sessionStorage.used);
 	}, 10);
 }
 
@@ -69,4 +70,12 @@ function isExit() {
 	$('#has-login-btn').addClass('hidden');
 	$('#no-login-btn').removeClass('hidden');
 	$('#userSetting .btn').addClass('disabled');
+}
+
+function getlocaldata(obj) {
+	return obj.getContent();
+}
+
+function clearLocalData(obj) {
+	obj.setContent('');
 }

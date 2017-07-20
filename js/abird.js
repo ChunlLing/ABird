@@ -169,14 +169,5 @@ $(function () {
 			return false;
 		}
 	});
-
-
 });
 
-function getlocaldata(obj) {
-	return obj.getContent();
-}
-
-function clearLocalData(obj) {
-	obj.setContent('');
-}
