@@ -18,11 +18,17 @@ $(function () {
 
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
-	}).on('click', '.addNote', function () {
-		ue = UE.getEditor('editor-container');
+	}).on('shown.bs.modal', '#addNote-panel', function () {
 		ue.ready(function () {
 			var html = ue.getContent();
+			if (html) {
+				if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
+					clearLocalData(ue);
+				}
+			}
 		});
+	}).on('click', '.addNote', function () {
+		ue = UE.getEditor('editor-container');
 	}).on('click', '#to-myNote', function () {
 		$('#nav-myNote a').tab('show');
 	}).on('focus', '#reg-username', function () {
@@ -165,7 +171,6 @@ $(function () {
 			} else if ($('#login-reg-btn:visible')) {
 				$('#no-login-btn').trigger('click');
 			}
-			clearLocalData(ue);
 			return false;
 		}
 	});
