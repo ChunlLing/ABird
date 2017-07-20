@@ -1,4 +1,5 @@
 $(function () {
+	var ue = null;
 
 	$('#nav-list a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 		var url = $(this).attr('href');
@@ -18,7 +19,7 @@ $(function () {
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
 	}).on('click', '.addNote', function () {
-		var ue = UE.getEditor('editor-container');
+		ue = UE.getEditor('editor-container');
 		ue.ready(function () {
 			var html = ue.getContent();
 		});
@@ -126,7 +127,56 @@ $(function () {
 		if ($('#username').val() && $('#userPSW').val()) {
 			$('#login-form').ajaxForm(option);
 		}
+	}).on('click', '#edit-submit', function (event) {
+		if (sessionStorage.name) {
+			if ($('.edit-title').val() == '') {
+				$('.edit-title').val($('.edit-title').attr('placeholder'));
+			}
+			$('#edit-user').val(sessionStorage.name);
+			$('#edit-type').val('personal');
+			$('#editor-container').val(ue.execCommand('getlocaldata'));
+			var option = {
+				type: 'POST',
+				data: $('#edit-form').serialize(),
+				dataType: 'json',
+				url: 'data/add_note.php',
+				beforeSubmit: function () {
+					$('#loading-well').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+					$('button:visible').addClass('disabled');
+				},
+				success: function (response) {
+					$('#loading-well p').remove();
+					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
+					setTimeout(function () {
+						$('button:visible').removeClass('disabled');
+						$('#addNote-panel').modal('hide');
+						$('#loading-well').addClass('hidden');
+						$('#loading-well p').remove();
+						clearLocalData(ue);
+					}, 2000);
+				}
+			}
+			$('#edit-form').ajaxForm(option);
+		} else {
+			alert('请登录......');
+			$('#addNote-panel').modal('hide');
+			if ($('#no-login-btn:visible')) {
+				$('#no-login-btn').trigger('click');
+			} else if ($('#login-reg-btn:visible')) {
+				$('#no-login-btn').trigger('click');
+			}
+			clearLocalData(ue);
+			return false;
+		}
 	});
+
 
 });
 
+function getlocaldata(obj) {
+	return obj.getContent();
+}
+
+function clearLocalData(obj) {
+	obj.setContent('');
+}

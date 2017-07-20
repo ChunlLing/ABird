@@ -239,14 +239,52 @@ nav#navbar-top ul.nav li a {
 }
 
 /* 编辑面板 */
-.modal-header .note-title {
+.modal-header .edit-title {
 	border: none;
 	padding: 4px 0px;
 	font-size: .9em;
 }
-.modal-header .note-title:focus {
+.modal-header .edit-title:focus {
 	outline: 0;
 	border-radius: 5px;
 	padding-left: 10px;
 	box-shadow: 0px 0px 3px #1d709d;
+}
+.modal-header .note-label {
+	width: 100px;
+	height: 30px;
+	letter-spacing: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+.modal-header .note-label option {
+	font-size: .3em;
+}
+
+/* 加载框 */
+#loading-well {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+	margin-top: -30px;
+	margin-left: -100px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	z-index: 99999;
+}
+.icon-spinner {
+	display: inline-block;
+	animation: spin 2s infinite linear;
+}
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
 }
