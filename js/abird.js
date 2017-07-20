@@ -133,7 +133,7 @@ $(function () {
 		if ($('#username').val() && $('#userPSW').val()) {
 			$('#login-form').ajaxForm(option);
 		}
-	}).on('click', '#edit-submit', function () {
+	}).on('click', '#edit-submit', function (event) {
 		if (sessionStorage.name) {
 			if ($('.edit-title').val() == '') {
 				$('.edit-title').val($('.edit-title').attr('placeholder'));
@@ -172,13 +172,6 @@ $(function () {
 				$('#no-login-btn').trigger('click');
 			}
 			return false;
-		}
-	}).on('click', '#addNote-panel', function () {
-		var html = ue.getContent();
-		if (html) {
-			if (confirm("是否清除所编辑的内容？")) {
-				clearLocalData(ue);
-			}
 		}
 	});
 });
