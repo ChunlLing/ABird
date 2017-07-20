@@ -23,7 +23,7 @@ $(function () {
 			var html = ue.getContent();
 			if (html) {
 				if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
-					clearLocalData(ue);
+					clearLocalData(ue, $('#edit-form'));
 				}
 			}
 		});
@@ -158,7 +158,7 @@ $(function () {
 						$('#addNote-panel').modal('hide');
 						$('#loading-well').addClass('hidden');
 						$('#loading-well p').remove();
-						clearLocalData(ue);
+						clearLocalData(ue, $('#edit-form'));
 					}, 2000);
 				}
 			}
@@ -177,7 +177,7 @@ $(function () {
 		var html = ue.getContent();
 		if (html) {
 			if (confirm("是否清除所编辑的内容？")) {
-				clearLocalData(ue);
+				clearLocalData(ue, $('#edit-form'));
 			}
 		}
 	});

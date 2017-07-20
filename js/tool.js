@@ -76,6 +76,7 @@ function getlocaldata(obj) {
 	return obj.getContent();
 }
 
-function clearLocalData(obj) {
-	obj.setContent('');
+function clearLocalData(editor, form) {
+	form.trigger('reset');
+	editor.setContent('');
 }
