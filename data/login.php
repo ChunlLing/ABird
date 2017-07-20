@@ -1,15 +1,16 @@
 <?php 
 	require 'config.php';
-
-	$_pass = sha1($_POST['login_pass']);
-
-	$query = mysql_query("SELECT user, pass FROM user WHERE user = '{$_POST['login_user']}' AND pass = '{$_pass}'") or die('SQL错误！');
-
-	if (mysql_fetch_array($query, MYSQL_ASSOC)) {
-		echo 'true';
-	} else {
-		echo 'false';
+	$user = array(
+		'user' => $_POST['user'],
+		'password' => sha1($_POST['password']),
+		'status' => false
+	);
+	$query = "SELECT name, password, email FROM usertable WHERE name = '{$user['user']}' AND password = '{$user['password']}'";
+	$result = mysqli_query($conn, $query);
+	if (($row = mysqli_fetch_assoc($result)) !== NULL) {
+		$user['status'] = true;
+		$user['email'] = $row['email'];
 	}
-
-	mysql_close();
+	echo json_encode($user);
+	mysqli_close($conn);
  ?>
