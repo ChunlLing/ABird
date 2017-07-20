@@ -14,7 +14,12 @@ $(function () {
 		}
 	});
 	// $('#nav-groupNotes a').tab('show');
-	$('#nav-home a').tab('show');
+	// $('#nav-home a').tab('show');
+	$('#nav-myNote a').show(function () {
+		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
+			alert(response.length);
+		}, 'json');
+	}).tab('show');
 
 	$('body').on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
