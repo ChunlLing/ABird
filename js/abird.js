@@ -148,10 +148,8 @@ $(function () {
 			}
 			$('#edit-user').val(sessionStorage.name);
 			$('#edit-type').val('personal');
-			alert(getContentTxt(ue));
 			$('#edit-txt').val(getContentTxt(ue));
 			$('#editor-container').val(getContent(ue));
-			alert($('#edit-txt').val());
 			var option = {
 				type: 'POST',
 				data: $('#edit-form').serialize(),

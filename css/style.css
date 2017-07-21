@@ -166,6 +166,24 @@ nav#navbar-top ul.nav li a {
 	line-height: 145px;
 	font-size: 120px;
 }
+#myNote-tabpanel .box.panel .panel-heading {
+	padding: 5px;
+}
+#myNote-tabpanel .box.panel .panel-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 1em;
+}
+#myNote-tabpanel .box.panel .panel-body {
+	padding: 5px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	background-color: #fff;
+}
+
 /* 群组笔记 */
 #groupNote-tabpanel .groupNote-container {
 	margin: 10px auto;

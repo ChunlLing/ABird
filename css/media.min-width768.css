@@ -15,4 +15,7 @@
 		line-height: 200px;
 		font-size: 140px;
 	}
+	#myNote-tabpanel .box.panel .panel-body {
+		-webkit-line-clamp: 8;
+	}
 }
