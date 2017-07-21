@@ -204,7 +204,11 @@ $(function () {
 			}
 		}
 	}).on('click', '#myNote-tabpanel .box.panel', function () {
-		$('#remote-modal .note-title').text('123');
+		var $this = $(this);
+		setTimeout(function () {
+			$('#remote-modal .note-title').text($this.find('.panel-title').text());
+			$('#remote-modal .note-content').html($this.data('content'));
+		}, 100)
 	});
 });
 
