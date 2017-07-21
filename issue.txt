@@ -121,3 +121,21 @@ Q : 邮箱补全功能中遇到的几点问题：
 22:46 2017/7/18
 Q : 使用sessionStorage存储时遇到一个问题：在$()函数内直接判断是否有sessionStorage时由于#home远程标签页的内容还没下载导致login函数无效
 A : ready大法好ヽ(￣▽￣)?
+
+24
+17:57 2017/7/21
+Q : 我的笔记面板，使用get()向后台请求数据，对于返回的数组始终显示最后一个
+A : 由于ajax发送的是异步请求，在for循环之后完成，所以在get()的回调函数执行的操作会后于for循环。使用匿名函数自调，在匿名函数中发送get请求
+--------------------------------------------------------------------------------------------------------------------------------------
+(function (info) {
+	$.get('tpl/note-box.html', function (html) {
+		var label = info.label;
+		var title = info.title;
+		var txt = info.txt;
+		html = html.replace('box', 'box panel-' + label);
+		html = html.replace('panel-title">', 'panel-title">' + title);
+		html = html.replace('panel-body">', 'panel-body">' + txt);
+		$('#myNote-tabpanel .row').append(html);
+	});
+})(response[i]);
+--------------------------------------------------------------------------------------------------------------------------------------

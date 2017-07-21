@@ -18,17 +18,14 @@ $(function () {
 	$('#nav-myNote a').show(function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
-				(function (info) {
+				(function (info, index) {
 					$.get('tpl/note-box.html', function (html) {
-						var label = info.label;
-						var title = info.title;
-						var txt = info.txt;
-						html = html.replace('box', 'box panel-' + label);
-						html = html.replace('panel-title">', 'panel-title">' + title);
-						html = html.replace('panel-body">', 'panel-body">' + txt);
 						$('#myNote-tabpanel .row').append(html);
+						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
+						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
+						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
 					});
-				})(response[i]);
+				})(response[i], i);
 			}
 		}, 'json');
 	}).tab('show');
@@ -174,13 +171,10 @@ $(function () {
 					setTimeout(function () {
 						(function (info) {
 							$.get('tpl/note-box.html', function (html) {
-								var label = info.label;
-								var title = info.title;
-								var txt = info.txt;
-								html = html.replace('box', 'box panel-' + label);
-								html = html.replace('panel-title">', 'panel-title">' + title);
-								html = html.replace('panel-body">', 'panel-body">' + txt);
 								$('#myNote-tabpanel .row .addNote').after(html);
+								$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content);
+								$('#myNote-tabpanel .panel.box').eq(0).find('.panel-title').text(info.title);
+								$('#myNote-tabpanel .panel.box').eq(0).find('.panel-body').text(info.txt);
 							});
 						})(response);
 						$('button:visible').removeClass('disabled');
@@ -209,6 +203,8 @@ $(function () {
 				clearContent(ue, $('#edit-form'));
 			}
 		}
+	}).on('click', '#myNote-tabpanel .box.panel', function () {
+		$('#remote-modal .note-title').text('123');
 	});
 });
 
