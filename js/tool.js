@@ -49,19 +49,21 @@ function emailList() {
 }
 
 function isLogin() {
-	$('#hasLogin').removeClass('hidden');
-	$('#unlogin').addClass('hidden');
-	$('#has-login-btn').removeClass('hidden');
-	$('#no-login-btn').addClass('hidden');
-	$('#userSetting .btn').removeClass('disabled');
+	if ($('#hasLogin').hasClass('hidden')) {
+		$('#hasLogin').removeClass('hidden');
+		$('#unlogin').addClass('hidden');
+		$('#has-login-btn').removeClass('hidden');
+		$('#no-login-btn').addClass('hidden');
+		$('#userSetting .btn').removeClass('disabled');
 
-	setInterval(function () {
-		$('.userName').text(sessionStorage.name);
-		$('.userEmail').text(sessionStorage.email);
-		$('.userSpace-total').text(sessionStorage.total);
-		$('.userSpace-used').text(sessionStorage.used);
-		$('.userSpace').val(sessionStorage.used);
-	}, 10);
+		setInterval(function () {
+			$('.userName').text(sessionStorage.name);
+			$('.userEmail').text(sessionStorage.email);
+			$('.userSpace-total').text(sessionStorage.total);
+			$('.userSpace-used').text(sessionStorage.used);
+			$('.userSpace').val(sessionStorage.used);
+		}, 10);
+	}
 }
 
 function isExit() {
