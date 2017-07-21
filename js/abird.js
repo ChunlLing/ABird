@@ -18,8 +18,17 @@ $(function () {
 	$('#nav-myNote a').show(function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
-				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box panel-' + response[i].label + '"><div class="panel-heading"><h3 class="panel-title">'+ response[i].title + '</h3></div><div class="panel-body">' + response[i].txt + '</div></div>';
-				$('#myNote-tabpanel .row').append(html);
+				(function (info) {
+					$.get('tpl/note-box.html', function (html) {
+						var label = info.label;
+						var title = info.title;
+						var txt = info.txt;
+						html = html.replace('box', 'box panel-' + label);
+						html = html.replace('panel-title">', 'panel-title">' + title);
+						html = html.replace('panel-body">', 'panel-body">' + txt);
+						$('#myNote-tabpanel .row').append(html);
+					});
+				})(response[i]);
 			}
 		}, 'json');
 	}).tab('show');
@@ -163,8 +172,17 @@ $(function () {
 					$('#loading-well p').remove();
 					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
 					setTimeout(function () {
-						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box panel-' + response.label + '"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.txt + '</div></div>';
-						$('#myNote-tabpanel .row .addNote').after(html);
+						(function (info) {
+							$.get('tpl/note-box.html', function (html) {
+								var label = info.label;
+								var title = info.title;
+								var txt = info.txt;
+								html = html.replace('box', 'box panel-' + label);
+								html = html.replace('panel-title">', 'panel-title">' + title);
+								html = html.replace('panel-body">', 'panel-body">' + txt);
+								$('#myNote-tabpanel .row .addNote').after(html);
+							});
+						})(response);
 						$('button:visible').removeClass('disabled');
 						$('#addNote-panel').modal('hide');
 						$('#loading-well').addClass('hidden');
