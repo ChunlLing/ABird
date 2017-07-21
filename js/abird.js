@@ -19,20 +19,6 @@ $(function () {
 	});
 	// $('#nav-groupNotes a').tab('show');
 	$('#nav-home a').tab('show');
-	$('#nav-myNote a').show(function () {
-		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
-			for (var i = 0; i < response.length; i++) {
-				(function (info, index) {
-					$.get('tpl/note-box.html', function (html) {
-						$('#myNote-tabpanel .row').append(html);
-						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
-						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
-						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
-					});
-				})(response[i], i);
-			}
-		}, 'json');
-	});
 
 	$('body').on('shown.bs.tab', '#nav-myNote a', function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
