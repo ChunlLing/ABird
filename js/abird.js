@@ -18,7 +18,7 @@ $(function () {
 	$('#nav-myNote a').show(function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
-				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response[i].title + '</h3></div><div class="panel-body">' + response[i].txt + '</div></div>';
+				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box panel-' + response[i].label + '"><div class="panel-heading"><h3 class="panel-title">'+ response[i].title + '</h3></div><div class="panel-body">' + response[i].txt + '</div></div>';
 				$('#myNote-tabpanel .row').append(html);
 			}
 		}, 'json');
@@ -163,7 +163,7 @@ $(function () {
 					$('#loading-well p').remove();
 					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
 					setTimeout(function () {
-						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.txt + '</div></div>';
+						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box panel-' + response.label + '"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.txt + '</div></div>';
 						$('#myNote-tabpanel .row .addNote').after(html);
 						$('button:visible').removeClass('disabled');
 						$('#addNote-panel').modal('hide');
