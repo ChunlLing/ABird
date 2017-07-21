@@ -152,19 +152,24 @@ nav#navbar-top ul.nav li a {
 	height: 145px;
 	padding: 0px;
 }
-#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.panel .panel-body {
+#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.loadMore, #myNote-tabpanel .box.panel .panel-body {
 	cursor: pointer;
 }
-#myNote-tabpanel .box.addNote {
+#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.loadMore {
 	border: 2px dashed #1d709d;
 	border-radius: 5px;
 	text-align: center;
 	color: rgba(29,112,157,.5);
 }
-#myNote-tabpanel .box.addNote:hover {
+#myNote-tabpanel .box.loadMore {
+	border: 1px solid #1d709d;
+}
+#myNote-tabpanel .box.addNote:hover, #myNote-tabpanel .box.loadMore:hover {
 	color: rgba(29,112,157,1);
 }
-#myNote-tabpanel .box.addNote span {
+#myNote-tabpanel .box.addNote span, #myNote-tabpanel .box.loadMore span {
+	width: auto;
+	height: auto;
 	line-height: 145px;
 	font-size: 120px;
 }

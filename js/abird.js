@@ -18,11 +18,12 @@ $(function () {
 		}
 	});
 	// $('#nav-groupNotes a').tab('show');
+	// $('#nav-myNote a').tab('show');
 	$('#nav-home a').tab('show');
 
-	$('body').on('shown.bs.tab', '#nav-myNote a', function () {
+	$('body').on('show.bs.tab', '#nav-myNote a', function () {
 		if (!$('#myNote-tabpanel .row').html()) {
-			$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
+			$.get('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
 				for (var i = 0; i < response.length; i++) {
 					(function (info, index) {
 						$.get('tpl/note-box.html', function (html) {
@@ -30,6 +31,11 @@ $(function () {
 							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
 							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
 							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
+							if (index == response.length-1) {
+								$.get('tpl/loadMore-box.html', function (loadMore) {
+									$('#myNote-tabpanel .panel.box').last().after(loadMore);
+								});
+							}
 						});
 					})(response[i], i);
 				}
