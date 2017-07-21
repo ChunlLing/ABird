@@ -17,7 +17,10 @@ $(function () {
 	// $('#nav-home a').tab('show');
 	$('#nav-myNote a').show(function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
-			alert(response.length);
+			for (var i = 0; i < response.length; i++) {
+				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response[i].title + '</h3></div><div class="panel-body">' + response[i].content + '</div></div>';
+				$('#myNote-tabpanel .row').append(html);
+			}
 		}, 'json');
 	}).tab('show');
 
@@ -159,6 +162,8 @@ $(function () {
 					$('#loading-well p').remove();
 					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
 					setTimeout(function () {
+						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.content + '</div></div>';
+						$('#myNote-tabpanel .row .addNote').after(html);
 						$('button:visible').removeClass('disabled');
 						$('#addNote-panel').modal('hide');
 						$('#loading-well').addClass('hidden');
