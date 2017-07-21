@@ -72,11 +72,15 @@ function isExit() {
 	$('#userSetting .btn').addClass('disabled');
 }
 
-function getlocaldata(obj) {
+function getContent(obj) {
 	return obj.getContent();
 }
 
-function clearLocalData(editor, form) {
+function getContentTxt(obj) {
+	return obj.getContentTxt();
+}
+
+function clearContent(editor, form) {
 	form.trigger('reset');
 	editor.setContent('');
 }

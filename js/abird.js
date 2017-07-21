@@ -18,7 +18,7 @@ $(function () {
 	$('#nav-myNote a').show(function () {
 		$.get('data/show_note.php', {start: 0, count: 5, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
-				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response[i].title + '</h3></div><div class="panel-body">' + response[i].content + '</div></div>';
+				var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response[i].title + '</h3></div><div class="panel-body">' + response[i].txt + '</div></div>';
 				$('#myNote-tabpanel .row').append(html);
 			}
 		}, 'json');
@@ -28,10 +28,10 @@ $(function () {
 		$(this).removeData('bs.modal');
 	}).on('shown.bs.modal', '#addNote-panel', function () {
 		ue.ready(function () {
-			var html = ue.getContent();
+			var html = getContent(ue);
 			if (html) {
 				if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
-					clearLocalData(ue, $('#edit-form'));
+					clearContent(ue, $('#edit-form'));
 				}
 			}
 		});
@@ -148,7 +148,10 @@ $(function () {
 			}
 			$('#edit-user').val(sessionStorage.name);
 			$('#edit-type').val('personal');
-			$('#editor-container').val(ue.execCommand('getlocaldata'));
+			alert(getContentTxt(ue));
+			$('#edit-txt').val(getContentTxt(ue));
+			$('#editor-container').val(getContent(ue));
+			alert($('#edit-txt').val());
 			var option = {
 				type: 'POST',
 				data: $('#edit-form').serialize(),
@@ -162,13 +165,13 @@ $(function () {
 					$('#loading-well p').remove();
 					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
 					setTimeout(function () {
-						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.content + '</div></div>';
+						var html = '<div class="panel panel-default col-md-2 col-sm-4 col-xs-6 box"><div class="panel-heading"><h3 class="panel-title">' + response.title + '</h3></div><div class="panel-body">' + response.txt + '</div></div>';
 						$('#myNote-tabpanel .row .addNote').after(html);
 						$('button:visible').removeClass('disabled');
 						$('#addNote-panel').modal('hide');
 						$('#loading-well').addClass('hidden');
 						$('#loading-well p').remove();
-						clearLocalData(ue, $('#edit-form'));
+						clearContent(ue, $('#edit-form'));
 					}, 2000);
 				}
 			}
@@ -184,10 +187,10 @@ $(function () {
 			return false;
 		}
 	}).on('click', '#edit-cancel', function () {
-		var html = ue.getContent();
+		var html = getContent(ue);
 		if (html) {
 			if (confirm("是否清除所编辑的内容？")) {
-				clearLocalData(ue, $('#edit-form'));
+				clearContent(ue, $('#edit-form'));
 			}
 		}
 	});
