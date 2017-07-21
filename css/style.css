@@ -151,6 +151,8 @@ nav#navbar-top ul.nav li a {
 	width: 145px;
 	height: 145px;
 	padding: 0px;
+}
+#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.panel .panel-body {
 	cursor: pointer;
 }
 #myNote-tabpanel .box.addNote {
@@ -305,4 +307,10 @@ nav#navbar-top ul.nav li a {
 	to {
 		transform: rotate(359deg);
 	}
+}
+
+/* 远程加载模态框 */
+#remote-modal .modal-body {
+	max-height: 400px;
+	overflow-y: scroll;
 }
