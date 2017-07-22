@@ -173,12 +173,12 @@ $(function () {
 				dataType: 'json',
 				url: 'data/add_note.php',
 				beforeSubmit: function () {
-					$('#loading-well').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+					$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
 					$('button:visible').addClass('disabled');
 				},
 				success: function (response) {
-					$('#loading-well p').remove();
-					$('#loading-well').append('<p class="text-success">数据保存成功！ <i class="icon-ok"></i></p>');
+					$('#loading-alert p').remove();
+					$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
 					setTimeout(function () {
 						(function (info) {
 							$.get('tpl/note-box.html', function (html) {
@@ -190,8 +190,8 @@ $(function () {
 						})(response);
 						$('button:visible').removeClass('disabled');
 						$('#addNote-panel').modal('hide');
-						$('#loading-well').addClass('hidden');
-						$('#loading-well p').remove();
+						$('#loading-alert').addClass('hidden').removeClass('alert-success');
+						$('#loading-alert p').remove();
 						clearContent(ue, $('#edit-form'));
 					}, 2000);
 				}
@@ -221,9 +221,21 @@ $(function () {
 			$('#remote-modal .note-content').html($this.data('content'));
 		}, 100)
 	}).on('click', '#myNote-tabpanel .box.loadMore', function () {
-		$this = $(this);
-		$.get('data/show_note.php', {start: 4, count: 5, user: sessionStorage.name}, function (response) {
-			var oldNum = $('#note-container').children().length-1;
+		var $this = $(this);
+		var oldNum = $('#note-container').children().length-1;
+		var count = 5;
+		$.get('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
+			var length = response.length;
+			if (length < count) {
+				$this.remove();
+				if (length == 0) {
+					$('#loading-alert').addClass('alert-info').append('<p>没有更多数据了 ┐(ﾟ～ﾟ)┌ </p>').removeClass('hidden');
+					setTimeout(function () {
+						$('#loading-alert').addClass('hidden').removeClass('alert-info');
+						$('#loading-alert p').remove();
+					}, 1000);
+				}
+			}
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
 					index += oldNum;
@@ -232,7 +244,7 @@ $(function () {
 						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
 						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
 						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
-						if (index == response.length+oldNum-1) {
+						if (index == length+oldNum-1) {
 							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
 						}
 					});
