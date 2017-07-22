@@ -42,7 +42,21 @@ $(function () {
 	}).on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
 	}).on('click', '.addNote', function () {
-		ue = UE.getEditor('editor-container');
+		if (sessionStorage.name) {
+			ue = UE.getEditor('editor-container');
+		} else {
+			$('#loading-alert').addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+			setTimeout(function () {
+				$('#loading-alert').addClass('hidden').removeClass('alert-info');
+				$('#addNote-panel').modal('hide');
+				if ($('#no-login-btn:visible')) {
+					$('#no-login-btn').trigger('click');
+				} else if ($('#login-reg-btn:visible')) {
+					$('#no-login-btn').trigger('click');
+				}
+			}, 1000);
+			return false;
+		}
 	}).on('shown.bs.modal', '#addNote-panel', function () {
 		ue.ready(function () {
 			var html = getContent(ue);
@@ -162,54 +176,43 @@ $(function () {
 			return false;
 		}
 	}).on('click', '#edit-submit', function () {
-		if (sessionStorage.name) {
-			if ($('.edit-title').val() == '') {
-				$('.edit-title').val($('.edit-title').attr('placeholder'));
-			}
-			$('#edit-user').val(sessionStorage.name);
-			$('#edit-type').val('personal');
-			$('#edit-txt').val(getContentTxt(ue));
-			$('#editor-container').val(getContent(ue));
-			var option = {
-				type: 'POST',
-				data: $('#edit-form').serialize(),
-				dataType: 'json',
-				url: 'data/add_note.php',
-				beforeSubmit: function () {
-					$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
-					$('button:visible').addClass('disabled');
-				},
-				success: function (response) {
-					$('#loading-alert p').remove();
-					$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
-					setTimeout(function () {
-						(function (info) {
-							$.get('tpl/note-box.html', function (html) {
-								$('#myNote-tabpanel .row .addNote').after(html);
-								$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content);
-								$('#myNote-tabpanel .panel.box').eq(0).find('.panel-title').text(info.title);
-								$('#myNote-tabpanel .panel.box').eq(0).find('.note-txt').text(info.txt);
-							});
-						})(response);
-						$('button:visible').removeClass('disabled');
-						$('#addNote-panel').modal('hide');
-						$('#loading-alert').addClass('hidden').removeClass('alert-success');
-						$('#loading-alert p').remove();
-						clearContent(ue, $('#edit-form'));
-					}, 2000);
-				}
-			}
-			$('#edit-form').ajaxForm(option);
-		} else {
-			alert('请登录......');
-			$('#addNote-panel').modal('hide');
-			if ($('#no-login-btn:visible')) {
-				$('#no-login-btn').trigger('click');
-			} else if ($('#login-reg-btn:visible')) {
-				$('#no-login-btn').trigger('click');
-			}
-			return false;
+		if ($('.edit-title').val() == '') {
+			$('.edit-title').val($('.edit-title').attr('placeholder'));
 		}
+		$('#edit-user').val(sessionStorage.name);
+		$('#edit-type').val('personal');
+		$('#edit-txt').val(getContentTxt(ue));
+		$('#editor-container').val(getContent(ue));
+		var option = {
+			type: 'POST',
+			data: $('#edit-form').serialize(),
+			dataType: 'json',
+			url: 'data/add_note.php',
+			beforeSubmit: function () {
+				$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+				$('button:visible').addClass('disabled');
+			},
+			success: function (response) {
+				$('#loading-alert p').remove();
+				$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+				setTimeout(function () {
+					(function (info) {
+						$.get('tpl/note-box.html', function (html) {
+							$('#myNote-tabpanel .row .addNote').after(html);
+							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content);
+							$('#myNote-tabpanel .panel.box').eq(0).find('.panel-title').text(info.title);
+							$('#myNote-tabpanel .panel.box').eq(0).find('.note-txt').text(info.txt);
+						});
+					})(response);
+					$('button:visible').removeClass('disabled');
+					$('#addNote-panel').modal('hide');
+					$('#loading-alert').addClass('hidden').removeClass('alert-success');
+					$('#loading-alert p').remove();
+					clearContent(ue, $('#edit-form'));
+				}, 2000);
+			}
+		}
+		$('#edit-form').ajaxForm(option);
 	}).on('click', '#edit-cancel', function () {
 		var html = getContent(ue);
 		if (html) {
