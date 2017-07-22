@@ -30,7 +30,7 @@ $(function () {
 							$('#note-container').append(html);
 							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
 							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
-							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
+							$('#myNote-tabpanel .panel.box').eq(index).find('.note-txt').text(info.txt);
 							if (index == response.length-1) {
 								$.get('tpl/loadMore-box.html', function (loadMore) {
 									$('#myNote-tabpanel .panel.box').last().after(loadMore);
@@ -185,7 +185,7 @@ $(function () {
 								$('#myNote-tabpanel .row .addNote').after(html);
 								$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content);
 								$('#myNote-tabpanel .panel.box').eq(0).find('.panel-title').text(info.title);
-								$('#myNote-tabpanel .panel.box').eq(0).find('.panel-body').text(info.txt);
+								$('#myNote-tabpanel .panel.box').eq(0).find('.note-txt').text(info.txt);
 							});
 						})(response);
 						$('button:visible').removeClass('disabled');
@@ -243,7 +243,7 @@ $(function () {
 						$('#note-container').append(html);
 						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
 						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
-						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
+						$('#myNote-tabpanel .panel.box').eq(index).find('.note-txt').text(info.txt);
 						if (index == length+oldNum-1) {
 							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
 						}

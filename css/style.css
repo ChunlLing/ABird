@@ -152,8 +152,9 @@ nav#navbar-top ul.nav li a {
 	height: 145px;
 	padding: 0px;
 }
-#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.loadMore, #myNote-tabpanel .box.panel .panel-body {
+#myNote-tabpanel .box .panel-body {
 	cursor: pointer;
+	height: 108px;
 }
 #myNote-tabpanel .box.addNote, #myNote-tabpanel .box.loadMore {
 	border: 2px dashed #1d709d;

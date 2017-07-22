@@ -11,6 +11,9 @@
 		width: 200px;
 		height: 200px;
 	}
+	#myNote-tabpanel .box .panel-body {
+		height: 168px;
+	}
 	#myNote-tabpanel .box.addNote span, #myNote-tabpanel .box.loadMore span {
 		line-height: 200px;
 		font-size: 140px;
