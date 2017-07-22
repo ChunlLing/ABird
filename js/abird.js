@@ -157,6 +157,9 @@ $(function () {
 		};
 		if ($('#username').val() && $('#userPSW').val()) {
 			$('#login-form').ajaxForm(option);
+		} else {
+			$(this).after('<span class="text-danger"> 请填写完整的登录信息</span>');
+			return false;
 		}
 	}).on('click', '#edit-submit', function () {
 		if (sessionStorage.name) {
