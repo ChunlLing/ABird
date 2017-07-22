@@ -77,6 +77,8 @@ function isExit() {
 	$('#has-login-btn').addClass('hidden');
 	$('#no-login-btn').removeClass('hidden');
 	$('#userSetting .btn').addClass('disabled');
+	$('#myNote-tabpanel').html('');
+	$('#groupNote-tabpanel').html('');
 }
 
 function getContent(obj) {
