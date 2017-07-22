@@ -52,6 +52,14 @@ function emailList() {
 	}
 }
 
+function setUserLogin() {
+	$('.userName').text(sessionStorage.name);
+	$('.userEmail').text(sessionStorage.email);
+	$('.userSpace-total').text(sessionStorage.total);
+	$('.userSpace-used').text(sessionStorage.used);
+	$('.userSpace').val(sessionStorage.used);
+}
+
 function isLogin() {
 	if ($('#hasLogin').hasClass('hidden')) {
 		$('#hasLogin').removeClass('hidden');
@@ -59,14 +67,7 @@ function isLogin() {
 		$('#has-login-btn').removeClass('hidden');
 		$('#no-login-btn').addClass('hidden');
 		$('#userSetting .btn').removeClass('disabled');
-
-		setInterval(function () {
-			$('.userName').text(sessionStorage.name);
-			$('.userEmail').text(sessionStorage.email);
-			$('.userSpace-total').text(sessionStorage.total);
-			$('.userSpace-used').text(sessionStorage.used);
-			$('.userSpace').val(sessionStorage.used);
-		}, 10);
+		setUserLogin();
 	}
 }
 

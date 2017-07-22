@@ -39,6 +39,10 @@ $(function () {
 				}
 			}, 'json');
 		}
+	}).on('loaded.bs.modal', '#remote-modal', function () {
+		if (sessionStorage.getItem('name')) {
+			setUserLogin();
+		}
 	}).on('hidden.bs.modal', '#remote-modal', function () {
 		$(this).removeData('bs.modal');
 	}).on('click', '.addNote', function () {
