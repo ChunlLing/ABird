@@ -81,6 +81,7 @@ $(function () {
 		$('.email-list').addClass('hidden');
 		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 	}).on('keydown', '#reg-useremail', function (e) {
+		console.log(e.keyCode);
 		switch (e.keyCode) {
 			case 13:
 				e.preventDefault();
@@ -102,6 +103,9 @@ $(function () {
 						$('.email-list-item.highlight').removeClass('highlight').next().addClass('highlight');
 					}
 				}
+				break;
+			case 9:
+				$('.email-list').addClass('hidden');
 				break;
 			default:
 				setTimeout(function () {
