@@ -49,7 +49,7 @@ $(function () {
 		if (sessionStorage.name) {
 			ue = UE.getEditor('editor-container');
 		} else {
-			$('#loading-alert').addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
 			setTimeout(function () {
 				$('#loading-alert').addClass('hidden').removeClass('alert-info');
 				$('#addNote-panel').modal('hide');
@@ -186,7 +186,9 @@ $(function () {
 		if ($('#username').val() && $('#userPSW').val()) {
 			$('#login-form').ajaxForm(option);
 		} else {
-			$(this).after('<span class="text-danger"> 请填写完整的登录信息</span>');
+			if (!$(this).next('span').html()) {
+				$(this).after('<span class="text-danger"> 请填写完整的登录信息！</span>');
+			}
 			return false;
 		}
 	}).on('click', '#edit-submit', function () {
