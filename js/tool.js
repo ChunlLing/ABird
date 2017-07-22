@@ -16,12 +16,16 @@ function validityBlur(obj, reg, errorText) {
 	var pattern = reg;
 	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
 	if (condition && obj.val()) {
+		validityFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-success');
+		return true;
 	} else {
+		validityFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
 		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
+		return false;
 	}
 }
 

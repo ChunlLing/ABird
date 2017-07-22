@@ -119,14 +119,17 @@ $(function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSW', function () {
 		validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
-		if ($(this).val() && $('#reg-userPSWAgain').val()) {
-			validityFocus($('#reg-userPSWAgain'));
-			validityBlur($('#reg-userPSWAgain'), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
+		if ($(this).val() && $('#reg-userPSWAgain').val() && validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！')) {
+			$('#reg-userPSWAgain').trigger('focus').trigger('blur');
+			// validityBlur($('#reg-userPSWAgain'), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
 		}
 	}).on('focus', '#reg-userPSWAgain', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userPSWAgain', function () {
 		validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
+		if (validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！')) {
+			validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
+		}
 	}).on('focus', '#reg-userAnswer', function () {
 		validityFocus($(this));
 	}).on('blur', '#reg-userAnswer', function () {
