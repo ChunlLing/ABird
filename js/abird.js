@@ -121,7 +121,6 @@ $(function () {
 		validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 		if ($(this).val() && $('#reg-userPSWAgain').val() && validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！')) {
 			$('#reg-userPSWAgain').trigger('focus').trigger('blur');
-			// validityBlur($('#reg-userPSWAgain'), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
 		}
 	}).on('focus', '#reg-userPSWAgain', function () {
 		validityFocus($(this));
@@ -210,15 +209,12 @@ $(function () {
 					(function (info) {
 						$.get('tpl/note-box.html', function (html) {
 							$('#myNote-tabpanel .row .addNote').after(html);
-							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content);
-							$('#myNote-tabpanel .panel.box').eq(0).find('.panel-title').text(info.title);
-							$('#myNote-tabpanel .panel.box').eq(0).find('.note-txt').text(info.txt);
+							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt);
 						});
 					})(response);
 					$('button:visible').removeClass('disabled');
 					$('#addNote-panel').modal('hide');
-					$('#loading-alert').addClass('hidden').removeClass('alert-success');
-					$('#loading-alert p').remove();
+					$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
 					clearContent(ue, $('#edit-form'));
 				}, 2000);
 			}
@@ -248,8 +244,7 @@ $(function () {
 				if (length == 0) {
 					$('#loading-alert').addClass('alert-info').append('<p>没有更多数据了 ┐(ﾟ～ﾟ)┌ </p>').removeClass('hidden');
 					setTimeout(function () {
-						$('#loading-alert').addClass('hidden').removeClass('alert-info');
-						$('#loading-alert p').remove();
+						$('#loading-alert').addClass('hidden').removeClass('alert-info').find('p').remove();
 					}, 1000);
 				}
 			}
@@ -258,9 +253,7 @@ $(function () {
 					index += oldNum;
 					$.get('tpl/note-box.html', function (html) {
 						$('#note-container').append(html);
-						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
-						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
-						$('#myNote-tabpanel .panel.box').eq(index).find('.note-txt').text(info.txt);
+						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt);
 						if (index == length+oldNum-1) {
 							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
 						}
