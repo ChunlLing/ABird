@@ -22,12 +22,12 @@ $(function () {
 	$('#nav-home a').tab('show');
 
 	$('body').on('show.bs.tab', '#nav-myNote a', function () {
-		if (!$('#myNote-tabpanel .row').html()) {
+		if (!$('#note-container').html()) {
 			$.get('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
 				for (var i = 0; i < response.length; i++) {
 					(function (info, index) {
 						$.get('tpl/note-box.html', function (html) {
-							$('#myNote-tabpanel .row').append(html);
+							$('#note-container').append(html);
 							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
 							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
 							$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
@@ -220,6 +220,25 @@ $(function () {
 			$('#remote-modal .note-title').text($this.find('.panel-title').text());
 			$('#remote-modal .note-content').html($this.data('content'));
 		}, 100)
+	}).on('click', '#myNote-tabpanel .box.loadMore', function () {
+		$this = $(this);
+		$.get('data/show_note.php', {start: 4, count: 5, user: sessionStorage.name}, function (response) {
+			var oldNum = $('#note-container').children().length-1;
+			for (var i = 0; i < response.length; i++) {
+				(function (info, index) {
+					index += oldNum;
+					$.get('tpl/note-box.html', function (html) {
+						$('#note-container').append(html);
+						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content);
+						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-title').text(info.title);
+						$('#myNote-tabpanel .panel.box').eq(index).find('.panel-body').text(info.txt);
+						if (index == response.length+oldNum-1) {
+							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
+						}
+					});
+				})(response[i], i);
+			}
+		}, 'json');
 	});
 });
 
