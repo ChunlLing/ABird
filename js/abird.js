@@ -28,7 +28,7 @@ $(function () {
 					(function (info, index) {
 						$.get('tpl/note-box.html', function (html) {
 							$('#note-container').append(html);
-							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt);
+							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 							if (index == response.length-1) {
 								$.get('tpl/loadMore-box.html', function (loadMore) {
 									$('#myNote-tabpanel .panel.box').last().after(loadMore);
@@ -88,12 +88,14 @@ $(function () {
 					$('.edit-title').val($panelBoxs.data('title'));
 					$('.modal-title select').val($panelBoxs.data('label'));
 					$('#edit-txt').val($panelBoxs.data('txt'));
+					$('#edit-id').val($panelBoxs.data('id'));
 					ue.setContent($panelBoxs.data('content'));
 				} else if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
 					if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
 						$('.edit-title').val($panelBoxs.data('title'));
 						$('.modal-title select').val($panelBoxs.data('label'));
 						$('#edit-txt').val($panelBoxs.data('txt'));
+						$('#edit-id').val($panelBoxs.data('id'));
 						ue.setContent($panelBoxs.data('content'));
 					}
 				}
@@ -228,7 +230,6 @@ $(function () {
 				$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
 				break;
 		}
-		$('#addNote-panel').removeData('trigger');
 		if ($('.edit-title').val() == '') {
 			$('.edit-title').val($('.edit-title').attr('placeholder'));
 		}
@@ -236,6 +237,8 @@ $(function () {
 		$('#edit-type').val('personal');
 		$('#edit-txt').val(getContentTxt(ue));
 		$('#editor-container').val(getContent(ue));
+		$('#edit-trigger').val($('#addNote-panel').data('trigger'));
+		$('#addNote-panel').removeData('trigger');
 		var option = {
 			type: 'POST',
 			data: $('#edit-form').serialize(),
@@ -252,7 +255,7 @@ $(function () {
 					(function (info) {
 						$.get('tpl/note-box.html', function (html) {
 							$('#myNote-tabpanel .row .addNote').after(html);
-							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt);
+							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 						});
 					})(response);
 					$('button:visible').removeClass('disabled');
@@ -295,7 +298,7 @@ $(function () {
 					index += oldNum;
 					$.get('tpl/note-box.html', function (html) {
 						$('#note-container').append(html);
-						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt);
+						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 						if (!(length < count)) {
 							if (index == length+oldNum-1) {
 								$this.insertAfter($('#myNote-tabpanel .panel.box').last());
