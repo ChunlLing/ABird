@@ -63,7 +63,6 @@ $(function () {
 				}, 1000);
 				return false;
 			}
-		} else {
 		}
 	}).on('shown.bs.modal', '#addNote-panel', function () {
 		var title, label, html, txt;
@@ -320,7 +319,16 @@ $(function () {
 		$('#addNote-panel').data('trigger', 'note-edit');
 		$('#remote-modal').modal('hide');
 		ue = UE.getEditor('editor-container');
+	}).on('click', '.note-delete', function () {
+		if (confirm('是否要删除该笔记？')) {
+			$.post('data/delete_note.php', {id: $('.box.panel').eq($('#addNote-panel').data('note-index')).data('id')}, function () {
+				$('#remote-modal').modal('hide');
+				$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
+			});
+		}
 	}).on('click', '.box .panel-body', function () {
+		console.log($(this).parents('.box').index());
+		// alert($(this).parents('.box').data('id'));
 		$('#addNote-panel').data('note-index', $(this).parents('.box').index());
 	});
 });
