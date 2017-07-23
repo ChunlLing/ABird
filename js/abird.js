@@ -228,6 +228,7 @@ $(function () {
 				$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
 				break;
 		}
+		$('#addNote-panel').removeData('trigger');
 		if ($('.edit-title').val() == '') {
 			$('.edit-title').val($('.edit-title').attr('placeholder'));
 		}
@@ -316,9 +317,6 @@ $(function () {
 		$('#addNote-panel').data('trigger', 'note-edit');
 		$('#remote-modal').modal('hide');
 		ue = UE.getEditor('editor-container');
-		ue.ready(function () {
-			// ue.setContent($this.parents('#remote-modal').find('.note-content').html());
-		})
 	}).on('click', '.box .panel-body', function () {
 		$('#addNote-panel').data('note-index', $(this).parents('.box').index());
 	});
