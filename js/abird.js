@@ -289,26 +289,26 @@ $(function () {
 		var count = 5;
 		$.get('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
 			var length = response.length;
-			if (length < count) {
-				$this.remove();
-				if (length == 0) {
-					$('#loading-alert').addClass('alert-info').append('<p>没有更多数据了 ┐(ﾟ～ﾟ)┌ </p>').removeClass('hidden');
-					setTimeout(function () {
-						$('#loading-alert').addClass('hidden').removeClass('alert-info').find('p').remove();
-					}, 1000);
-				}
-			}
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
 					index += oldNum;
 					$.get('tpl/note-box.html', function (html) {
 						$('#note-container').append(html);
 						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt);
-						if (index == length+oldNum-1) {
-							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
+						if (!(length < count)) {
+							if (index == length+oldNum-1) {
+								$this.insertAfter($('#myNote-tabpanel .panel.box').last());
+							}
 						}
 					});
 				})(response[i], i);
+			}
+			if (length < count) {
+				$this.remove();
+				$('#loading-alert').addClass('alert-info').append('<p>没有更多数据了 ┐(ﾟ～ﾟ)┌ </p>').removeClass('hidden');
+				setTimeout(function () {
+					$('#loading-alert').addClass('hidden').removeClass('alert-info').find('p').remove();
+				}, 1000);
 			}
 		}, 'json');
 	}).on('click', '.note-edit', function () {
