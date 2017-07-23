@@ -321,9 +321,15 @@ $(function () {
 		ue = UE.getEditor('editor-container');
 	}).on('click', '.note-delete', function () {
 		if (confirm('是否要删除该笔记？')) {
-			$.post('data/delete_note.php', {id: $('.box.panel').eq($('#addNote-panel').data('note-index')).data('id')}, function () {
-				$('#remote-modal').modal('hide');
-				$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
+			var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.box.panel').eq($('#addNote-panel').data('note-index')).data('id');
+			var $this = $(this);
+			$.post('data/delete_note.php', {id: id}, function () {
+				if ($this.parent().hasClass('panel-heading')) {
+					$this.parents('.box.panel').remove();
+				} else {
+					$('#remote-modal').modal('hide');
+					$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
+				}
 			});
 		}
 	}).on('click', '.box .panel-body', function () {

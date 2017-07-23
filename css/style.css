@@ -152,6 +152,26 @@ nav#navbar-top ul.nav li a {
 	height: 145px;
 	padding: 0px;
 }
+#myNote-tabpanel .box .panel-heading .note-delete {
+	position: absolute;
+	top: 0px;
+	right: 5px;
+	border: none;
+	outline: none;
+	border-radius: 50%;
+	background-color: transparent;
+}
+#myNote-tabpanel .box .panel-heading .note-delete:hover {
+	animation: deltip .2s infinite alternate ease-in-out;
+}
+@keyframes deltip {
+	from {
+		transform: rotate(45deg);
+	}
+	to {
+		transform: rotate(-45deg);
+	}
+}
 #myNote-tabpanel .box .panel-body {
 	cursor: pointer;
 	height: 108px;
