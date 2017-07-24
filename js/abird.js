@@ -279,6 +279,15 @@ $(function () {
 				}
 				break;
 			case 'note-edit' : 
+				var $panelBoxs = $('.panel.box.note-active');
+				var title = $('.edit-title').val();
+				var label = $('.modal-title select').val();
+				var html = getContent(ue);
+				if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
+					if (confirm("您编辑的内容尚未保存，是否保存？")) {
+						$('#edit-submit').trigger('click');
+					}
+				}
 				break;
 		}
 	}).on('click', '#myNote-tabpanel .box.panel', function () {
