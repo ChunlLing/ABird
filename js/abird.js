@@ -283,7 +283,7 @@ $(function () {
 		}, 100)
 	}).on('click', '#myNote-tabpanel .box.loadMore', function () {
 		var $this = $(this);
-		var oldNum = $('#note-container').children().length-1;
+		var oldNum = $('.box.panel').length;
 		var count = 5;
 		$.get('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
 			var length = response.length;
