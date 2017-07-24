@@ -79,26 +79,11 @@ $(function () {
 				break;
 			case 'note-edit':
 				var $panelBoxs = $('.panel.box.note-active');
-				title = $('.edit-title').val();
-				label = $('.modal-title select').val();
-				txt = getContentTxt(ue);
-				html = getContent(ue);
-				if (!(title || (label != 'default') || txt || html)) {
-					$('.edit-title').val($panelBoxs.data('title'));
-					$('.modal-title select').val($panelBoxs.data('label'));
-					$('#edit-txt').val($panelBoxs.data('txt'));
-					$('#edit-id').val($panelBoxs.data('id'));
-					ue.setContent($panelBoxs.data('content'));
-				} else if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
-					if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
-						$('.edit-title').val($panelBoxs.data('title'));
-						$('.modal-title select').val($panelBoxs.data('label'));
-						$('#edit-txt').val($panelBoxs.data('txt'));
-						$('#edit-id').val($panelBoxs.data('id'));
-						ue.setContent($panelBoxs.data('content'));
-					} else {
-					}
-				}
+				$('.edit-title').val($panelBoxs.data('title'));
+				$('.modal-title select').val($panelBoxs.data('label'));
+				$('#edit-txt').val($panelBoxs.data('txt'));
+				$('#edit-id').val($panelBoxs.data('id'));
+				ue.setContent($panelBoxs.data('content'));
 				break;
 		}
 	}).on('click', '#to-myNote', function () {
