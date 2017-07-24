@@ -78,7 +78,7 @@ $(function () {
 				}
 				break;
 			case 'note-edit':
-				var $panelBoxs = $('.panel.box').eq($('#addNote-panel').data('note-index'));
+				var $panelBoxs = $('.panel.box.note-active');
 				title = $('.edit-title').val();
 				label = $('.modal-title select').val();
 				txt = getContentTxt(ue);
@@ -96,6 +96,7 @@ $(function () {
 						$('#edit-txt').val($panelBoxs.data('txt'));
 						$('#edit-id').val($panelBoxs.data('id'));
 						ue.setContent($panelBoxs.data('content'));
+					} else {
 					}
 				}
 				break;
@@ -226,7 +227,7 @@ $(function () {
 			case 'addNote':
 				break;
 			case 'note-edit':
-				$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
+				$('.panel.box.note-active').remove();
 				break;
 		}
 		if ($('.edit-title').val() == '') {
@@ -321,21 +322,23 @@ $(function () {
 		ue = UE.getEditor('editor-container');
 	}).on('click', '.note-delete', function () {
 		if (confirm('是否要删除该笔记？')) {
-			var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.box.panel').eq($('#addNote-panel').data('note-index')).data('id');
+			var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
 			var $this = $(this);
 			$.post('data/delete_note.php', {id: id}, function () {
 				if ($this.parent().hasClass('panel-heading')) {
 					$this.parents('.box.panel').remove();
 				} else {
 					$('#remote-modal').modal('hide');
-					$('.box.panel').eq($('#addNote-panel').data('note-index')).remove();
+					$('.panel.box.note-active').remove();
 				}
 			});
 		}
 	}).on('click', '.box .panel-body', function () {
-		console.log($(this).parents('.box').index());
-		// alert($(this).parents('.box').data('id'));
-		$('#addNote-panel').data('note-index', $(this).parents('.box').index());
+		console.log('1 : ' + $('.panel.box.note-active').length);
+		$('.panel.box.note-active').removeClass('note-active');
+		console.log('2 : ' + $('.panel.box.note-active').length);
+		$('.panel.box.note-active').data('.note-active', 1);
+		$(this).parents('.box').addClass('note-active');
 	});
 });
 
