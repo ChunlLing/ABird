@@ -328,9 +328,7 @@ $(function () {
 			});
 		}
 	}).on('click', '.box .panel-body', function () {
-		console.log('1 : ' + $('.panel.box.note-active').length);
 		$('.panel.box.note-active').removeClass('note-active');
-		console.log('2 : ' + $('.panel.box.note-active').length);
 		$('.panel.box.note-active').data('.note-active', 1);
 		$(this).parents('.box').addClass('note-active');
 	});
