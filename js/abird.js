@@ -23,7 +23,7 @@ $(function () {
 
 	$('body').on('show.bs.tab', '#nav-myNote a', function () {
 		if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
-			$.get('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
+			$.post('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
 				for (var i = 0; i < response.length; i++) {
 					(function (info, index) {
 						$.get('tpl/note-box.html', function (html) {
@@ -285,7 +285,7 @@ $(function () {
 		var $this = $(this);
 		var oldNum = $('.box.panel').length;
 		var count = 5;
-		$.get('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
+		$.post('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
 			var length = response.length;
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {

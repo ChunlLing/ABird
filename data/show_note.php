@@ -1,11 +1,11 @@
 <?php 
 	require 'config.php';
-	$start = $_GET['start'];
+	$start = $_POST['start'];
 	if (!isset($start)) {
 		$start = 0;
 	}
-	$count = $_GET['count'];
-	$user = $_GET['user'];
+	$count = $_POST['count'];
+	$user = $_POST['user'];
 	$sql = "SELECT id, name, title, label, content, txt, date FROM notetable WHERE name = '{$user}' ORDER BY date DESC LIMIT $start, $count";
 	$result = mysqli_query($conn, $sql);
 	$output = [];
