@@ -230,7 +230,7 @@ $(function () {
 			url: 'data/add_note.php',
 			beforeSubmit: function () {
 				$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
-				$('button:visible').addClass('disabled');
+				$('button:visible').attr('disabled', 'disabled');
 			},
 			success: function (response) {
 				$('#loading-alert p').remove();
@@ -242,7 +242,7 @@ $(function () {
 							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 						});
 					})(response);
-					$('button:visible').removeClass('disabled');
+					$('button:visible').removeAttr('disabled');
 					$('#addNote-panel').modal('hide');
 					$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
 					clearContent(ue, $('#edit-form'));

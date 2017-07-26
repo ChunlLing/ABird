@@ -66,7 +66,7 @@ function isLogin() {
 		$('#unlogin').addClass('hidden');
 		$('#has-login-btn').removeClass('hidden');
 		$('#no-login-btn').addClass('hidden');
-		$('#userSetting .btn').removeClass('disabled');
+		$('#userSetting .btn').removeAttr('disabled');
 		setUserLogin();
 	}
 }
@@ -76,7 +76,7 @@ function isExit() {
 	$('#unlogin').removeClass('hidden');
 	$('#has-login-btn').addClass('hidden');
 	$('#no-login-btn').removeClass('hidden');
-	$('#userSetting .btn').addClass('disabled');
+	$('#userSetting .btn').attr('disabled', 'disabled');
 	$('#myNote-tabpanel').html('');
 	$('#groupNote-tabpanel').html('');
 }
