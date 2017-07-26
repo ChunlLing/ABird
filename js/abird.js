@@ -8,14 +8,17 @@ $(function () {
 		if (!$(target).html()) {
 			(function () {
 				$(target).load(url, function (result) {
+					if (sessionStorage.getItem('name')) {
+						isLogin();
+					}
 					tab.tab('show');
 				});
 			})();
 		}
 	}).ready(function (e) {
-		if (sessionStorage.getItem('name')) {
+/*		if (sessionStorage.getItem('name')) {
 			isLogin();
-		}
+		}*/
 	});
 	// $('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
