@@ -15,10 +15,6 @@ $(function () {
 				});
 			})();
 		}
-	}).ready(function (e) {
-/*		if (sessionStorage.getItem('name')) {
-			isLogin();
-		}*/
 	});
 	// $('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
@@ -32,7 +28,7 @@ $(function () {
 						$.get('tpl/note-box.html', function (html) {
 							$('#note-container').append(html);
 							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-							if (index == response.length-1) {
+							if (index == response.length-1 && response.length == 4) {
 								$.get('tpl/loadMore-box.html', function (loadMore) {
 									$('#myNote-tabpanel .panel.box').last().after(loadMore);
 								});
