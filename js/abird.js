@@ -339,15 +339,14 @@ $(function () {
 			dataType: 'json',
 			url: 'data/add_group.php',
 			success: function (response) {
-				console.log(response);
 				$('#remote-modal').modal('hide');
+				$('#groupNotes-sm').load('tpl/group-item.html .group-item-sm', function () {
+					console.log($(this));
+					$('.group-name').text(response['teamName']);
+				});
 			}
 		};
 		if ($('#teamName').val()) {
-			$('#groupNotes-sm').load('tpl/group-item.html .group-item-sm', function () {
-				
-			});
-			console.log($('#teamDescription').val());
 			$('#add-group-form').ajaxForm(option);
 		} else {
 			if (!$(this).next('span').html()) {
