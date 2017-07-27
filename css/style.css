@@ -254,6 +254,10 @@ nav#navbar-top ul.nav li a {
 	right: 15px;
 	top: 10px;
 }
+#groupNote-tabpanel .group-item .btn-group .dropdown-toggle {
+	border: none;
+	background-color: transparent;
+}
 #groupNote-tabpanel .groupNote-tabpanel-right .notes {
 	margin: 10px auto;
 	width: 90%;

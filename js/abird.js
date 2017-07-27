@@ -356,9 +356,9 @@ $(function () {
 				$('#remote-modal').modal('hide');
 				(function (info) {
 					$.get('tpl/group-item.html', function (html) {
-						$('#groupNotes-sm').append(html);
-						$('.group-name').attr('href', '#myGroup'+info['id']).text(info['teamName']);
-						$('.tab-content').append('<div id="myGroup' + info['id'] +'" class="tab-pane" role="tabpanel"><div class="notes"></div></div>');
+						$('#groupNotes-sm').prepend(html);
+						$('.group-name').eq(0).attr('href', '#myGroup'+info['id']).text(info['teamName']);
+						$('.tab-content').append('<div id="myGroup' + info['id'] +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 					});
 				})(response);
 			}
