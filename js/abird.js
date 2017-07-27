@@ -16,9 +16,9 @@ $(function () {
 			})();
 		}
 	});
-	$('#nav-groupNotes a').tab('show');
+	// $('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
-	// $('#nav-home a').tab('show');
+	$('#nav-home a').tab('show');
 
 	$('body').on('show.bs.tab', '#nav-myNote a', function () {
 		if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
@@ -33,6 +33,20 @@ $(function () {
 									$('#myNote-tabpanel .panel.box').last().after(loadMore);
 								});
 							}
+						});
+					})(response[i], i);
+				}
+			}, 'json');
+		}
+	}).on('show.bs.tab', '#nav-groupNotes a', function () {
+		if ((!$('#groupNotes-sm').html())) {
+			$.post('data/show_group.php', {user: sessionStorage.name}, function (response) {
+				for (var i = 0; i < response.length; i++) {
+					(function (info, index) {
+						$.get('tpl/group-item.html', function (html) {
+							$('#groupNotes-sm').append(html);
+							$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
+							$('.tab-content').append('<div id="myGroup' + info['id'] +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 						});
 					})(response[i], i);
 				}
@@ -340,10 +354,13 @@ $(function () {
 			url: 'data/add_group.php',
 			success: function (response) {
 				$('#remote-modal').modal('hide');
-				$('#groupNotes-sm').load('tpl/group-item.html .group-item-sm', function () {
-					console.log($(this));
-					$('.group-name').text(response['teamName']);
-				});
+				(function (info) {
+					$.get('tpl/group-item.html', function (html) {
+						$('#groupNotes-sm').append(html);
+						$('.group-name').attr('href', '#myGroup'+info['id']).text(info['teamName']);
+						$('.tab-content').append('<div id="myGroup' + info['id'] +'" class="tab-pane" role="tabpanel"><div class="notes"></div></div>');
+					});
+				})(response);
 			}
 		};
 		if ($('#teamName').val()) {
