@@ -16,9 +16,9 @@ $(function () {
 			})();
 		}
 	});
-	// $('#nav-groupNotes a').tab('show');
+	$('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
-	$('#nav-home a').tab('show');
+	// $('#nav-home a').tab('show');
 
 	$('body').on('show.bs.tab', '#nav-myNote a', function () {
 		if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
@@ -100,7 +100,6 @@ $(function () {
 		$('.email-list').addClass('hidden');
 		validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 	}).on('keydown', '#reg-useremail', function (e) {
-		console.log(e.keyCode);
 		switch (e.keyCode) {
 			case 13:
 				e.preventDefault();
@@ -330,6 +329,32 @@ $(function () {
 		$('.panel.box.note-active').removeClass('note-active');
 		$('.panel.box.note-active').data('.note-active', 1);
 		$(this).parents('.box').addClass('note-active');
+	}).on('blur', '#teamName', function () {
+		validityBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
+	}).on('click', '#add-group-submit', function () {
+		$('#teamMaster').val(sessionStorage.name);
+		var option = {
+			type: 'POST',
+			data: $('#add-group-form').serialize(),
+			dataType: 'json',
+			url: 'data/add_group.php',
+			success: function (response) {
+				console.log(response);
+				$('#remote-modal').modal('hide');
+			}
+		};
+		if ($('#teamName').val()) {
+			$('#groupNotes-sm').load('tpl/group-item.html .group-item-sm', function () {
+				
+			});
+			console.log($('#teamDescription').val());
+			$('#add-group-form').ajaxForm(option);
+		} else {
+			if (!$(this).next('span').html()) {
+				$(this).after('<span class="text-danger"> 请填写群组名称！</span>');
+			}
+			return false;
+		}
 	});
 });
 
