@@ -29,6 +29,21 @@
 					} else {
 						$('.email-list').hide();
 					}
+
+					$('.email-container').css({
+						'position': 'relative'
+					}).find('.email-list').css({
+						'position': 'absolute'
+						,'margin-top': 5
+						,'border': '1px solid #ccc'
+						,'border-radius': 5
+						,'background-color': '#fff'
+						,'list-style': 'none'
+						,'padding': 0
+					}).find('.email-list-item').css({
+						'padding': 5
+						,'cursor': 'default'
+					});
 				}
 
 				,keydown: function (e) {
@@ -66,6 +81,12 @@
 								defaults.init();
 							}, 50);
 					}
+					$('.email-list-item.highlight').css({
+						'background-color': '#23b5f9'
+					});
+					$('.email-list-item:not(.highlight)').css({
+						'background-color': 'transparent'
+					});
 				}
 
 				,mousedown: function (e) {
@@ -98,23 +119,6 @@
 				$(this).css({
 					'background-color': 'transparent'
 				});
-			});
-
-			$('.email-container').css({
-				'position': 'relative'
-			}).find('.email-list').css({
-				'position': 'absolute'
-				,'margin-top': 5
-				,'border': '1px solid #ccc'
-				,'border-radius': 5
-				,'background-color': '#fff'
-				,'list-style': 'none'
-				,'padding': 0
-			}).find('.email-list-item').css({
-				'padding': 5
-				,'cursor': 'default'
-			}).filter('.highlight').css({
-				'background-color': '#23b5f9'
 			});
 
 			return this;
