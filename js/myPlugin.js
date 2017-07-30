@@ -6,9 +6,33 @@
 			$this.after('<div class="email-container"><ul class="email-list"></ul><div>');
 
 			var defaults = {
-				hosts: ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'],
+				'hosts': ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com']
 
-				init: function () {
+				,'style': {
+					'container': {
+						'position': 'relative'
+					}
+					,'list': {
+						'position': 'absolute'
+						,'margin-top': 5
+						,'border': '1px solid #ccc'
+						,'border-radius': 5
+						,'background-color': '#fff'
+						,'list-style': 'none'
+						,'padding': 0
+					}
+					,'item': {
+						'padding': 5
+						,'cursor': 'default'
+					}
+					,'highlight': {
+						'background-color': '#23b5f9'
+					},'normal': {
+						'background-color': 'transparent'
+					}
+				}
+
+				,init: function () {
 					var hosts = this.hosts;
 					$('.email-list').empty().show();
 					if ($this.val().indexOf('@') != -1) {
@@ -30,20 +54,9 @@
 						$('.email-list').hide();
 					}
 
-					$('.email-container').css({
-						'position': 'relative'
-					}).find('.email-list').css({
-						'position': 'absolute'
-						,'margin-top': 5
-						,'border': '1px solid #ccc'
-						,'border-radius': 5
-						,'background-color': '#fff'
-						,'list-style': 'none'
-						,'padding': 0
-					}).find('.email-list-item').css({
-						'padding': 5
-						,'cursor': 'default'
-					});
+					$('.email-container').css(defaults['style']['container'])
+					.find('.email-list').css(defaults['style']['list'])
+					.find('.email-list-item').css(defaults['style']['item']);
 				}
 
 				,keydown: function (e) {
@@ -81,12 +94,8 @@
 								defaults.init();
 							}, 50);
 					}
-					$('.email-list-item.highlight').css({
-						'background-color': '#23b5f9'
-					});
-					$('.email-list-item:not(.highlight)').css({
-						'background-color': 'transparent'
-					});
+					$('.email-list-item.highlight').css(defaults['style']['highlight']);
+					$('.email-list-item:not(.highlight)').css(defaults['style']['normal']);
 				}
 
 				,mousedown: function (e) {
@@ -112,16 +121,19 @@
 			defaults.init();
 			$this.keydown(defaults.keydown).focus(defaults.show)/*.blur(defaults.hide)*/;
 			$('.email-list').mousedown(defaults.mousedown).on('mouseover', '.email-list-item', function () {
-				$(this).css({
-					'background-color': '#23b5f9'
-				});
+				$(this).css(defaults['style']['highlight']);
 			}).on('mouseout', '.email-list-item', function () {
-				$(this).css({
-					'background-color': 'transparent'
-				});
+				$(this).css(defaults['style']['normal']);
 			});
 
 			return this;
 		}
 	});
 })(jQuery);
+
+/*
+* 一个小规范：
+* 对于对象，属性使用"['属性名']"，方法使用"."
+* 对象的属性和方法定义前使用","防止出错
+* 对象的属性定义方式"'属性名'"
+*/
