@@ -72,6 +72,14 @@
 					$this.val($(e.target).text());
 					$('.email-list').hide();
 				}
+
+				,show: function () {
+					$('.email-list').show();
+				}
+
+				,hide: function () {
+					$('.email-list').hide();
+				}
 			};
 
 			if (option) {
@@ -81,8 +89,33 @@
 			}
 
 			defaults.init();
-			$this.keydown(defaults.keydown);
-			$('.email-list').mousedown(defaults.mousedown);
+			$this.keydown(defaults.keydown).focus(defaults.show)/*.blur(defaults.hide)*/;
+			$('.email-list').mousedown(defaults.mousedown).on('mouseover', '.email-list-item', function () {
+				$(this).css({
+					'background-color': '#23b5f9'
+				});
+			}).on('mouseout', '.email-list-item', function () {
+				$(this).css({
+					'background-color': 'transparent'
+				});
+			});
+
+			$('.email-container').css({
+				'position': 'relative'
+			}).find('.email-list').css({
+				'position': 'absolute'
+				,'margin-top': 5
+				,'border': '1px solid #ccc'
+				,'border-radius': 5
+				,'background-color': '#fff'
+				,'list-style': 'none'
+				,'padding': 0
+			}).find('.email-list-item').css({
+				'padding': 5
+				,'cursor': 'default'
+			}).filter('.highlight').css({
+				'background-color': '#23b5f9'
+			});
 
 			return this;
 		}
