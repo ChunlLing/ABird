@@ -94,18 +94,29 @@
 							// 按下tab键
 							$('.email-list').hide();
 							break;
-						default:
-							// 这里使用setTimeout是因为defaults.init()会先于keyup事件触发。待改善
-							setTimeout(function () {
-								defaults.init();
-							}, 50);
 					}
 					$('.email-list-item.highlight').css(defaults['style']['highlight']);
 					$('.email-list-item:not(.highlight)').css(defaults['style']['normal']);
 				}
 
+				,keyup: function (e) {
+					e.stopPropagation();
+					var keyCodes = [13, 38, 40, 9];
+					if (keyCodes.indexOf(e.keyCode) == -1) {
+						defaults.init();
+					}
+				}
+
 				,mousedown: function (e) {
 					$this.val($(e.target).text());
+					$('.email-list').hide();
+				}
+
+				,show: function () {
+					$('.email-list').show();
+				}
+
+				,hide: function () {
 					$('.email-list').hide();
 				}
 			};
@@ -124,7 +135,8 @@
 
 			$this.focus(defaults.show)
 				.blur(defaults.hide)
-				.keydown(defaults.keydown);
+				.keydown(defaults.keydown)
+				.keyup(defaults.keyup);
 
 			$('.email-list').mousedown(defaults.mousedown)
 			.on('mouseover', '.email-list-item', function () {
