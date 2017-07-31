@@ -2,11 +2,12 @@
 	$.fn.extend({
 		emailList: function (option) {
 
-			var $this = this;
-			$this.after('<div class="email-container"><ul class="email-list"></ul><div>');
+			var $this = this;	// $this ==> 使用.emailList()的对象
 
 			var defaults = {
 				'hosts': ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com']
+
+				,'htmlStr': '<div class="email-container"><ul class="email-list"></ul><div>'
 
 				,'style': {
 					'container': {
@@ -33,10 +34,11 @@
 				}
 
 				,init: function () {
-					var hosts = this.hosts;
+					var hosts = this['hosts'];
 					$('.email-list').empty().show();
 					if ($this.val().indexOf('@') != -1) {
-						hosts = this.hosts.filter(function (host) {
+						// 输入框中已输入'@'
+						hosts = this['hosts'].filter(function (host) {
 							return !host.indexOf($this.val().slice($this.val().indexOf('@')+1));
 						});
 					}
@@ -60,6 +62,7 @@
 				}
 
 				,keydown: function (e) {
+					e.stopPropagation();
 					switch (e.keyCode) {
 						case 13:
 							// 按下回车键
@@ -75,12 +78,12 @@
 							}
 							break;
 						case 40:
-							// 按下向上下键
+							// 按下向下键
 							e.preventDefault();
-							if (!$('.email-list-item').is('.highlight')) {
-								$('.email-list-item').first().addClass('highlight');
+							if ($('.email-list-item.highlight').length == 0) {
+								$('.email-list-item:first').addClass('highlight');
 							} else {
-								if (!$('.email-list-item.highlight').is($('.email-list-item').last())) {
+								if (!$('.email-list-item:last').hasClass('highlight')) {
 									$('.email-list-item.highlight').removeClass('highlight').next().addClass('highlight');
 								}
 							}
@@ -90,6 +93,7 @@
 							$('.email-list').hide();
 							break;
 						default:
+							// 这里使用setTimeout是因为defaults.init()会先于keyup事件触发。待改善
 							setTimeout(function () {
 								defaults.init();
 							}, 50);
@@ -102,14 +106,6 @@
 					$this.val($(e.target).text());
 					$('.email-list').hide();
 				}
-
-				,show: function () {
-					$('.email-list').show();
-				}
-
-				,hide: function () {
-					$('.email-list').hide();
-				}
 			};
 
 			if (option) {
@@ -118,9 +114,18 @@
 				}
 			}
 
+			if ($('.email-list').length == 0) {
+				$this.after(defaults['htmlStr']);
+			}
+
 			defaults.init();
-			$this.keydown(defaults.keydown).focus(defaults.show)/*.blur(defaults.hide)*/;
-			$('.email-list').mousedown(defaults.mousedown).on('mouseover', '.email-list-item', function () {
+
+			$this.focus(defaults.show)
+				.blur(defaults.hide)
+				.keydown(defaults.keydown);
+
+			$('.email-list').mousedown(defaults.mousedown)
+			.on('mouseover', '.email-list-item', function () {
 				$(this).css(defaults['style']['highlight']);
 			}).on('mouseout', '.email-list-item', function () {
 				$(this).css(defaults['style']['normal']);
