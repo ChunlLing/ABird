@@ -59,6 +59,8 @@
 					$('.email-container').css(defaults['style']['container'])
 					.find('.email-list').css(defaults['style']['list'])
 					.find('.email-list-item').css(defaults['style']['item']);
+
+					$('.email-list-item:first').addClass('highlight').css(defaults['style']['highlight']);
 				}
 
 				,keydown: function (e) {
