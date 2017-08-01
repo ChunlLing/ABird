@@ -267,26 +267,8 @@ nav#navbar-top ul.nav li a {
 
 
 /* 邮箱提示框 */
-.email-container {
-	position: relative;
-	width: 100%;
-}
 .email-list {
-	position: absolute;
-	margin-top: 5px;
-	width: 100%;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff;
 	z-index: 1;
-}
-.email-list .email-list-item {
-	height: 30px;
-	line-height: 30px;
-	cursor: default;
-}
-.email-list .email-list-item:hover, .email-list .email-list-item.highlight {
-	background-color: #23b5f9;
 }
 
 /* 编辑面板 */
