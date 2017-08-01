@@ -30,8 +30,11 @@ $(function () {
 	.on('click', '#to-groupNotes', {target: $('#nav-myNote a')}, toTabShow)
 	.on('focus', '#reg-username', validateFocus)
 	.on('blur', '#reg-username', regUsernameBlur)
-	.on('focus', '#reg-useremail', regUseremailFocus)
+	.on('focus', '#reg-useremail', validateFocus)
 	.on('blur', '#reg-useremail', regUseremailBlur)
+	.on('beforeShow', $('#reg-useremail'), function () {
+		$('#reg-useremail').emailList();
+	})
 	.on('focus', '#reg-userPSW', validateFocus)
 	.on('blur', '#reg-userPSW', regUserPSWBlur)
 	.on('focus', '#reg-userPSWAgain', validateFocus)

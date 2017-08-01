@@ -98,11 +98,6 @@ function validateFocus(e) {
 	formControllerFocus($(this));
 }
 
-function regUseremailFocus() {
-	validateFocus();
-	$(this).emailList();
-}
-
 function regUsernameBlur() {
 	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
 }

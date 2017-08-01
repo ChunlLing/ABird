@@ -39,7 +39,7 @@
 
 				,init: function () {
 					var hosts = this['hosts'];
-					$('.email-list').empty().show();
+					$('.email-list').empty();
 					if ($this.val().indexOf('@') != -1) {
 						// 输入框中已输入'@'
 						hosts = this['hosts'].filter(function (host) {
@@ -47,7 +47,9 @@
 						});
 					}
 					if (hosts.length != 0) {
-						$('.email-list').removeClass('hidden');
+						// 使用注释的用法会抛出栈溢出的错误
+						// $('.email-list').show();
+						$('.email-list').css('display', 'block');
 						for (let i = 0; i < hosts.length; i++) {
 							$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + hosts[i] + '</li>');
 						}
@@ -98,6 +100,7 @@
 							// 按下tab键
 							$('.email-list').hide();
 							break;
+
 					}
 					$('.email-list-item.highlight').css(defaults['style']['highlight']);
 					$('.email-list-item:not(.highlight)').css(defaults['style']['normal']);
@@ -136,6 +139,7 @@
 			}
 
 			defaults.init();
+			$('.email-list').hide();
 
 			$this.focus(defaults.show)
 				.blur(defaults.hide)
