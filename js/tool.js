@@ -4,7 +4,7 @@ function resetForm(form) {
 	form.find('input:not([type="submit"])').next('span').remove();
 }
 
-function validityFocus(obj) {
+function formControllerFocus(obj) {
 	if (obj.next('span')) {
 		obj.next('span').remove();
 	}
@@ -12,16 +12,16 @@ function validityFocus(obj) {
 	obj.parents('.form-group').attr('class', 'form-group has-feedback');
 }
 
-function validityBlur(obj, reg, errorText) {
+function formControllerBlur(obj, reg, errorText) {
 	var pattern = reg;
 	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
 	if (condition && obj.val()) {
-		validityFocus(obj);
+		formControllerFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-success');
 		return true;
 	} else {
-		validityFocus(obj);
+		formControllerFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
 		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');

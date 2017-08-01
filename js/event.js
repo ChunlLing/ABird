@@ -90,98 +90,44 @@ function addNotePanelShown() {
 	}
 }
 
-function toMyNoteClick() {
-	$('#nav-myNote a').tab('show');
+function toTabShow(e) {
+	e.data.target.tab('show');
 }
 
-function toGroupNotesClick() {
-	$('#nav-groupNotes a').tab('show');
-}
-
-function regUsernameFocus() {
-	validityFocus($(this));
-}
-
-function regUsernameBlur() {
-	validityBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
+function validateFocus(e) {
+	formControllerFocus($(this));
 }
 
 function regUseremailFocus() {
-	emailList();
-	validityFocus($(this));
+	validateFocus();
+	$(this).emailList();
+}
+
+function regUsernameBlur() {
+	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
 }
 
 function regUseremailBlur() {
 	$('.email-list').addClass('hidden');
-	validityBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
-}
-
-function regUseremailKeydown(e) {
-	switch (e.keyCode) {
-		case 13:
-			e.preventDefault();
-			$(this).val($('.email-list-item.highlight').text());
-			$('.email-list').addClass('hidden');
-			break;
-		case 38:
-			e.preventDefault();
-			if (!$('.email-list-item.highlight').is($('.email-list-item').first())) {
-				$('.email-list-item.highlight').removeClass('highlight').prev().addClass('highlight');
-			}
-			break;
-		case 40:
-			e.preventDefault();
-			if (!$('.email-list-item').is('.highlight')) {
-				$('.email-list-item').first().addClass('highlight');
-			} else {
-				if (!$('.email-list-item.highlight').is($('.email-list-item').last())) {
-					$('.email-list-item.highlight').removeClass('highlight').next().addClass('highlight');
-				}
-			}
-			break;
-		case 9:
-			$('.email-list').addClass('hidden');
-			break;
-		default:
-			setTimeout(function () {
-				emailList();
-			}, 50);
-	}
-}
-
-function emailListItemMousedown() {
-	$('#reg-useremail').val($(this).text());
-	$('.email-list').addClass('hidden');
-}
-
-function regUserPSWFocus() {
-	validityFocus($(this));
+	formControllerBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 }
 
 function regUserPSWBlur() {
-	validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
-	if ($(this).val() && $('#reg-userPSWAgain').val() && validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！')) {
+	formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
+	if ($(this).val() && $('#reg-userPSWAgain').val() && formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！')) {
 		$('#reg-userPSWAgain').trigger('focus').trigger('blur');
 	}
 }
 
-function regUserPSWAgainFocus() {
-	validityFocus($(this));
-}
-
 function regUserPSWAgainBlur() {
-	validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
-	if (validityBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！')) {
-		validityBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
+	formControllerBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
+	if (formControllerBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！')) {
+		formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 	}
 }
 
-function regUserAnswerFocus() {
-	validityFocus($(this));
-}
-
 function regUserAnswerBlur() {
-	validityBlur($(this), 'true');
+	formControllerBlur($(this), 'true');
 }
 
 function regSubmitClick() {
@@ -229,8 +175,8 @@ function loginSubmitClick() {
 				resetForm($('#login-form'));
 			} else {
 				$('#login-form .form-group').addClass('has-feedback');
-				validityBlur($('#username'), 'false', '');
-				validityBlur($('#userPSW'), 'false', '用户名或密码错误，请重新输入！');
+				formControllerBlur($('#username'), 'false', '');
+				formControllerBlur($('#userPSW'), 'false', '用户名或密码错误，请重新输入！');
 			}
 		}
 	};
@@ -383,7 +329,7 @@ function boxPanelBodyClick() {
 }
 
 function teamNameBlur() {
-	validityBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
+	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
 }
 
 function addGroupSubmitClick() {
