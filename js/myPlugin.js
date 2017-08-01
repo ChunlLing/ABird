@@ -12,9 +12,11 @@
 				,'style': {
 					'container': {
 						'position': 'relative'
+						,'width': $this.css('width')
 					}
 					,'list': {
 						'position': 'absolute'
+						,'width': '100%'
 						,'margin-top': 5
 						,'border': '1px solid #ccc'
 						,'border-radius': 5
