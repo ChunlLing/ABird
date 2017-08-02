@@ -128,35 +128,37 @@
 				}
 			};
 
-			if (option) {
-				if (option['hosts']) {
-					defaults['hosts'] = option['hosts'];
+			if ($this.length !=0) {
+				if (option) {
+					if (option['hosts']) {
+						defaults['hosts'] = option['hosts'];
+					}
 				}
+
+				if ($('.email-list').length == 0) {
+					$this.after(defaults['htmlStr']);
+				}
+
+				defaults.init();
+				$('.email-list').hide();
+
+				$this.focus(defaults.show)
+					.blur(defaults.hide)
+					.keydown(defaults.keydown)
+					.keyup(defaults.keyup);
+
+				$('.email-list').mousedown(defaults.mousedown)
+				.on('mouseover', '.email-list-item', function () {
+					$(this).css(defaults['style']['highlight']);
+				}).on('mouseout', '.email-list-item', function () {
+					$(this).css(defaults['style']['normal']);
+				});
 			}
-
-			if ($('.email-list').length == 0) {
-				$this.after(defaults['htmlStr']);
-			}
-
-			defaults.init();
-			$('.email-list').hide();
-
-			$this.focus(defaults.show)
-				.blur(defaults.hide)
-				.keydown(defaults.keydown)
-				.keyup(defaults.keyup);
-
-			$('.email-list').mousedown(defaults.mousedown)
-			.on('mouseover', '.email-list-item', function () {
-				$(this).css(defaults['style']['highlight']);
-			}).on('mouseout', '.email-list-item', function () {
-				$(this).css(defaults['style']['normal']);
-			});
 
 			return this;
 		}
 
-		,show: function (speed, oldCallback) {
+/*		,show: function (speed, oldCallback) {
 			return $(this).each(function () {
 				var obj = $(this),
 					newCallback = function () {
@@ -168,7 +170,7 @@
 				obj.trigger('beforeShow');
 				_oldShow.apply(obj, [speed, newCallback]);
 			});
-		}
+		}*/
 	});
 })(jQuery);
 
