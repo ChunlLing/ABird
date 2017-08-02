@@ -22,6 +22,9 @@ $(function () {
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
+	.on('shown.bs.modal', '#remote-modal', function () {
+		$('#reg-useremail').emailList();
+	})
 	.on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
 	.on('hidden.bs.modal', '#remote-modal', remoteModalHidden)
 	.on('click', '.addNote', addNoteClick)
@@ -32,9 +35,6 @@ $(function () {
 	.on('blur', '#reg-username', regUsernameBlur)
 	.on('focus', '#reg-useremail', validateFocus)
 	.on('blur', '#reg-useremail', regUseremailBlur)
-	.on('beforeShow', $('#reg-useremail'), function () {
-		$('#reg-useremail').emailList();
-	})
 	.on('focus', '#reg-userPSW', validateFocus)
 	.on('blur', '#reg-userPSW', regUserPSWBlur)
 	.on('focus', '#reg-userPSWAgain', validateFocus)
