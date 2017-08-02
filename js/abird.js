@@ -30,7 +30,7 @@ $(function () {
 	.on('click', '.addNote', addNoteClick)
 	.on('shown.bs.modal', '#addNote-panel', addNotePanelShown)
 	.on('click', '#to-myNote', {target: $('#nav-myNote a')}, toTabShow)
-	.on('click', '#to-groupNotes', {target: $('#nav-myNote a')}, toTabShow)
+	.on('click', '#to-groupNotes', {target: $('#nav-groupNotes a')}, toTabShow)
 	.on('focus', '#reg-username', validateFocus)
 	.on('blur', '#reg-username', regUsernameBlur)
 	.on('focus', '#reg-useremail', validateFocus)
@@ -52,6 +52,16 @@ $(function () {
 	.on('click', '.note-delete', noteDeleteClick)
 	.on('click', '.box .panel-body', boxPanelBodyClick)
 	.on('blur', '#teamName', teamNameBlur)
+	.on('click', '.createGroup', function () {
+		if (!sessionStorage.name) {
+			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+			setTimeout(function () {
+				$('#loading-alert').addClass('hidden').removeClass('alert-info');
+				$('#no-login-btn').trigger('click');
+			}, 1000);
+			return false;
+		}
+	})
 	.on('click', '#add-group-submit', addGroupSubmitClick);
 });
 

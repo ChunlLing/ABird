@@ -55,11 +55,7 @@ function addNoteClick() {
 			setTimeout(function () {
 				$('#loading-alert').addClass('hidden').removeClass('alert-info');
 				$('#addNote-panel').modal('hide');
-				if ($('#no-login-btn:visible')) {
-					$('#no-login-btn').trigger('click');
-				} else if ($('#login-reg-btn:visible')) {
-					$('#no-login-btn').trigger('click');
-				}
+				$('#no-login-btn').trigger('click');
 			}, 1000);
 			return false;
 		}
@@ -123,7 +119,6 @@ function regUserPSWBlur() {
 }
 
 function regUserPSWAgainBlur() {
-	formControllerBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！');
 	if (formControllerBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！')) {
 		formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 	}
@@ -336,24 +331,24 @@ function teamNameBlur() {
 }
 
 function addGroupSubmitClick() {
-	$('#teamMaster').val(sessionStorage.name);
-	var option = {
-		type: 'POST',
-		data: $('#add-group-form').serialize(),
-		dataType: 'json',
-		url: 'data/add_group.php',
-		success: function (response) {
-			$('#remote-modal').modal('hide');
-			(function (info) {
-				$.get('tpl/group-item.html', function (html) {
-					$('#groupNotes-sm').prepend(html);
-					$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
-					$('.groupNote-tabpanel-right .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
-				});
-			})(response);
-		}
-	};
 	if ($('#teamName').val()) {
+		$('#teamMaster').val(sessionStorage.name);
+		var option = {
+			type: 'POST',
+			data: $('#add-group-form').serialize(),
+			dataType: 'json',
+			url: 'data/add_group.php',
+			success: function (response) {
+				$('#remote-modal').modal('hide');
+				(function (info) {
+					$.get('tpl/group-item.html', function (html) {
+						$('#groupNotes-sm').prepend(html);
+						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
+						$('.groupNote-tabpanel-right .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+					});
+				})(response);
+			}
+		};
 		$('#add-group-form').ajaxForm(option);
 	} else {
 		if (!$(this).next('span').html()) {
