@@ -99,7 +99,15 @@ function validateFocus(e) {
 }
 
 function regUsernameBlur() {
-	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
+	// formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
+	var $this = $(this);
+	if (formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！')) {
+		$.post('data/is_user.php', {user: $(this).val()}, function (response) {
+			if (response['status']) {
+				formControllerBlur($this, 'false', '该用户名已被注册，请重新填写！');
+			}
+		}, 'json');
+	}
 }
 
 function regUseremailBlur() {
