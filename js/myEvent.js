@@ -27,6 +27,9 @@ function navGroupNotesShow() {
 						$('#groupNotes-sm').append(html);
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						if (index == response.length-1) {
+							$('.group-item').first().find('a.group-name').trigger('click');
+						}
 					});
 				})(response[i], i);
 			}
