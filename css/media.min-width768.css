@@ -21,4 +21,7 @@
 	#myNote-tabpanel .box.panel .panel-body {
 		-webkit-line-clamp: 8;
 	}
+	#groupNote-tabpanel .groupNote-tabpanel-left {
+		border-right: 1px solid #1d709d;
+	}
 }
