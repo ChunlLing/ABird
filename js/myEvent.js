@@ -26,7 +26,7 @@ function navGroupNotesShow() {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').append(html);
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
-						$('.groupNote-tabpanel-right .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 						if (index == response.length-1) {
 							$('.group-item').first().find('a.group-name').trigger('click');
 						}
@@ -347,7 +347,7 @@ function addGroupSubmitClick() {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').prepend(html);
 						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
-						$('.groupNote-tabpanel-right .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 					});
 				})(response);
 			}

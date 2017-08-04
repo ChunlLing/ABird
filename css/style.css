@@ -224,10 +224,10 @@ nav#navbar-top ul.nav li a {
 #groupNote-tabpanel .groupNote-tabpanel-left {
 	padding: 0px;
 	height: inherit;
-	border-right: 1px solid #1d709d;
+	border-right: none;
 	overflow: hidden;
 }
-#groupNote-tabpanel .groupNote-tabpanel-left p.top {
+#groupNote-tabpanel .groupNote-container p.top  {
 	overflow: hidden;
 	padding: 10px 20px;
 	margin: 0px;
@@ -257,6 +257,10 @@ nav#navbar-top ul.nav li a {
 #groupNote-tabpanel .group-item .btn-group .dropdown-toggle {
 	border: none;
 	background-color: transparent;
+}
+#groupNote-tabpanel .groupNote-tabpanel-right {
+	padding-left: 0;
+	padding-right: 0;
 }
 #groupNote-tabpanel .groupNote-tabpanel-right .notes {
 	margin: 10px auto;

@@ -62,6 +62,19 @@ $(function () {
 			return false;
 		}
 	})
-	.on('click', '#add-group-submit', addGroupSubmitClick);
+	.on('click', '#add-group-submit', addGroupSubmitClick)
+	.on('click', '.add-group-note', function () {
+		if (sessionStorage.name) {
+			ue = UE.getEditor('editor-container');
+		} else {
+			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+			setTimeout(function () {
+				$('#loading-alert').addClass('hidden').removeClass('alert-info');
+				$('#addNote-panel').modal('hide');
+				$('#no-login-btn').trigger('click');
+			}, 1000);
+			return false;
+		}
+	});
 });
 
