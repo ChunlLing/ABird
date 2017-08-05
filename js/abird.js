@@ -65,7 +65,8 @@ $(function () {
 	.on('click', '#add-group-submit', addGroupSubmitClick)
 	.on('click', '.add-group-note', function () {
 		if (sessionStorage.name) {
-			ue = UE.getEditor('editor-container');
+			$('#addNote-panel').data('trigger', 'note-group');
+			// ue = UE.getEditor('editor-container');
 		} else {
 			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
 			setTimeout(function () {
