@@ -3,15 +3,17 @@ function navMyNoteShow() {
 		$.post('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
-					$.get('tpl/note-box.html', function (html) {
-						$('#note-container').append(html);
-						$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-						if (index == response.length-1 && response.length == 4) {
-							$.get('tpl/loadMore-box.html', function (loadMore) {
-								$('#myNote-tabpanel .panel.box').last().after(loadMore);
-							});
-						}
-					});
+					if (info.type == 'personal') {
+						$.get('tpl/note-box.html', function (html) {
+							$('#note-container').append(html);
+							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
+							if (index == response.length-1 && response.length == 4) {
+								$.get('tpl/loadMore-box.html', function (loadMore) {
+									$('#myNote-tabpanel .panel.box').last().after(loadMore);
+								});
+							}
+						});
+					}
 				})(response[i], i);
 			}
 		}, 'json');
@@ -50,8 +52,8 @@ function remoteModalHidden() {
 
 function addNoteClick() {
 	if ($('#addNote-panel').data('trigger') != 'note-edit') {
-		$('#addNote-panel').data('trigger', 'addNote');
 		if (sessionStorage.name) {
+			$('#addNote-panel').data('trigger', 'addNote');
 			ue = UE.getEditor('editor-container');
 		} else {
 			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
@@ -165,15 +167,25 @@ function loginSubmitClick() {
 		data: $('#login-form').serialize(),
 		dataType: 'json',
 		url: 'data/login.php',
+		beforeSubmit: function () {
+			$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+			$(':submit').attr('disabled', 'disabled');
+		},
 		success: function (response) {
 			if (response['status']) {
-				sessionStorage.setItem('name', response['user']);
-				sessionStorage.setItem('email', response['email']);
-				sessionStorage.setItem('total', '1000');
-				sessionStorage.setItem('used', Math.floor(Math.random()*1000));
-				isLogin();
-				$('#remote-modal').modal('hide');
-				resetForm($('#login-form'));
+				$('#loading-alert p').remove();
+				$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+				setTimeout(function () {
+					$(':submit').removeAttr('disabled');
+					$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
+					sessionStorage.setItem('name', response['user']);
+					sessionStorage.setItem('email', response['email']);
+					sessionStorage.setItem('total', '1000');
+					sessionStorage.setItem('used', Math.floor(Math.random()*1000));
+					isLogin();
+					$('#remote-modal').modal('hide');
+					resetForm($('#login-form'));
+				}, 2000);
 			} else {
 				$('#login-form .form-group').addClass('has-feedback');
 				formControllerBlur($('#username'), 'false', '');
@@ -194,20 +206,26 @@ function loginSubmitClick() {
 function editSubmitClick() {
 	switch ($('#addNote-panel').data('trigger')) {
 		case 'addNote':
+			$('#edit-type').val('personal');
 			break;
 		case 'note-edit':
+			$('#edit-type').val('personal');
 			$('.panel.box.note-active').remove();
+			break;
+		case 'note-group':
+			$('#edit-type').val('group');
 			break;
 	}
 	if ($('.edit-title').val() == '') {
 		$('.edit-title').val($('.edit-title').attr('placeholder'));
 	}
 	$('#edit-user').val(sessionStorage.name);
-	$('#edit-type').val('personal');
-	$('#edit-txt').val(getContentTxt(ue));
-	$('#editor-container').val(getContent(ue));
+	console.log(getContentTxt(ue));
+	// $('#edit-txt').val(getContentTxt(ue));
+	// $('#editor-container').val(getContent(ue));
 	$('#edit-trigger').val($('#addNote-panel').data('trigger'));
 	$('#addNote-panel').removeData('trigger');
+	console.log($('#edit-form').serialize());
 	var option = {
 		type: 'POST',
 		data: $('#edit-form').serialize(),
@@ -221,12 +239,14 @@ function editSubmitClick() {
 			$('#loading-alert p').remove();
 			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
 			setTimeout(function () {
-				(function (info) {
-					$.get('tpl/note-box.html', function (html) {
-						$('#myNote-tabpanel .row .addNote').after(html);
-						$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-					});
-				})(response);
+				if (response.type == 'personal') {
+					(function (info) {
+						$.get('tpl/note-box.html', function (html) {
+							$('#myNote-tabpanel .row .addNote').after(html);
+							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
+						});
+					})(response);
+				}
 				$('button:visible').removeAttr('disabled');
 				$('#addNote-panel').modal('hide');
 				$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
