@@ -139,14 +139,24 @@ function regSubmitClick() {
 		data: $('#reg-form').serialize(),
 		dataType: 'json',
 		url: 'data/add_user.php',
+		beforeSubmit: function () {
+			$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+			$(':submit').attr('disabled', 'disabled');
+		},
 		success: function (response) {
-			sessionStorage.setItem('name', response['user']);
-			sessionStorage.setItem('email', response['email']);
-			sessionStorage.setItem('total', '1000');
-			sessionStorage.setItem('used', Math.floor(Math.random()*1000));
-			isLogin();
-			$('#remote-modal').modal('hide');
-			resetForm($('#reg-form'));
+			$('#loading-alert p').remove();
+			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+			setTimeout(function () {
+				$(':submit').removeAttr('disabled');
+				$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
+				sessionStorage.setItem('name', response['user']);
+				sessionStorage.setItem('email', response['email']);
+				sessionStorage.setItem('total', '1000');
+				sessionStorage.setItem('used', Math.floor(Math.random()*1000));
+				isLogin();
+				$('#remote-modal').modal('hide');
+				resetForm($('#reg-form'));
+			}, 2000);
 		}
 	};
 	if (!$('#reg-form .form-group').is('.has-error')) {
