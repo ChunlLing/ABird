@@ -1,5 +1,4 @@
 $(function () {
-	var ue = null;
 
 	$('#nav-list a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 		var url = $(this).attr('href');
@@ -66,7 +65,6 @@ $(function () {
 	.on('click', '.add-group-note', function () {
 		if (sessionStorage.name) {
 			$('#addNote-panel').data('trigger', 'note-group');
-			// ue = UE.getEditor('editor-container');
 		} else {
 			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
 			setTimeout(function () {

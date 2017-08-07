@@ -53,8 +53,8 @@ function remoteModalHidden() {
 function addNoteClick() {
 	if ($('#addNote-panel').data('trigger') != 'note-edit') {
 		if (sessionStorage.name) {
+			$('.panel.box.note-active').removeClass('note-active');
 			$('#addNote-panel').data('trigger', 'addNote');
-			// ue = UE.getEditor('editor-container');
 		} else {
 			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
 			setTimeout(function () {
@@ -68,8 +68,6 @@ function addNoteClick() {
 }
 
 function addNotePanelShown() {
-	ue = UE.getEditor('editor-container');
-	console.log(ue);
 	var title, label, html, txt;
 	switch ($(this).data('trigger')) {
 		case 'addNote':
@@ -216,35 +214,10 @@ function loginSubmitClick() {
 }
 
 function editSubmitClick() {
-	switch ($('#addNote-panel').data('trigger')) {
-		case 'addNote':
-			// 通过点击添加个人笔记触发的编辑面板
-			$('#edit-type').val('personal');
-			break;
-		case 'note-edit':
-			// 通过点击个人笔记预览框触发的编辑面板
-			$('#edit-type').val('personal');
-			$('.panel.box.note-active').remove();
-			break;
-		case 'note-group':
-			// 通过点击添加群组笔记触发的编辑面板
-			$('#edit-type').val('group');
-			break;
-	}
-	if ($('.edit-title').val() == '') {
-		$('.edit-title').val($('.edit-title').attr('placeholder'));
-	}
-	$('#edit-user').val(sessionStorage.name);
-	console.log(getContentTxt(ue));
-	// $('#edit-txt').val(getContentTxt(ue));
-	// $('#editor-container').val(getContent(ue));
-	$('#edit-trigger').val($('#addNote-panel').data('trigger'));
-	$('#addNote-panel').removeData('trigger');
 	var option = {
 		type: 'POST',
 		data: $('#edit-form').serialize(),
 		dataType: 'json',
-		url: 'data/add_note.php',
 		beforeSubmit: function () {
 			$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
 			$('button:visible').attr('disabled', 'disabled');
@@ -260,6 +233,11 @@ function editSubmitClick() {
 							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 						});
 					})(response);
+				} else {
+					console.log(response);
+					(function (info) {
+						console.log(info);
+					})(response);
 				}
 				$('button:visible').removeAttr('disabled');
 				$('#addNote-panel').modal('hide');
@@ -268,7 +246,33 @@ function editSubmitClick() {
 			}, 2000);
 		}
 	}
+	if ($('.edit-title').val() == '') {
+		// 若笔记标题没有修改，默认为‘未命名’（即placeholder属性的值）
+		$('.edit-title').val($('.edit-title').attr('placeholder'));
+	}
+	$('#edit-txt').val(getContentTxt(ue));
+	$('#edit-user').val(sessionStorage.name);
+	$('#edit-trigger').val($('#addNote-panel').data('trigger'));
+
+	switch ($('#addNote-panel').data('trigger')) {
+		case 'addNote':		// 通过点击添加个人笔记触发的编辑面板
+		case 'note-edit':	// 通过点击个人笔记预览框触发的编辑面板
+			$('#edit-type').val('personal');
+			$('.panel.box.note-active').remove();
+			option['url'] = 'data/add_note.php';
+			break;
+		case 'note-group':
+			// 通过点击添加群组笔记触发的编辑面板
+			$('#edit-type').val('group');
+			option['url'] = 'data/add_noteG.php';
+			$('#edit-master').val(sessionStorage.name);
+			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
+			console.log($('#edit-form').serialize());
+			break;
+	}
 	$('#edit-form').ajaxForm(option);
+
+	$('#addNote-panel').removeData('trigger');
 }
 
 function editCancelClick() {
@@ -339,7 +343,6 @@ function noteEditClick() {
 	var $this = $(this);
 	$('#addNote-panel').data('trigger', 'note-edit');
 	$('#remote-modal').modal('hide');
-	// ue = UE.getEditor('editor-container');
 }
 
 function noteDeleteClick() {
