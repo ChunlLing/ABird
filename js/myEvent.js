@@ -53,6 +53,7 @@ function remoteModalHidden() {
 function addNoteClick() {
 	if ($('#addNote-panel').data('trigger') != 'note-edit') {
 		if (sessionStorage.name) {
+			console.log($('#addNote-panel').data('trigger'));
 			$('.panel.box.note-active').removeClass('note-active');
 			$('#addNote-panel').data('trigger', 'addNote');
 		} else {
@@ -62,7 +63,6 @@ function addNoteClick() {
 				$('#addNote-panel').modal('hide');
 				$('#no-login-btn').trigger('click');
 			}, 1000);
-			return false;
 		}
 	}
 }

@@ -72,7 +72,6 @@ $(function () {
 				$('#addNote-panel').modal('hide');
 				$('#no-login-btn').trigger('click');
 			}, 1000);
-			return false;
 		}
 	});
 });
