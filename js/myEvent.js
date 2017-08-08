@@ -28,7 +28,7 @@ function navGroupNotesShow() {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').append(html);
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
-						$('.groupNote-tabpanel-right .notes-container').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 						if (index == response.length-1) {
 							$('.group-item').first().find('a.group-name').trigger('click');
 						}
@@ -53,7 +53,6 @@ function remoteModalHidden() {
 function addNoteClick() {
 	if ($('#addNote-panel').data('trigger') != 'note-edit') {
 		if (sessionStorage.name) {
-			console.log($('#addNote-panel').data('trigger'));
 			$('.panel.box.note-active').removeClass('note-active');
 			$('#addNote-panel').data('trigger', 'addNote');
 		} else {
@@ -234,7 +233,6 @@ function editSubmitClick() {
 						});
 					})(response);
 				} else {
-					console.log(response);
 					(function (info) {
 						console.log(info);
 					})(response);
@@ -261,13 +259,11 @@ function editSubmitClick() {
 			$('.panel.box.note-active').remove();
 			option['url'] = 'data/add_note.php';
 			break;
-		case 'note-group':
-			// 通过点击添加群组笔记触发的编辑面板
+		case 'note-group':	// 通过点击添加群组笔记触发的编辑面板
 			$('#edit-type').val('group');
 			option['url'] = 'data/add_noteG.php';
 			$('#edit-master').val(sessionStorage.name);
 			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
-			console.log($('#edit-form').serialize());
 			break;
 	}
 	$('#edit-form').ajaxForm(option);
@@ -384,7 +380,7 @@ function addGroupSubmitClick() {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').prepend(html);
 						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
-						$('.groupNote-tabpanel-right .notes-container').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
 					});
 				})(response);
 			}
