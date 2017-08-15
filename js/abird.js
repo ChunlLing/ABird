@@ -15,9 +15,6 @@ $(function () {
 			})();
 		}
 	});
-	// $('#nav-groupNotes a').tab('show');
-	// $('#nav-myNote a').tab('show');
-	$('#nav-home a').tab('show');
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
@@ -74,5 +71,9 @@ $(function () {
 			}, 1000);
 		}
 	});
+	
+	$('#nav-groupNotes a').tab('show');
+	// $('#nav-myNote a').tab('show');
+	// $('#nav-home a').tab('show');
 });
 

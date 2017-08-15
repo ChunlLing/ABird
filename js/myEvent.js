@@ -2,36 +2,30 @@ function navMyNoteShow() {
 	if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
-				(function (info, index) {
-					if (info.type == 'personal') {
-						$.get('tpl/note-box.html', function (html) {
-							$('#note-container').append(html);
-							$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-							if (index == response.length-1 && response.length == 4) {
-								$.get('tpl/loadMore-box.html', function (loadMore) {
-									$('#myNote-tabpanel .panel.box').last().after(loadMore);
-								});
-							}
-						});
-					}
-				})(response[i], i);
+				createNoteBox(response[i], i, response);
 			}
 		}, 'json');
 	}
 }
 
 function navGroupNotesShow() {
-	if ((!$('#groupNotes-sm').html())) {
+	if ((!$('#groupNotes-sm').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_group.php', {user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').append(html);
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
-						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
+					}).done(function () {
 						if (index == response.length-1) {
 							$('.group-item').first().find('a.group-name').trigger('click');
 						}
+						$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, team: $('.group-item.active').find('.group-name').data('team')}, function (res) {
+							for (var j = 0; j < res.length; j++) {
+								createNoteBox(res[j], j);
+							}
+						}, 'json');
 					});
 				})(response[i], i);
 			}
@@ -99,7 +93,6 @@ function validateFocus(e) {
 }
 
 function regUsernameBlur() {
-	// formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！');
 	var $this = $(this);
 	if (formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！')) {
 		$.post('data/is_user.php', {user: $(this).val()}, function (response) {
@@ -225,18 +218,7 @@ function editSubmitClick() {
 			$('#loading-alert p').remove();
 			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
 			setTimeout(function () {
-				if (response.type == 'personal') {
-					(function (info) {
-						$.get('tpl/note-box.html', function (html) {
-							$('#myNote-tabpanel .row .addNote').after(html);
-							$('#myNote-tabpanel .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-						});
-					})(response);
-				} else {
-					(function (info) {
-						console.log(info);
-					})(response);
-				}
+				createNoteBox(response);
 				$('button:visible').removeAttr('disabled');
 				$('#addNote-panel').modal('hide');
 				$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
@@ -307,23 +289,12 @@ function boxPanelClick() {
 
 function boxLoadMoreClick() {
 	var $this = $(this);
-	var oldNum = $('.box.panel').length;
 	var count = 5;
+	var oldNum = $('#note-container .box.panel').length+1;
 	$.post('data/show_note.php', {start: oldNum, count: count, user: sessionStorage.name}, function (response) {
 		var length = response.length;
 		for (var i = 0; i < response.length; i++) {
-			(function (info, index) {
-				index += oldNum;
-				$.get('tpl/note-box.html', function (html) {
-					$('#note-container').append(html);
-					$('#myNote-tabpanel .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
-					if (!(length < count)) {
-						if (index == length+oldNum-1) {
-							$this.insertAfter($('#myNote-tabpanel .panel.box').last());
-						}
-					}
-				});
-			})(response[i], i);
+			createNoteBox(response[i], i, response, count);
 		}
 		if (length < count) {
 			$this.remove();
@@ -345,7 +316,8 @@ function noteDeleteClick() {
 	if (confirm('是否要删除该笔记？')) {
 		var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
 		var $this = $(this);
-		$.post('data/delete_note.php', {id: id}, function () {
+		var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
+		$.post(url, {id: id}, function () {
 			if ($this.parent().hasClass('panel-heading')) {
 				$this.parents('.box.panel').remove();
 			} else {
@@ -380,7 +352,7 @@ function addGroupSubmitClick() {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').prepend(html);
 						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
-						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"><div class="notes">'+Math.random()*10+'</div></div>');
+						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					});
 				})(response);
 			}

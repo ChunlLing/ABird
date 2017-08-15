@@ -93,3 +93,43 @@ function clearContent(editor, form) {
 	form.trigger('reset');
 	editor.setContent('');
 }
+
+function createNoteBox(info, index, infoArr, extra) {
+	var isNew = (index) ? false : true;	// 判断是显示新笔记还是显示已有笔记，为false表示显示已有笔记，此时index不为undefined
+	var index = index || 0;
+	var oldNum = $('#note-container .box.panel').length+1;
+	if (extra) {
+		isNew = false;
+		index += oldNum;
+	}
+	$.get('tpl/note-box.html', function (html) {
+		if (info.type == 'personal') {
+			if (isNew) {
+				$('#myNote-tabpanel .row .addNote').after(html);
+			} else {
+				$('#note-container').append(html);
+			}
+			$('#myNote-tabpanel .panel.box').eq(index).addClass('col-md-2 col-sm-4 col-xs-6 panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id).data('type', info.type);
+			if (!extra) {
+				// 没有第四个参数
+				if (!isNew) {
+					if (index == infoArr.length-1 && infoArr.length == 4) {
+						$.get('tpl/loadMore-box.html', function (loadMore) {
+							$('#myNote-tabpanel .panel.box').last().after(loadMore);
+						});
+					}
+				}
+			} else {
+				// 有第四个参数，由boxLoadMoreClick触发
+				if (!(infoArr.length < extra)) {
+					if (index == infoArr.length+oldNum-1) {
+						$('.loadMore.box').insertAfter($('#myNote-tabpanel .panel.box').last());
+					}
+				}
+			}
+		} else {
+			$('.notes-container .tab-pane.active').prepend(html);
+			$('.notes-container .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
+		}
+	});
+}

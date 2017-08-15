@@ -165,5 +165,13 @@ A : 折中的办法：在数据库删除第一条数据
 29
 0:11 2017/8/7
 Q : 
-	1 在编辑面板html片段文件中插入脚本实例化编辑器对象
-	2 
+	1 // 在编辑面板html片段文件中插入脚本实例化编辑器对象
+	2 分离html和js代码
+	3 // 群组面板笔记UI
+		3.1 群组笔记面板预览框上下margin无效？	==》	对.box设置overflow:hidden;
+		3.2 overflow-y:scroll无效？		==》	应同时设置该元素的高度值（不然鬼知道多少算溢出...）
+	4 整理代码
+	5 // 我的笔记面板加载更多按钮失效？？？	==》	选择器应改为这个$('#note-container .box.panel')，不然和群组冲突
+	6 考虑下延迟对象修改createNoteBox函数？？
+	7 // boxLoadMoreClick函数？？？		==》	createNoteBox(info, index, infoArr, extra)函数中少了index += oldNum;
+	8 还是应该勤commit/(ㄒoㄒ)/~~

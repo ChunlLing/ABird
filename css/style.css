@@ -142,17 +142,15 @@ nav#navbar-top ul.nav li a {
 	margin-left: 5px;
 	margin-right: 5px;
 }
-/* 我的笔记 */
-#myNote-tabpanel .row {
-	padding-left: 1px;
-}
-#myNote-tabpanel .box {
+
+/* 我的笔记、群组笔记预览框 */
+.box {
+	position: relative;
 	margin: 10px 3px;
-	width: 145px;
-	height: 145px;
 	padding: 0px;
+	overflow: hidden;
 }
-#myNote-tabpanel .box .panel-heading .note-delete {
+.box .panel-heading .note-delete {
 	position: absolute;
 	top: 0px;
 	right: 5px;
@@ -161,7 +159,7 @@ nav#navbar-top ul.nav li a {
 	border-radius: 50%;
 	background-color: transparent;
 }
-#myNote-tabpanel .box .panel-heading .note-delete:hover {
+.box .panel-heading .note-delete:hover {
 	animation: deltip .2s infinite alternate ease-in-out;
 }
 @keyframes deltip {
@@ -172,45 +170,55 @@ nav#navbar-top ul.nav li a {
 		transform: rotate(-45deg);
 	}
 }
-#myNote-tabpanel .box .panel-body {
+.box .panel-body {
 	cursor: pointer;
 	height: 108px;
 }
-#myNote-tabpanel .box.addNote, #myNote-tabpanel .box.loadMore {
+.box.addNote, .box.loadMore {
 	border: 2px dashed #1d709d;
 	border-radius: 5px;
 	text-align: center;
 	color: rgba(29,112,157,.5);
 	cursor: pointer;
 }
-#myNote-tabpanel .box.loadMore {
+.box.loadMore {
 	border: 1px solid #1d709d;
 }
-#myNote-tabpanel .box.addNote:hover, #myNote-tabpanel .box.loadMore:hover {
+.box.addNote:hover, .box.loadMore:hover {
 	color: rgba(29,112,157,1);
 }
-#myNote-tabpanel .box.addNote span, #myNote-tabpanel .box.loadMore span {
+.box.addNote span, .box.loadMore span {
 	width: auto;
 	height: auto;
 	line-height: 145px;
 	font-size: 120px;
 }
-#myNote-tabpanel .box.panel .panel-heading {
+.box.panel .panel-heading {
 	padding: 5px;
 }
-#myNote-tabpanel .box.panel .panel-title {
+.box.panel .panel-title {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-size: 1em;
 }
-#myNote-tabpanel .box.panel .panel-body {
+.box.panel .panel-body {
 	padding: 5px;
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	background-color: #fff;
+}
+
+/* 我的笔记 */
+#myNote-tabpanel .row {
+	padding-left: 1px;
+}
+
+#myNote-tabpanel .box {
+	width: 145px;
+	height: 145px;
 }
 
 /* 群组笔记 */
@@ -262,11 +270,14 @@ nav#navbar-top ul.nav li a {
 	padding-left: 0;
 	padding-right: 0;
 }
-#groupNote-tabpanel .groupNote-tabpanel-right .notes {
+#groupNote-tabpanel .groupNote-tabpanel-right .tab-content {
+	height: 440px;
+	overflow-y: scroll;
+}
+#groupNote-tabpanel .groupNote-tabpanel-right .box {
 	margin: 10px auto;
 	width: 90%;
-	height: 40px;
-	border: 1px solid #1d709d;
+	height: 120px;
 }
 
 
