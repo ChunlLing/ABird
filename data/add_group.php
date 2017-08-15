@@ -12,9 +12,9 @@
 	$query = "SELECT * FROM grouptable ORDER BY id DESC LIMIT 1";
 	$result = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
-	$group['id'] = $result['id'];
-	$group['date'] = $result['date'];
+	/*$group['id'] = $result['id'];
+	$group['date'] = $result['date'];*/
 
-	echo json_encode($group);
+	echo json_encode($result);
 	mysqli_close($conn);
 ?>

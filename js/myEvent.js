@@ -361,7 +361,7 @@ function addGroupSubmitClick() {
 				(function (info) {
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes-sm').prepend(html);
-						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).text(info.teamName);
+						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					});
 				})(response);
