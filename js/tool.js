@@ -128,9 +128,10 @@ function createNoteBox(info, index, infoArr, extra) {
 				}
 			}
 		} else {
-			// console.log(index);
 			$('.notes-container .tab-pane.active').prepend(html);
-			$('.notes-container .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
+			console.log(info.title);
+			console.log(index);
+			$('.notes-container .tab-pane.active .panel.box').eq(0).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
 		}
 	});
 }
