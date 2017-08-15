@@ -30,6 +30,15 @@ function navGroupNotesShow() {
 				})(response[i], i);
 			}
 		}, 'json');
+		$('#groupNote-tabpanel').on('show.bs.tab', 'a.group-name', function () {
+			if ((!$($(this).attr('href')).html())) {
+						$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, team: $('.group-item.active').find('.group-name').data('team')}, function (res) {
+							for (var j = 0; j < res.length; j++) {
+								createNoteBox(res[j], j);
+							}
+						}, 'json');
+			}
+		});
 	}
 }
 
