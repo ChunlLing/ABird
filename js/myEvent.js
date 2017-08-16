@@ -18,15 +18,7 @@ function navGroupNotesShow() {
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					}).done(function () {
-						$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, team: $('.group-item.active').find('.group-name').data('team')}, function (res) {
-							for (var j = 0; j < res.length; j++) {
-								createNoteBox(res[j], j);
-							}
-						}, 'json');
-						if (index == response.length-1) {
-							// $('.group-item').first().find('a.group-name').trigger('click');
 							$('a.group-name').first().tab('show');
-						}
 					});
 				})(response[i], i);
 			}
