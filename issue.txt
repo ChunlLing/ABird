@@ -175,3 +175,8 @@ Q :
 	6 考虑下延迟对象修改createNoteBox函数？？
 	7 // boxLoadMoreClick函数？？？		==》	createNoteBox(info, index, infoArr, extra)函数中少了index += oldNum;
 	8 还是应该勤commit/(ㄒoㄒ)/~~
+
+30
+23:07 2017/8/16
+Q : sql 把一个表中的某一列赋值到另一个表中的某一列??
+A : https://stackoverflow.com/questions/5036918/update-one-table-with-data-from-another

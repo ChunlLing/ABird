@@ -9,17 +9,14 @@
 		'txt' => $_POST['txt'],
 		'team' => $_POST['team'],
 		'master' => $_POST['master'],
-		'id' => $_POST['id']
+		'gid' => $_POST['gid']
 	);
-	$query = "INSERT INTO groupnotetable (name, title, label, content, txt, team, master, date) VALUES ('{$note['user']}', '{$note['title']}', '{$note['label']}', '{$note['content']}', '{$note['txt']}', '{$note['team']}', '{$note['master']}', NOW())";
+	$query = "INSERT INTO groupnotetable (name, title, label, content, txt, team, master, gid, date) VALUES ('{$note['user']}', '{$note['title']}', '{$note['label']}', '{$note['content']}', '{$note['txt']}', '{$note['team']}', '{$note['master']}', '{$note['gid']}', NOW())";
 	mysqli_query($conn, $query);
 
 	$query = "SELECT * FROM groupnotetable ORDER BY id DESC LIMIT 1";
 	$result = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
-	$note['id'] = $result['id'];
-	$note['date'] = $result['date'];
-
-	echo json_encode($note);
+	echo json_encode($result);
 	mysqli_close($conn);
 ?>

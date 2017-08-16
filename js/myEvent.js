@@ -25,7 +25,7 @@ function navGroupNotesShow() {
 		}, 'json');
 		$('#groupNote-tabpanel').on('shown.bs.tab', 'a.group-name', function () {
 			if ((!$($(this).attr('href')).html())) {
-				$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, team: $('.group-item.active').find('.group-name').data('team')}, function (res) {
+				$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, gid: $('.group-item.active').find('.group-name').data('id')}, function (res) {
 					for (var j = 0; j < res.length; j++) {
 						createNoteBox(res[j], j);
 					}
@@ -248,6 +248,8 @@ function editSubmitClick() {
 			option['url'] = 'data/add_noteG.php';
 			$('#edit-master').val(sessionStorage.name);
 			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
+			console.log($('.group-item.active').find('.group-name').data('id'));
+			$('#edit-gid').val($('.group-item.active').find('.group-name').data('id'));
 			break;
 	}
 	$('#edit-form').ajaxForm(option);
