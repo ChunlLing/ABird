@@ -11,15 +11,16 @@
 		width: 200px;
 		height: 200px;
 	}
-	#myNote-tabpanel .box .panel-body {
-		height: 168px;
-	}
 	#myNote-tabpanel .box.addNote span, #myNote-tabpanel .box.loadMore span {
 		line-height: 200px;
 		font-size: 140px;
 	}
 	#myNote-tabpanel .box.panel .panel-body {
-		-webkit-line-clamp: 8;
+		height: 124px;
+		-webkit-line-clamp: 7;
+	}
+	#myNote-tabpanel .box .panel-footer {
+		font-size: 1em;
 	}
 	#groupNote-tabpanel .groupNote-tabpanel-left {
 		border-right: 1px solid #1d709d;

@@ -103,13 +103,22 @@ function createNoteBox(info, index, infoArr, extra) {
 		index += oldNum;
 	}
 	$.get('tpl/note-box.html', function (html) {
+		var dataArr = {
+			'id': info.id,
+			'title': info.title,
+			'label': info.label,
+			'type': (info.type) ? info.type : 'group',
+			'content': info.content,
+			'txt': info.txt,
+			'date': info.date
+		};
 		if (info.type == 'personal') {
 			if (isNew) {
 				$('#myNote-tabpanel .row .addNote').after(html);
 			} else {
 				$('#note-container').append(html);
 			}
-			$('#myNote-tabpanel .panel.box').eq(index).addClass('col-md-2 col-sm-4 col-xs-6 panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id).data('type', info.type);
+			$('#myNote-tabpanel .panel.box').eq(index).addClass('col-md-2 col-sm-4 col-xs-6 panel-' + info.label).data(dataArr).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().find('.note-time').text(info.date);
 			if (!extra) {
 				// 没有第四个参数
 				if (!isNew) {
@@ -129,7 +138,7 @@ function createNoteBox(info, index, infoArr, extra) {
 			}
 		} else {
 			$('.notes-container .tab-pane.active').append(html);
-			$('.notes-container .tab-pane.active .panel.box').eq(index).addClass('panel-' + info.label).data('content', info.content).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().data('title', info.title).data('label', info.label).data('txt', info.txt).data('id', info.id);
+			$('.notes-container .tab-pane.active .panel.box').eq(index).addClass('panel-' + info.label).data(dataArr).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().find('.note-time').text(info.date);
 		}
 	});
 }

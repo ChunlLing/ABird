@@ -170,10 +170,6 @@ nav#navbar-top ul.nav li a {
 		transform: rotate(-45deg);
 	}
 }
-.box .panel-body {
-	cursor: pointer;
-	height: 108px;
-}
 .box.addNote, .box.loadMore {
 	border: 2px dashed #1d709d;
 	border-radius: 5px;
@@ -193,7 +189,7 @@ nav#navbar-top ul.nav li a {
 	line-height: 145px;
 	font-size: 120px;
 }
-.box.panel .panel-heading {
+.box.panel .panel-heading, .box.panel .panel-footer {
 	padding: 5px;
 }
 .box.panel .panel-title {
@@ -206,9 +202,21 @@ nav#navbar-top ul.nav li a {
 	padding: 5px;
 	overflow: hidden;
 	display: -webkit-box;
-	-webkit-line-clamp: 5;
+	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	background-color: #fff;
+	cursor: pointer;
+	height: 70px;
+	font-size: .8em;
+}
+.box .panel-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: .5em;
+}
+.box .panel-footer p {
+	margin-bottom: 0;
 }
 
 /* 我的笔记 */
