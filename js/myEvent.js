@@ -25,7 +25,13 @@ function navGroupNotesShow() {
 		}, 'json');
 		$('#groupNote-tabpanel').on('shown.bs.tab', 'a.group-name', function () {
 			if ((!$($(this).attr('href')).html())) {
-				$.post('data/show_noteG.php', {start: 0, count: 4, user: sessionStorage.name, gid: $('.group-item.active').find('.group-name').data('id')}, function (res) {
+				var options = {
+					start: 0, 
+					count: 3, 
+					user: sessionStorage.name, 
+					gid: $('.group-item.active').find('.group-name').data('id')
+				};
+				$.post('data/show_noteG.php', options, function (res) {
 					for (var j = 0; j < res.length; j++) {
 						createNoteBox(res[j], j);
 					}
