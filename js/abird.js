@@ -18,8 +18,13 @@ $(function () {
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
-	.on('shown.bs.modal', '#remote-modal', function () {
-		$('#reg-useremail').emailList();
+	.on('shown.bs.modal', '#remote-modal', function (e) {
+		if ($(e.relatedTarget).attr('id') == 'login-reg-btn') {
+			$('#reg-useremail').emailList();
+		} else if ($(e.relatedTarget).hasClass('panel-body')) {
+			$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
+			$('#remote-modal .note-content').html($(e.relatedTarget).parents('.panel').data('content'));
+		}
 	})
 	.on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
 	.on('hidden.bs.modal', '#remote-modal', remoteModalHidden)
@@ -43,7 +48,7 @@ $(function () {
 	.on('click', '#edit-submit', editSubmitClick)
 	.on('click', '#edit-cancel', editCancelClick)
 	.on('click', '#myNote-tabpanel .box.loadMore', boxLoadMoreClick)
-	.on('click', '.box.panel', boxPanelClick)
+	// .on('click', '.box.panel', boxPanelClick)
 	.on('click', '.box .panel-body', boxPanelBodyClick)
 	.on('click', '.note-edit', noteEditClick)
 	.on('click', '.note-delete', noteDeleteClick)
