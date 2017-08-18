@@ -42,11 +42,11 @@ $(function () {
 	.on('click', '#login-submit', loginSubmitClick)
 	.on('click', '#edit-submit', editSubmitClick)
 	.on('click', '#edit-cancel', editCancelClick)
-	.on('click', '#myNote-tabpanel .box.panel', boxPanelClick)
 	.on('click', '#myNote-tabpanel .box.loadMore', boxLoadMoreClick)
+	.on('click', '.box.panel', boxPanelClick)
+	.on('click', '.box .panel-body', boxPanelBodyClick)
 	.on('click', '.note-edit', noteEditClick)
 	.on('click', '.note-delete', noteDeleteClick)
-	.on('click', '.box .panel-body', boxPanelBodyClick)
 	.on('blur', '#teamName', teamNameBlur)
 	.on('click', '.createGroup', function () {
 		if (!sessionStorage.name) {

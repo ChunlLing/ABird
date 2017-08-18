@@ -82,6 +82,7 @@ function addNotePanelShown() {
 			}
 			break;
 		case 'note-edit':
+		case 'note-group':
 			var $panelBoxs = $('.panel.box.note-active');
 			$('.edit-title').val($panelBoxs.data('title'));
 			$('.modal-title select').val($panelBoxs.data('label'));
@@ -318,7 +319,14 @@ function boxLoadMoreClick() {
 
 function noteEditClick() {
 	var $this = $(this);
-	$('#addNote-panel').data('trigger', 'note-edit');
+	switch ($('.box.note-active').data('type')) {
+		case 'personal' :
+			$('#addNote-panel').data('trigger', 'note-edit');
+			break;
+		case 'group' :
+			$('#addNote-panel').data('trigger', 'note-group');
+			break;
+	}
 	$('#remote-modal').modal('hide');
 }
 
@@ -340,7 +348,7 @@ function noteDeleteClick() {
 
 function boxPanelBodyClick() {
 	$('.panel.box.note-active').removeClass('note-active');
-	$('.panel.box.note-active').data('.note-active', 1);
+	// $('.panel.box.note-active').data('.note-active', 1);
 	$(this).parents('.box').addClass('note-active');
 }
 
