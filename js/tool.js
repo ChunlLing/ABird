@@ -137,7 +137,12 @@ function createNoteBox(info, index, infoArr, extra) {
 				}
 			}
 		} else {
-			$('.notes-container .tab-pane.active').append(html);
+			if (isNew) {
+				$('.notes-container .tab-pane.active').prepend(html);
+			} else {
+				$('.notes-container .tab-pane.active').append(html);
+			}
+			// $('.notes-container .tab-pane.active').append(html);
 			$('.notes-container .tab-pane.active .panel.box').eq(index).addClass('panel-' + info.label).data(dataArr).find('.panel-title').text(info.title).end().find('.note-txt').text(info.txt).end().find('.note-time').text(info.date);
 		}
 	});

@@ -265,7 +265,6 @@ function editSubmitClick() {
 			$('#edit-master').val(sessionStorage.name);
 			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
 			$('#edit-gid').val($('.group-item.active').find('.group-name').data('id'));
-			console.log(option.data.id);
 			break;
 	}
 	$('#edit-form').ajaxForm(option);
@@ -349,7 +348,6 @@ function noteDeleteClick() {
 
 function boxPanelBodyClick() {
 	$('.panel.box.note-active').removeClass('note-active');
-	// $('.panel.box.note-active').data('.note-active', 1);
 	$(this).parents('.box').addClass('note-active');
 }
 
