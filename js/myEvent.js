@@ -41,6 +41,15 @@ function navGroupNotesShow() {
 	}
 }
 
+function remoteModalShown(e) {
+	if ($(e.relatedTarget).attr('id') == 'login-reg-btn') {
+		$('#reg-useremail').emailList();
+	} else if ($(e.relatedTarget).hasClass('panel-body')) {
+		$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
+		$('#remote-modal .note-content').html($(e.relatedTarget).parents('.panel').data('content'));
+	}
+}
+
 function remoteModalLoaded() {
 	if (sessionStorage.getItem('name')) {
 		setUserLogin();
@@ -346,6 +355,32 @@ function boxPanelBodyClick() {
 
 function teamNameBlur() {
 	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
+}
+
+function createGroupClick() {
+	if (!sessionStorage.name) {
+		$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+		setTimeout(function () {
+			$('#loading-alert').addClass('hidden').removeClass('alert-info');
+			$('#no-login-btn').trigger('click');
+		}, 1000);
+		return false;
+	}
+}
+
+function addGroupNoteClick() {
+	if (sessionStorage.name) {
+		$('#addNote-panel').data('trigger', 'note-group');
+		$('.panel.box.note-active').removeClass('note-active');
+	} else {
+		$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
+		setTimeout(function () {
+			$('#loading-alert').addClass('hidden').removeClass('alert-info');
+			$('#addNote-panel').modal('hide');
+			$('#no-login-btn').trigger('click');
+		}, 1000);
+		return false;
+	}
 }
 
 function addGroupSubmitClick() {

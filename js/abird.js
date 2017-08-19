@@ -18,14 +18,7 @@ $(function () {
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
-	.on('shown.bs.modal', '#remote-modal', function (e) {
-		if ($(e.relatedTarget).attr('id') == 'login-reg-btn') {
-			$('#reg-useremail').emailList();
-		} else if ($(e.relatedTarget).hasClass('panel-body')) {
-			$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
-			$('#remote-modal .note-content').html($(e.relatedTarget).parents('.panel').data('content'));
-		}
-	})
+	.on('shown.bs.modal', '#remote-modal', remoteModalShown)
 	.on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
 	.on('hidden.bs.modal', '#remote-modal', remoteModalHidden)
 	.on('click', '.addNote', addNoteClick)
@@ -52,30 +45,9 @@ $(function () {
 	.on('click', '.note-edit', noteEditClick)
 	.on('click', '.note-delete', noteDeleteClick)
 	.on('blur', '#teamName', teamNameBlur)
-	.on('click', '.createGroup', function () {
-		if (!sessionStorage.name) {
-			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
-			setTimeout(function () {
-				$('#loading-alert').addClass('hidden').removeClass('alert-info');
-				$('#no-login-btn').trigger('click');
-			}, 1000);
-			return false;
-		}
-	})
+	.on('click', '.createGroup', createGroupClick)
 	.on('click', '#add-group-submit', addGroupSubmitClick)
-	.on('click', '.add-group-note', function () {
-		if (sessionStorage.name) {
-			$('#addNote-panel').data('trigger', 'note-group');
-			$('.panel.box.note-active').removeClass('note-active');
-		} else {
-			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
-			setTimeout(function () {
-				$('#loading-alert').addClass('hidden').removeClass('alert-info');
-				$('#addNote-panel').modal('hide');
-				$('#no-login-btn').trigger('click');
-			}, 1000);
-		}
-	});
+	.on('click', '.add-group-note', addGroupNoteClick);
 	
 	$('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
