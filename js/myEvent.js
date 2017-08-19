@@ -255,8 +255,8 @@ function editSubmitClick() {
 			option['url'] = 'data/add_noteG.php';
 			$('#edit-master').val(sessionStorage.name);
 			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
-			console.log($('.group-item.active').find('.group-name').data('id'));
 			$('#edit-gid').val($('.group-item.active').find('.group-name').data('id'));
+			console.log(option.data);
 			break;
 	}
 	$('#edit-form').ajaxForm(option);
