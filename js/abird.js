@@ -57,6 +57,13 @@ $(function () {
 		$('.groupNote-tabpanel-left').show();
 		$('.groupNote-tabpanel-right').hide();
 	});
+
+	$(window).resize(function () {
+		if ($(window).width() >= 768) {
+			$('.groupNote-tabpanel-right').show();
+			$('.groupNote-tabpanel-left').show();
+		}
+	});
 	
 	$('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');
