@@ -90,7 +90,7 @@ function addNoteClick() {
 function addNotePanelShown() {
 	var title, label, html, txt;
 	switch ($(this).data('trigger')) {
-		case 'addNote':
+		case 'addNote' :
 			title = $('.edit-title').val();
 			label = $('.modal-title select').val();
 			html = getContent(ue);
@@ -100,11 +100,11 @@ function addNotePanelShown() {
 				}
 			}
 			break;
-		case 'note-edit':
-		case 'note-group':
+		case 'note-edit' :
+		case 'note-group' :
 			var $panelBoxs = $('.panel.box.note-active');
 			$('.edit-title').val($panelBoxs.data('title'));
-			$('.modal-title select').val($panelBoxs.data('label'));
+			$('.modal-title select').val($panelBoxs.data('label') ? $panelBoxs.data('label') : 'default');
 			$('#edit-txt').val($panelBoxs.data('txt'));
 			$('#edit-id').val($panelBoxs.data('id'));
 			ue.setContent($panelBoxs.data('content'));
@@ -283,28 +283,26 @@ function editSubmitClick() {
 }
 
 function editCancelClick() {
-	switch ($(this).parents('#addNote-panel').data('trigger')) {
-		case 'addNote' :
-			var title = $('.edit-title').val();
-			var label = $('.modal-title select').val();
-			var html = getContent(ue);
-			if (html || title || (label != 'default')) {
+	var title = $('.edit-title').val();
+	var label = $('.modal-title select').val();
+	var html = getContent(ue);
+	if (html || title || (label != 'default')) {
+		switch ($(this).parents('#addNote-panel').data('trigger')) {
+			case 'addNote' :
 				if (confirm("是否清除所编辑的内容？")) {
 					clearContent(ue, $('#edit-form'));
 				}
-			}
-			break;
-		case 'note-edit' : 
-			var $panelBoxs = $('.panel.box.note-active');
-			var title = $('.edit-title').val();
-			var label = $('.modal-title select').val();
-			var html = getContent(ue);
-			if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
-				if (confirm("您编辑的内容尚未保存，是否保存？")) {
-					$('#edit-submit').trigger('click');
+				break;
+			case 'note-edit' : 
+			case 'note-group' :
+				var $panelBoxs = $('.panel.box.note-active');
+				if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
+					if (confirm("您编辑的内容尚未保存，是否保存？")) {
+						$('#edit-submit').trigger('click');
+					}
 				}
-			}
-			break;
+				break;
+		}
 	}
 }
 
