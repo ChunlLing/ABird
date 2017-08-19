@@ -5,27 +5,16 @@
 			<button class="btn btn-default pull-left createGroup" data-toggle="modal" data-target="#remote-modal" href="tpl/addgroup-modal.html">新建群组</button>
 			<button class="btn btn-default pull-right joinGroup">加入群组</button>
 		</p>
-		<ul id="groupNotes-sm" class="nav nav-pills nav-stacked hidden-xs" role="tablist"></ul>
-		<div id="groupNotes-xs" class="panel-group visible-xs-block" role="tablist">
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab">
-					<h4 class="panel-title">
-						<a href="#myGroup1" data-toggle="collapse" data-parent="#groupNotes-sm">我的第一个群</a>
-					</h4>
-				</div>
-				<div id="myGroup1" class="panel-collapse collapse in" role="tabpanel">
-					<div class="panel-body"></div>
-				</div>
-			</div>
-		</div>
+		<ul id="groupNotes" class="nav nav-pills nav-stacked" role="tablist"></ul>
 		<p class="bottom">
 			<botton class="btn btn-default pull-right setting"><span class="icon-cog"></span></botton>
 		</p>
 	</div>
-	<div class="col-sm-8 groupNote-tabpanel-right hidden-xs">
+	<div class="col-sm-8 groupNote-tabpanel-right">
 		<div class="notes-container">
 			<p class="top">
-				<button class="btn btn-default add-group-note" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">添加群组笔记</button>
+				<button class="btn btn-default visible-xs-inline-block back-group-list"><span class="icon-reply"></span> 返回</button>
+				<button class="btn btn-default pull-right add-group-note" data-toggle="modal" data-target="#addNote-panel" href="tpl/addNote-panel.html">添加群组笔记</button>
 			</p>
 			<div class="tab-content">
 			</div>

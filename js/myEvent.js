@@ -1,3 +1,7 @@
+/*
+*	navMyNoteShow：我的笔记标签页显示处理函数
+*	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中的个人笔记数据并渲染
+*/
 function navMyNoteShow() {
 	if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
@@ -8,13 +12,17 @@ function navMyNoteShow() {
 	}
 }
 
+/*
+*	navGroupNotesShow：群组笔记标签页显示处理函数
+*	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中有关的群组和群组笔记数据并渲染
+*/
 function navGroupNotesShow() {
-	if ((!$('#groupNotes-sm').html()) && sessionStorage.getItem('name')) {
+	if ((!$('#groupNotes').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_group.php', {user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
 					$.get('tpl/group-item.html', function (html) {
-						$('#groupNotes-sm').append(html);
+						$('#groupNotes').append(html);
 						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					}).done(function () {
@@ -38,6 +46,8 @@ function navGroupNotesShow() {
 				}, 'json');
 			}
 		});
+	} else if ((!$('#groupNotes-xs').html()) && sessionStorage.getItem('name')) {
+
 	}
 }
 
@@ -393,7 +403,7 @@ function addGroupSubmitClick() {
 				$('#remote-modal').modal('hide');
 				(function (info) {
 					$.get('tpl/group-item.html', function (html) {
-						$('#groupNotes-sm').prepend(html);
+						$('#groupNotes').prepend(html);
 						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					});

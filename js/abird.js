@@ -47,7 +47,16 @@ $(function () {
 	.on('blur', '#teamName', teamNameBlur)
 	.on('click', '.createGroup', createGroupClick)
 	.on('click', '#add-group-submit', addGroupSubmitClick)
-	.on('click', '.add-group-note', addGroupNoteClick);
+	.on('click', '.add-group-note', addGroupNoteClick)
+	.on('click', '#groupNotes .group-item', function () {
+		if ($(window).width() < 768) {
+			$('.groupNote-tabpanel-right').show();
+			$('.groupNote-tabpanel-left').hide();
+		}
+	}).on('click', '.back-group-list', function () {
+		$('.groupNote-tabpanel-left').show();
+		$('.groupNote-tabpanel-right').hide();
+	});
 	
 	$('#nav-groupNotes a').tab('show');
 	// $('#nav-myNote a').tab('show');

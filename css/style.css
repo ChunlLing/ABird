@@ -275,6 +275,7 @@ nav#navbar-top ul.nav li a {
 	background-color: transparent;
 }
 #groupNote-tabpanel .groupNote-tabpanel-right {
+	display: none;
 	padding-left: 0;
 	padding-right: 0;
 }
