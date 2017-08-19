@@ -48,7 +48,6 @@ $(function () {
 	.on('click', '#edit-submit', editSubmitClick)
 	.on('click', '#edit-cancel', editCancelClick)
 	.on('click', '#myNote-tabpanel .box.loadMore', boxLoadMoreClick)
-	// .on('click', '.box.panel', boxPanelClick)
 	.on('click', '.box .panel-body', boxPanelBodyClick)
 	.on('click', '.note-edit', noteEditClick)
 	.on('click', '.note-delete', noteDeleteClick)
@@ -67,6 +66,7 @@ $(function () {
 	.on('click', '.add-group-note', function () {
 		if (sessionStorage.name) {
 			$('#addNote-panel').data('trigger', 'note-group');
+			$('.panel.box.note-active').removeClass('note-active');
 		} else {
 			$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
 			setTimeout(function () {

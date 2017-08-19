@@ -256,7 +256,7 @@ function editSubmitClick() {
 			$('#edit-master').val(sessionStorage.name);
 			$('#edit-team').val($('.group-item.active').find('.group-name').data('team'));
 			$('#edit-gid').val($('.group-item.active').find('.group-name').data('id'));
-			console.log(option.data);
+			console.log(option.data.id);
 			break;
 	}
 	$('#edit-form').ajaxForm(option);
@@ -288,14 +288,6 @@ function editCancelClick() {
 			}
 			break;
 	}
-}
-
-function boxPanelClick() {
-	var $this = $(this);
-	setTimeout(function () {
-		$('#remote-modal .note-title').text($this.find('.panel-title').text());
-		$('#remote-modal .note-content').html($this.data('content'));
-	}, 100)
 }
 
 function boxLoadMoreClick() {
