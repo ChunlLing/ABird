@@ -236,6 +236,7 @@ function editSubmitClick() {
 			$('#loading-alert p').remove();
 			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
 			setTimeout(function () {
+				$('.panel.box.note-active').remove();
 				createNoteBox(response);
 				$('button:visible').removeAttr('disabled');
 				$('#addNote-panel').modal('hide');
@@ -256,7 +257,6 @@ function editSubmitClick() {
 		case 'addNote':		// 通过点击添加个人笔记触发的编辑面板
 		case 'note-edit':	// 通过点击个人笔记预览框触发的编辑面板
 			$('#edit-type').val('personal');
-			$('.panel.box.note-active').remove();
 			option['url'] = 'data/add_note.php';
 			break;
 		case 'note-group':	// 通过点击添加群组笔记触发的编辑面板
