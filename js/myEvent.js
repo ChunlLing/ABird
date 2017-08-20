@@ -52,7 +52,7 @@ function navGroupNotesShow() {
 }
 
 function remoteModalShown(e) {
-	if ($(e.relatedTarget).attr('id') == 'login-reg-btn') {
+	if ($(e.relatedTarget).attr('id') == 'no-login-btn') {
 		$('#reg-useremail').emailList();
 	} else if ($(e.relatedTarget).hasClass('panel-body')) {
 		$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
