@@ -61,7 +61,7 @@ function setUserLogin() {
 }
 
 function isLogin() {
-	if ($('#hasLogin').hasClass('hidden')) {
+	if ($('#hasLogin').hasClass('hidden') || $('#has-login-btn').hasClass('hidden')) {
 		$('#hasLogin').removeClass('hidden');
 		$('#unlogin').addClass('hidden');
 		$('#has-login-btn').removeClass('hidden');
