@@ -52,7 +52,19 @@ function emailList() {
 	}
 }
 
+function setLoginMessage(msg) {
+	for (var item in msg) {
+		sessionStorage.setItem(item, msg[item]);
+	}
+}
+
 function setUserLogin() {
+	$('#hasLogin').removeClass('hidden');
+	$('#unlogin').addClass('hidden');
+	$('#has-login-btn').removeClass('hidden');
+	$('#no-login-btn').addClass('hidden');
+	$('#userSetting .btn').removeAttr('disabled');
+
 	$('.userName').text(sessionStorage.name);
 	$('.userEmail').text(sessionStorage.email);
 	$('.userSpace-total').text(sessionStorage.total);
@@ -61,24 +73,28 @@ function setUserLogin() {
 }
 
 function isLogin() {
-	if ($('#hasLogin').hasClass('hidden') || $('#has-login-btn').hasClass('hidden')) {
-		$('#hasLogin').removeClass('hidden');
-		$('#unlogin').addClass('hidden');
-		$('#has-login-btn').removeClass('hidden');
-		$('#no-login-btn').addClass('hidden');
-		$('#userSetting .btn').removeAttr('disabled');
-		setUserLogin();
+	if (sessionStorage.getItem('name')) {
+		return true;
+	} else {
+		return false;
 	}
 }
 
-function isExit() {
+function setUserExit() {
 	$('#hasLogin').addClass('hidden');
 	$('#unlogin').removeClass('hidden');
 	$('#has-login-btn').addClass('hidden');
 	$('#no-login-btn').removeClass('hidden');
 	$('#userSetting .btn').attr('disabled', 'disabled');
-	$('#myNote-tabpanel').html('');
-	$('#groupNote-tabpanel').html('');
+
+	$('.userName').text('');
+	$('.userEmail').text('');
+	$('.userSpace-total').text('');
+	$('.userSpace-used').text('');
+	$('.userSpace').val('');
+
+	$('#myNote-tabpanel .row').html($('#myNote-tabpanel .row .addNote'));
+	$('#groupNote-tabpanel').find('#groupNotes').html('').end().find('.tab-content').html('');
 }
 
 function getContent(obj) {

@@ -7,9 +7,7 @@ $(function () {
 		if (!$(target).html()) {
 			(function () {
 				$(target).load(url, function (result) {
-					if (sessionStorage.getItem('name')) {
-						isLogin();
-					}
+					remoteModalLoaded();
 					tab.tab('show');
 				});
 			})();
@@ -19,7 +17,7 @@ $(function () {
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
 	.on('shown.bs.modal', '#remote-modal', remoteModalShown)
-	.on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
+	// .on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
 	.on('hidden.bs.modal', '#remote-modal', remoteModalHidden)
 	.on('click', '.addNote', addNoteClick)
 	.on('shown.bs.modal', '#addNote-panel', addNotePanelShown)

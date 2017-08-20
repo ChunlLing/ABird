@@ -61,7 +61,7 @@ function remoteModalShown(e) {
 }
 
 function remoteModalLoaded() {
-	if (sessionStorage.getItem('name')) {
+	if (isLogin()) {
 		setUserLogin();
 	}
 }
@@ -164,16 +164,20 @@ function regSubmitClick() {
 			$(':submit').attr('disabled', 'disabled');
 		},
 		success: function (response) {
+			var msg = {
+				'name': response['user'],
+				'email': response['email'],
+				'total': '1000',
+				'used': Math.floor(Math.random()*1000)
+			};
 			$('#loading-alert p').remove();
 			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+			setLoginMessage(msg);
 			setTimeout(function () {
 				$(':submit').removeAttr('disabled');
 				$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
-				sessionStorage.setItem('name', response['user']);
-				sessionStorage.setItem('email', response['email']);
-				sessionStorage.setItem('total', '1000');
-				sessionStorage.setItem('used', Math.floor(Math.random()*1000));
-				isLogin();
+				setUserLogin();
+				location.reload();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
 			}, 2000);
@@ -188,7 +192,7 @@ function regSubmitClick() {
 
 function exitClick() {
 	sessionStorage.clear();
-	isExit();
+	setUserExit();
 }
 
 function loginSubmitClick() {
@@ -202,24 +206,31 @@ function loginSubmitClick() {
 			$(':submit').attr('disabled', 'disabled');
 		},
 		success: function (response) {
+			$('#loading-alert p').remove();
 			if (response['status']) {
-				$('#loading-alert p').remove();
+				var msg = {
+					'name': response['user'],
+					'email': response['email'],
+					'total': '1000',
+					'used': Math.floor(Math.random()*1000)
+				};
 				$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+				setLoginMessage(msg);
 				setTimeout(function () {
 					$(':submit').removeAttr('disabled');
 					$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
-					sessionStorage.setItem('name', response['user']);
-					sessionStorage.setItem('email', response['email']);
-					sessionStorage.setItem('total', '1000');
-					sessionStorage.setItem('used', Math.floor(Math.random()*1000));
-					isLogin();
+					setUserLogin();
+					location.reload();
 					$('#remote-modal').modal('hide');
 					resetForm($('#login-form'));
 				}, 2000);
 			} else {
+				$('#loading-alert').removeClass('alert-info');
+				$(':submit').removeAttr('disabled');
 				$('#login-form .form-group').addClass('has-feedback');
 				formControllerBlur($('#username'), 'false', '');
 				formControllerBlur($('#userPSW'), 'false', '用户名或密码错误，请重新输入！');
+				return false;
 			}
 		}
 	};
