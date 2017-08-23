@@ -113,7 +113,7 @@ function clearContent(editor, form) {
 function createNoteBox(info, index, infoArr, extra) {
 	var isNew = (index) ? false : true;	// 判断是显示新笔记还是显示已有笔记，为false表示显示已有笔记，此时index不为undefined
 	var index = index || 0;
-	var oldNum = $('#note-container .box.panel').length+1;
+	var oldNum = $('.box.panel:visible').length;
 	if (extra) {
 		isNew = false;
 		index += oldNum;

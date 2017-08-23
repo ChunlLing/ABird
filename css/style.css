@@ -279,7 +279,7 @@ nav#navbar-top ul.nav li a {
 	padding-left: 0;
 	padding-right: 0;
 }
-#groupNote-tabpanel .groupNote-tabpanel-right .tab-content {
+#groupNote-tabpanel .groupNote-tabpanel-right .tab-pane {
 	height: 440px;
 	overflow-y: scroll;
 }

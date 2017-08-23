@@ -35,19 +35,28 @@ function navGroupNotesShow() {
 			if ((!$($(this).attr('href')).html())) {
 				var options = {
 					start: 0, 
-					count: 3, 
+					count: 5, 
 					user: sessionStorage.name, 
 					gid: $('.group-item.active').find('.group-name').data('id')
 				};
 				$.post('data/show_noteG.php', options, function (res) {
-					for (var j = 0; j < res.length; j++) {
+					for (let j = 0; j < res.length; j++) {
 						createNoteBox(res[j], j);
 					}
 				}, 'json');
+				$('.tab-pane.active').scroll(function () {
+					if ($(this).prop('scrollHeight') - $(this).scrollTop() - $(this).height() == 0) {
+						options.gid = $('.group-item.active').find('.group-name').data('id');
+						options.start = $('.box.panel:visible').length;
+						$.post('data/show_noteG.php', options, function (res) {
+							for (let j = 0; j < res.length; j++) {
+								createNoteBox(res[j], j, res, options.count);
+							}
+						}, 'json');
+					}
+				});
 			}
 		});
-	} else if ((!$('#groupNotes-xs').html()) && sessionStorage.getItem('name')) {
-
 	}
 }
 
