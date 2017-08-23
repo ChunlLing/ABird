@@ -81,7 +81,6 @@ function remoteModalHidden() {
 }
 
 function addNoteClick() {
-	if ($('#addNote-panel').data('trigger') != 'note-edit') {
 		if (sessionStorage.name) {
 			$('.panel.box.note-active').removeClass('note-active');
 			$('#addNote-panel').data('trigger', 'addNote');
@@ -93,7 +92,6 @@ function addNoteClick() {
 				$('#no-login-btn').trigger('click');
 			}, 1000);
 		}
-	}
 }
 
 function addNotePanelShown() {
@@ -104,9 +102,12 @@ function addNotePanelShown() {
 			label = $('.modal-title select').val();
 			html = getContent(ue);
 			if (title || (label != 'default') || html) {
-				if (!confirm("您上次编辑的内容尚未保存，是否继续编辑？")) {
-					clearContent(ue, $('#edit-form'));
-				}
+				$('#tip-modal').modal('show')
+					.on('click', '.btn-default', function () {
+						clearContent(ue, $('#edit-form'));
+					})
+					.find('.modal-body p')
+					.text('您上次编辑的内容尚未保存，是否继续编辑？');
 			}
 			break;
 		case 'note-edit' :
@@ -309,17 +310,23 @@ function editCancelClick() {
 	if (html || title || (label != 'default')) {
 		switch ($(this).parents('#addNote-panel').data('trigger')) {
 			case 'addNote' :
-				if (confirm("是否清除所编辑的内容？")) {
-					clearContent(ue, $('#edit-form'));
-				}
+				$('#tip-modal').modal('show')
+					.on('click', '.btn-primary', function () {
+						clearContent(ue, $('#edit-form'));
+					})
+					.find('.modal-body p')
+					.text('是否清除所编辑的内容？');
 				break;
 			case 'note-edit' : 
 			case 'note-group' :
 				var $panelBoxs = $('.panel.box.note-active');
 				if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
-					if (confirm("您编辑的内容尚未保存，是否保存？")) {
+					$('#tip-modal').modal('show')
+					.on('click', '.btn-primary', function () {
 						$('#edit-submit').trigger('click');
-					}
+					})
+					.find('.modal-body p')
+					.text('您编辑的内容尚未保存，是否保存？');
 				}
 				break;
 		}
@@ -359,19 +366,24 @@ function noteEditClick() {
 }
 
 function noteDeleteClick() {
-	if (confirm('是否要删除该笔记？')) {
-		var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
-		var $this = $(this);
-		var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
-		$.post(url, {id: id}, function () {
-			if ($this.parent().hasClass('panel-heading')) {
-				$this.parents('.box.panel').remove();
-			} else {
-				$('#remote-modal').modal('hide');
-				$('.panel.box.note-active').remove();
-			}
-		});
-	}
+	$('#tip-modal').modal('show')
+					.on('click', '.btn-primary', function () {
+						var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
+						var $this = $(this);
+						var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
+						$.post(url, {id: id}, function () {
+							if ($this.parent().hasClass('panel-heading')) {
+								$this.parents('.box.panel').remove();
+							} else {
+								$('#remote-modal').modal('hide');
+								$('.panel.box.note-active').remove();
+							}
+						});
+					}).on('click', '.btn-default', function () {
+						$('#remote-modal').modal('hide');
+					})
+					.find('.modal-body p')
+					.text('是否要删除该笔记？');
 }
 
 function boxPanelBodyClick() {
