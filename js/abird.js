@@ -51,7 +51,21 @@ $(function () {
 			$('.groupNote-tabpanel-right').show();
 			$('.groupNote-tabpanel-left').hide();
 		}
-	}).on('click', '.back-group-list', function () {
+	})
+	.on('click', '.group-delete', function () {
+		var $this = $(this);
+		$('#tip-modal').on('click', '.btn-primary', function () {
+			$.post('data/delete_group.php', {user: sessionStorage.name, id: $this.parents('.group-item').find('.group-name').data('id')}, function () {
+				$this.parents('.group-item').remove();
+			});
+		})
+		.find('.modal-body p')
+		.text('是否要退出该组？')
+		.end()
+		.find('.btn-primary')
+		.text('是的');
+	})
+	.on('click', '.back-group-list', function () {
 		$('.groupNote-tabpanel-left').show();
 		$('.groupNote-tabpanel-right').hide();
 	});
