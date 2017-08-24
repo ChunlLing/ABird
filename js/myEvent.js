@@ -366,24 +366,24 @@ function noteEditClick() {
 }
 
 function noteDeleteClick() {
+	var $this = $(this);
 	$('#tip-modal').modal('show')
-					.on('click', '.btn-primary', function () {
-						var id = $(this).parent().hasClass('panel-heading') ? $(this).parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
-						var $this = $(this);
-						var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
-						$.post(url, {id: id}, function () {
-							if ($this.parent().hasClass('panel-heading')) {
-								$this.parents('.box.panel').remove();
-							} else {
-								$('#remote-modal').modal('hide');
-								$('.panel.box.note-active').remove();
-							}
-						});
-					}).on('click', '.btn-default', function () {
-						$('#remote-modal').modal('hide');
-					})
-					.find('.modal-body p')
-					.text('是否要删除该笔记？');
+	.on('click', '.btn-primary', function () {
+		var id = $this.parent().hasClass('panel-heading') ? $this.parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
+		var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
+		$.post(url, {id: id}, function () {
+			if ($this.parent().hasClass('panel-heading')) {
+				$this.parents('.box.panel').remove();
+			} else {
+				$('#remote-modal').modal('hide');
+				$('.panel.box.note-active').remove();
+			}
+		});
+	}).on('click', '.btn-default', function () {
+		$('#remote-modal').modal('hide');
+	})
+	.find('.modal-body p')
+	.text('是否要删除该笔记？');
 }
 
 function boxPanelBodyClick() {
