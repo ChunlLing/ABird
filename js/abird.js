@@ -47,7 +47,7 @@ $(function () {
 	.on('click', '.createGroup', createGroupClick)
 	.on('click', '#add-group-submit', addGroupSubmitClick)
 	.on('click', '.add-group-note', addGroupNoteClick)
-	.on('click', '#groupNotes .group-item', groupItemClick)
+	.on('click', '#groupNotes .group-name', groupNameClick)
 	.on('click', '.group-delete', groupDeleteClick)
 	.on('click', '.back-group-list', backGroupListClick);
 

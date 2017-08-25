@@ -447,7 +447,7 @@ function addGroupSubmitClick() {
 	}
 }
 
-function groupItemClick() {
+function groupNameClick() {
 	if ($(window).width() < 768) {
 		$('.groupNote-tabpanel-right').show();
 		$('.groupNote-tabpanel-left').hide();
