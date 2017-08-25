@@ -1,4 +1,4 @@
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
 	nav#navbar-top ul.nav li.active {
 		border-left: none;
 		border-bottom: 2px solid #1d709d;

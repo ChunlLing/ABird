@@ -15,9 +15,7 @@ $(function () {
 			})();
 		}
 	}).on('click', function () {
-		if ($('.navbar-toggle').css('display') != 'none') {
-			$('#nav-list').collapse('toggle');
-		}
+		$('#nav-list').collapse('toggle');
 	});
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
