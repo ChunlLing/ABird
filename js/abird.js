@@ -56,7 +56,7 @@ $(function () {
 	.on('click', '.back-group-list', backGroupListClick);
 
 	$(window).resize(function () {
-		if ($(window).width() >= 768) {
+		if ($(document).width() >= 768) {
 			$('.groupNote-tabpanel-right').show();
 			$('.groupNote-tabpanel-left').show();
 		}
