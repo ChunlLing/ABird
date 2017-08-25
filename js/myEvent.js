@@ -63,17 +63,12 @@ function navGroupNotesShow() {
 function remoteModalShown(e) {
 	if ($(e.relatedTarget).attr('id') == 'no-login-btn') {
 		$('#reg-useremail').emailList();
+	} else if ($(e.relatedTarget).attr('id') == 'has-login-btn') {
+		setUserLogin();
 	} else if ($(e.relatedTarget).hasClass('panel-body')) {
 		$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
 		$('#remote-modal .note-content').html($(e.relatedTarget).parents('.panel').data('content'));
-	}
-}
-
-function remoteModalLoaded() {
-	if (isLogin()) {
-		setUserLogin();
-	}
-}
+	}}
 
 function remoteModalHidden() {
 	$(this).removeData('bs.modal');

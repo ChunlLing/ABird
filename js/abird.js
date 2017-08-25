@@ -7,8 +7,10 @@ $(function () {
 		if (!$(target).html()) {
 			(function () {
 				$(target).load(url, function (result) {
-					remoteModalLoaded();
 					tab.tab('show');
+					if (isLogin()) {
+						setUserLogin();
+					}
 				});
 			})();
 		}
