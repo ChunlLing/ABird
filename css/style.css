@@ -1,6 +1,7 @@
 @charset "utf8";
 body {
-	width: 100vw;
+	width: 100%;
+	margin-top: 80px;
 	background-image: url('../image/bg.jpg');
 }
 ul, li {
@@ -53,9 +54,6 @@ nav#navbar-top ul.nav li a {
 	font-size: 1em;
 	color: #1d709d;
 	background-color: transparent;
-}
-#home, #myNote-tabpanel, #groupNote-tabpanel {
-	padding-top: 100px;
 }
 #home .container-left .panel-heading {
 	height: 48px;

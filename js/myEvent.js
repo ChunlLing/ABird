@@ -62,13 +62,24 @@ function navGroupNotesShow() {
 
 function remoteModalShown(e) {
 	if ($(e.relatedTarget).attr('id') == 'no-login-btn') {
+		// 由登录注册按钮触发
 		$('#reg-useremail').emailList();
 	} else if ($(e.relatedTarget).attr('id') == 'has-login-btn') {
+		// 由用户信息按钮触发
 		setUserLogin();
-	} else if ($(e.relatedTarget).hasClass('panel-body')) {
+	} else if ($(e.relatedTarget).parents('.panel').hasClass('box')) {
+		// 由笔记预览框触发
 		$('#remote-modal .note-title').text($(e.relatedTarget).parents('.panel').find('.panel-title').text());
 		$('#remote-modal .note-content').html($(e.relatedTarget).parents('.panel').data('content'));
-	}}
+	} else if ($(e.relatedTarget).hasClass('group-rename')) {
+		// 由群组重命名触发
+		var $this = $(e.relatedTarget);
+		$('.modal-title').text('重命名');
+		$('#teamName').val($this.parents('.group-item').find('.group-name').data('team'));
+		$('#teamDescription').val($this.parents('.group-item').find('.group-name').data('description'));
+		$('#teamId').val($this.parents('.group-item').find('.group-name').data('id'));
+	}
+}
 
 function remoteModalHidden() {
 	$(this).removeData('bs.modal');
@@ -426,6 +437,11 @@ function addGroupSubmitClick() {
 				$('#remote-modal').modal('hide');
 				(function (info) {
 					$.get('tpl/group-item.html', function (html) {
+						if ($('#teamId').val()) {
+							$('.group-name').filter(function (index, element) {
+								return $(element).data('id') == $('#teamId').val();
+							}).remove();
+						}
 						$('#groupNotes').prepend(html);
 						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
