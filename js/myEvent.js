@@ -1,7 +1,7 @@
 /*
-*	navMyNoteShow：我的笔记标签页显示处理函数
-*	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中的个人笔记数据并渲染
-*/
+ *	navMyNoteShow：我的笔记标签页显示处理函数
+ *	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中的个人笔记数据并渲染
+ */
 function navMyNoteShow() {
 	if ((!$('#note-container').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_note.php', {start: 0, count: 4, user: sessionStorage.name}, function (response) {
@@ -13,9 +13,9 @@ function navMyNoteShow() {
 }
 
 /*
-*	navGroupNotesShow：群组笔记标签页显示处理函数
-*	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中有关的群组和群组笔记数据并渲染
-*/
+ *	navGroupNotesShow：群组笔记标签页显示处理函数
+ *	若客户已登录并且该便签页内容未加载过，向服务器请求该客户存储在数据库中有关的群组和群组笔记数据并渲染
+ */
 function navGroupNotesShow() {
 	if ((!$('#groupNotes').html()) && sessionStorage.getItem('name')) {
 		$.post('data/show_group.php', {user: sessionStorage.name}, function (response) {
@@ -74,7 +74,6 @@ function remoteModalLoaded() {
 		setUserLogin();
 	}
 }
-
 
 function remoteModalHidden() {
 	$(this).removeData('bs.modal');
@@ -142,7 +141,6 @@ function regUsernameBlur() {
 }
 
 function regUseremailBlur() {
-	$('.email-list').addClass('hidden');
 	formControllerBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 }
 
