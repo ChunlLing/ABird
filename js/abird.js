@@ -12,6 +12,8 @@ $(function () {
 				});
 			})();
 		}
+	}).on('click', function () {
+		$('#nav-list').collapse('toggle');
 	});
 
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)

@@ -7,7 +7,6 @@ ul, li {
 	padding: 0px;
 	margin: 0px;
 	list-style: none;
-	text-indent: 10px;
 }
 a:link, a:visited, a:hover, a:active{
 	text-decoration: none;
@@ -45,7 +44,6 @@ nav#navbar-top ul.nav li:hover {
 	background-color: rgba(242,234,246,1);
 }
 nav#navbar-top ul.nav li.active {
-	border-left: 2px solid #1d709d;
 	background-color: rgba(64,155,205,.2);
 }
 nav#navbar-top ul.nav li.active a {
