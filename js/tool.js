@@ -29,29 +29,6 @@ function formControllerBlur(obj, reg, errorText) {
 	}
 }
 
-function emailList() {
-	$('.email-list').empty();
-	var hosts = ['qq.com', 'gmail.com', 'sina.com', '126.com', '163.com'];
-	if ($('#reg-useremail').val().indexOf('@') != -1) {
-		hosts = hosts.filter(function (host) {
-			return !host.indexOf($('#reg-useremail').val().slice($('#reg-useremail').val().indexOf('@')+1));
-		});
-	}
-	if (hosts.length != 0) {
-		$('.email-list').removeClass('hidden');
-		for (let i = 0; i < hosts.length; i++) {
-			$('.email-list').append('<li class="email-list-item"><span class="userinput"></span>@' + hosts[i] + '</li>');
-		}
-		if ($('#reg-useremail').val().indexOf('@') == -1) {
-			$('.userinput').text($('#reg-useremail').val());
-		} else {
-			$('.userinput').text($('#reg-useremail').val().slice(0,$('#reg-useremail').val().indexOf('@')));
-		}
-	} else {
-		$('.email-list').addClass('hidden');
-	}
-}
-
 function setLoginMessage(msg) {
 	for (var item in msg) {
 		sessionStorage.setItem(item, msg[item]);

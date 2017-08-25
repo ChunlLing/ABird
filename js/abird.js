@@ -19,7 +19,6 @@ $(function () {
 	$('body').on('show.bs.tab', '#nav-myNote a', navMyNoteShow)
 	.on('show.bs.tab', '#nav-groupNotes a', navGroupNotesShow)
 	.on('shown.bs.modal', '#remote-modal', remoteModalShown)
-	// .on('loaded.bs.modal', '#remote-modal', remoteModalLoaded)
 	.on('hidden.bs.modal', '#remote-modal', remoteModalHidden)
 	.on('click', '.addNote', addNoteClick)
 	.on('shown.bs.modal', '#addNote-panel', addNotePanelShown)
@@ -48,30 +47,9 @@ $(function () {
 	.on('click', '.createGroup', createGroupClick)
 	.on('click', '#add-group-submit', addGroupSubmitClick)
 	.on('click', '.add-group-note', addGroupNoteClick)
-	.on('click', '#groupNotes .group-item', function () {
-		if ($(window).width() < 768) {
-			$('.groupNote-tabpanel-right').show();
-			$('.groupNote-tabpanel-left').hide();
-		}
-	})
-	.on('click', '.group-delete', function () {
-		var $this = $(this);
-		$('#tip-modal').on('click', '.btn-primary', function () {
-			$.post('data/delete_group.php', {user: sessionStorage.name, id: $this.parents('.group-item').find('.group-name').data('id')}, function () {
-				$this.parents('.group-item').remove();
-				$('a.group-name').first().tab('show');
-			});
-		})
-		.find('.modal-body p')
-		.text('是否要退出该组？')
-		.end()
-		.find('.btn-primary')
-		.text('是的');
-	})
-	.on('click', '.back-group-list', function () {
-		$('.groupNote-tabpanel-left').show();
-		$('.groupNote-tabpanel-right').hide();
-	});
+	.on('click', '#groupNotes .group-item', groupItemClick)
+	.on('click', '.group-delete', groupDeleteClick)
+	.on('click', '.back-group-list', backGroupListClick);
 
 	$(window).resize(function () {
 		if ($(window).width() >= 768) {
