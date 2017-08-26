@@ -10,6 +10,8 @@
 	if ($group['teamId']) {
 		$query = "UPDATE grouptable SET team = '{$group['teamName']}', description = '{$group['teamDescription']}', date = NOW() WHERE id = '{$group['teamId']}'";
 		mysqli_query($conn, $query);
+		$query = "UPDATE groupnotetable SET team = '{$group['teamName']}' WHERE gid = '{$group['teamId']}'";
+		mysqli_query($conn, $query);
 		$query = "SELECT * FROM grouptable WHERE id = '{$group['teamId']}'";
 	} else {
 		$query = "INSERT INTO grouptable (team, master, description, date) VALUES ('{$group['teamName']}', '{$group['teamMaster']}', '{$group['teamDescription']}', NOW())";

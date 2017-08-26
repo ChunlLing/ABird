@@ -250,3 +250,12 @@ Q : 自适应与响应式的区别？？？
 A : http://www.liquidapsive.com/
 	https://www.zhihu.com/question/20628050?rf=24334181
 	[ps:不是很懂]
+
+43
+0:38 2017/8/26
+Q : 页面加载时show_group.php请求时间有点久？？？
+
+44
+0:53 2017/8/26
+Q : 重命名后在该群组添加新笔记不保存
+A : 改名后新笔记向数据库提交的数据变了，改名时对groupnotetable表格也应当做相应的修改

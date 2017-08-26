@@ -74,7 +74,7 @@ function remoteModalShown(e) {
 	} else if ($(e.relatedTarget).hasClass('group-rename')) {
 		// 由群组重命名触发
 		var $this = $(e.relatedTarget);
-		$('.modal-title').text('重命名');
+		$('.modal-title:visible').text('重命名');
 		$('#teamName').val($this.parents('.group-item').find('.group-name').data('team'));
 		$('#teamDescription').val($this.parents('.group-item').find('.group-name').data('description'));
 		$('#teamId').val($this.parents('.group-item').find('.group-name').data('id'));
