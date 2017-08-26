@@ -436,6 +436,13 @@ function addGroupSubmitClick() {
 			success: function (response) {
 				$('#remote-modal').modal('hide');
 				(function (info) {
+					var data = {
+						'id': info.id,
+						'team': info.id,
+						'master': info.master,
+						'description': info.description,
+						'date': info.date
+					};
 					$.get('tpl/group-item.html', function (html) {
 						if ($('#teamId').val()) {
 							$('.group-name').filter(function (index, element) {
@@ -443,8 +450,9 @@ function addGroupSubmitClick() {
 							}).remove();
 						}
 						$('#groupNotes').prepend(html);
-						$('.group-name').eq(0).attr('href', '#myGroup'+info.id).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
+						$('.group-name').eq(0).data(data).attr('href', '#myGroup'+info.id).text(info.team).trigger('click');
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
+						console.log($('.group-name').eq(0).data());
 					});
 				})(response);
 			}
