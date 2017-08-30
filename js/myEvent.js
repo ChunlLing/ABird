@@ -21,9 +21,13 @@ function navGroupNotesShow() {
 		$.post('data/show_group.php', {user: sessionStorage.name}, function (response) {
 			for (var i = 0; i < response.length; i++) {
 				(function (info, index) {
+					var data = {};
+					for (var key in info) {
+						data[key] = info[key];
+					}
 					$.get('tpl/group-item.html', function (html) {
 						$('#groupNotes').append(html);
-						$('.group-name').eq(index).data('id', info.id).data('team', info.team).data('master', info.master).data('description', info.description).data('date', info.date).attr('href', '#myGroup'+info.id).text(info.team);
+						$('.group-name').eq(index).data(data).attr('href', '#myGroup'+info.id).text(info.team);
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
 					}).done(function () {
 							$('a.group-name').first().tab('show');
@@ -204,6 +208,9 @@ function regSubmitClick() {
 	}
 }
 
+/*
+ *	exitClick：点击退出按钮，用户退出登录，清除用户信息
+ */
 function exitClick() {
 	sessionStorage.clear();
 	setUserExit();
@@ -436,13 +443,10 @@ function addGroupSubmitClick() {
 			success: function (response) {
 				$('#remote-modal').modal('hide');
 				(function (info) {
-					var data = {
-						'id': info.id,
-						'team': info.id,
-						'master': info.master,
-						'description': info.description,
-						'date': info.date
-					};
+					var data = {};
+					for (var key in info) {
+						data[key] = info[key];
+					}
 					$.get('tpl/group-item.html', function (html) {
 						if ($('#teamId').val()) {
 							$('.group-name').filter(function (index, element) {
@@ -452,7 +456,6 @@ function addGroupSubmitClick() {
 						$('#groupNotes').prepend(html);
 						$('.group-name').eq(0).data(data).attr('href', '#myGroup'+info.id).text(info.team).trigger('click');
 						$('.groupNote-tabpanel-right .notes-container .tab-content').append('<div id="myGroup' + info.id +'" class="tab-pane" role="tabpanel"></div>');
-						console.log($('.group-name').eq(0).data());
 					});
 				})(response);
 			}
@@ -489,6 +492,6 @@ function groupDeleteClick() {
 }
 
 function backGroupListClick() {
-		$('.groupNote-tabpanel-left').show();
-		$('.groupNote-tabpanel-right').hide();
-	}
+	$('.groupNote-tabpanel-left').show();
+	$('.groupNote-tabpanel-right').hide();
+}
