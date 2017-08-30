@@ -12,13 +12,13 @@
 		'id' => $_POST['id']
 	);
 	if ($note['trigger'] == 'note-edit') {
-		$query = "DELETE FROM mynotetable WHERE id = {$note['id']}";
+		$query = "DELETE FROM note_person WHERE id = {$note['id']}";
 		mysqli_query($conn, $query);
 	}
-	$query = "INSERT INTO mynotetable (name, title, type, label, content, txt, date) VALUES ('{$note['user']}', '{$note['title']}', '{$note['type']}', '{$note['label']}', '{$note['content']}', '{$note['txt']}', NOW())";
+	$query = "INSERT INTO note_person (name, title, type, label, content, txt, date) VALUES ('{$note['user']}', '{$note['title']}', '{$note['type']}', '{$note['label']}', '{$note['content']}', '{$note['txt']}', NOW())";
 	mysqli_query($conn, $query);
 
-	$query = "SELECT * FROM mynotetable ORDER BY id DESC LIMIT 1";
+	$query = "SELECT * FROM note_person ORDER BY id DESC LIMIT 1";
 	$result = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
 	$note['id'] = $result['id'];

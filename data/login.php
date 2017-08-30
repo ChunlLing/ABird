@@ -5,7 +5,7 @@
 		'password' => sha1($_POST['password']),
 		'status' => false
 	);
-	$query = "SELECT name, password, email FROM usertable WHERE name = '{$user['user']}' AND password = '{$user['password']}'";
+	$query = "SELECT * FROM user WHERE name = '{$user['user']}' AND password = '{$user['password']}'";
 	$result = mysqli_query($conn, $query);
 	if (($row = mysqli_fetch_assoc($result)) !== NULL) {
 		$user['status'] = true;

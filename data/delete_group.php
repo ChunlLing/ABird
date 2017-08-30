@@ -4,9 +4,9 @@
 		'master'  => $_POST['user'],
 		'id' =>$_POST['id']
 	);
-	$query = "DELETE FROM grouptable WHERE id = {$group['id']} AND master = '{$group['master']}'";
+	$query = "DELETE FROM group WHERE id = {$group['id']} AND master = '{$group['master']}'";
 	mysqli_query($conn, $query);
-	$query = "DELETE FROM groupnotetable WHERE gid = {$group['id']} AND master = '{$group['master']}'";
+	$query = "DELETE FROM note_group WHERE gid = {$group['id']} AND master = '{$group['master']}'";
 	mysqli_query($conn, $query);
 	mysqli_close($conn);
 ?>

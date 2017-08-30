@@ -4,7 +4,7 @@
 		'user' => $_POST['user'],
 		'status' => true
 	);
-	$sql = "SELECT name FROM usertable WHERE name = '{$user['user']}'";
+	$sql = "SELECT name FROM user WHERE name = '{$user['user']}'";
 	$result = mysqli_query($conn, $sql);
 	if (($row = mysqli_fetch_assoc($result)) == NULL) {
 		$user['status'] = false;
