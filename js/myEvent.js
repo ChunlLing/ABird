@@ -65,7 +65,7 @@ function navGroupNotesShow() {
 }
 
 function remoteModalShown(e) {
-	if ($(e.relatedTarget).attr('id') == 'no-login-btn') {
+	if ($(e.relatedTarget).attr('id') == 'no-login-btn' || $(e.relatedTarget).attr('id') == 'login-reg-btn') {
 		// 由登录注册按钮触发
 		$('#reg-useremail').emailList();
 	} else if ($(e.relatedTarget).attr('id') == 'has-login-btn') {
