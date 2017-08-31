@@ -12,19 +12,22 @@ function formControllerFocus(obj) {
 	obj.parents('.form-group').attr('class', 'form-group has-feedback');
 }
 
-function formControllerBlur(obj, reg, errorText) {
+function formControllerBlur(obj, reg, text) {
 	var pattern = reg;
 	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
 	if (condition && obj.val()) {
 		formControllerFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-success');
+		if (text) {
+			obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-success">' + text + '</p></div>');
+		}
 		return true;
 	} else {
 		formControllerFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-error');
-		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? errorText : '请输入内容') + '</p></div>');
+		obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-danger">' + ((obj.val()) ? text : '请输入内容') + '</p></div>');
 		return false;
 	}
 }

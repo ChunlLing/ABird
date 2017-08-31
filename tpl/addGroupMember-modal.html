@@ -1,0 +1,30 @@
+<!-- 添加新成员 -->
+<div class="modal-header">
+	<button class="close" data-dismiss="modal"><span class="icon-remove-circle"></span></button>
+	<h4 class="modal-title">添加新成员</h4>
+</div>
+<div class="modal-body">
+	<div class="tab-pane active" role="tabpanel">
+		<form id="add-group-member-form" class="form-horizontal">
+			<div class="form-group">
+				<label for="teamName" class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-10">
+					<input type="text" id="memberName" class="form-control" name="memberName" autocomplete="off" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="memberInvitation" class="col-sm-2 control-label">邀请函</label>
+				<div class="col-sm-10">
+					<textarea id="memberInvitation" class="form-control" name="memberInvitation" placeholder="我们正在招募天下侠士共筑大业，少侠可有兴趣助我们一臂之力๑╹◡╹)ﾉ”  "></textarea>
+				</div>
+			</div>
+			<input id="teamId" type="hidden" name="teamId">
+			<input id="teamMaster" type="hidden" name="teamMaster">
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<input id="add-group-member-submit" type="submit" class="btn btn-primary validate-submit" value="确定">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

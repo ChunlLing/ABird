@@ -82,6 +82,11 @@ function remoteModalShown(e) {
 		$('#teamName').val($this.parents('.group-item').find('.group-name').data('team'));
 		$('#teamDescription').val($this.parents('.group-item').find('.group-name').data('description'));
 		$('#teamId').val($this.parents('.group-item').find('.group-name').data('id'));
+	} else if ($(e.relatedTarget).hasClass('group-invite')) {
+		// 由添加成员触发
+		console.log($(e.relatedTarget).parents('.group-item').find('.group-name').data());
+		$('#teamId').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('id'));
+		$('#teamMaster').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('master'));
 	}
 }
 
@@ -473,6 +478,61 @@ function groupNameClick() {
 	if ($(document).width() < 768) {
 		$('.groupNote-tabpanel-right').show();
 		$('.groupNote-tabpanel-left').hide();
+	}
+}
+
+function addGroupInviteBlur() {
+	var $this = $(this);
+	if ($this.val() == sessionStorage.name) {
+		formControllerBlur($this, 'false', '你已经在群中啦~~~');
+	} else {
+		var option = {
+			user: $this.val(),
+			teamId: $('#teamId').val()
+		};
+		$.post('data/add_group_member.php', option, function (response) {
+			if (!response['status']) {
+				formControllerBlur($this, 'false', '查无此人，再检查一下...');
+			} else if (response['isMember']) {
+				formControllerBlur($this, 'false', '这位少侠已经在群中了٩(๑❛ᴗ❛๑)۶');
+			} else {
+				formControllerBlur($this, 'true');
+			}
+		}, 'json');
+	}
+}
+
+function addGroupInviteClick() {
+	if ($('#memberName').parents('.form-group').hasClass('has-success')) {
+		if (!$('#memberInvitation').val()) {
+			$('#memberInvitation').val($('#memberInvitation').attr('placeholder'));
+		}
+		var option = {
+			type: 'POST',
+			data: $('#add-group-member-form').serialize(),
+			dataType: 'json',
+			url: 'data/add_group_member_message.php',
+			beforeSubmit: function () {
+				$('#loading-alert').addClass('alert-info').append('<p>数据提交中 <i class="icon-spinner"></i></p>').removeClass('hidden');
+				$(':submit').attr('disabled', 'disabled');
+			},
+			success: function (response) {
+				$('#loading-alert p').remove();
+				$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据提交成功！ <i class="icon-ok"></i></p>');
+				setTimeout(function () {
+					$(':submit').removeAttr('disabled');
+					$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
+					$('#remote-modal').modal('hide');
+					resetForm($('#reg-form'));
+				}, 2000);
+			}
+		};
+		$('#add-group-member-form').ajaxForm(option);
+	} else if (!$('#memberName').val()) {
+		$(this).after('<span class="text-danger"> 请填写用户名！</span>');
+		return false;
+	} else {
+		return false;
 	}
 }
 

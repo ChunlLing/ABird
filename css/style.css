@@ -9,6 +9,9 @@ ul, li {
 	margin: 0px;
 	list-style: none;
 }
+textarea {
+	resize: none;
+}
 a:link, a:visited, a:hover, a:active{
 	text-decoration: none;
 }
@@ -346,4 +349,9 @@ nav#navbar-top ul.nav li a {
 #remote-modal .modal-body {
 	max-height: 400px;
 	overflow-y: scroll;
+}
+
+/* 添加群组成员模态框 */
+#memberInvitation {
+	height: 80px;
 }
