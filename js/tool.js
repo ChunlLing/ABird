@@ -121,7 +121,7 @@ function clearContent(editor, form) {
 *	createNoteBox：创建笔记预览框
 */
 function createNoteBox(info, index, infoArr, extra) {
-	var isNew = (index) ? false : true;	// 判断是显示新笔记还是显示已有笔记，为false表示显示已有笔记，此时index不为undefined
+	var isNew = (typeof index == 'undefined') ? true : false;	// 判断是显示新笔记还是显示已有笔记，为false表示显示已有笔记，此时index不为undefined
 	var index = index || 0;
 	var oldNum = $('.box.panel:visible').length;
 	if (extra) {
