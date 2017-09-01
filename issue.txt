@@ -270,3 +270,7 @@ Q : SQL。对表名为`group`的数据表进行操作会出错？
 A : SQL不区分大小写，group为SQL语法的一个关键字，所以直接对group进行操作是不行的，需写在反引号内。
 	https://stackoverflow.com/questions/26648404/how-to-work-with-sql-table-named-group
 	PS:题外话。憋挖坑！好好的取别的名字不行啊 (╬￣皿￣)=○
+	
+47
+16:11 2017/9/1
+Q : 管理成员功能待完善。显示成员，群主权限。。。

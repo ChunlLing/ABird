@@ -90,6 +90,16 @@ function remoteModalShown(e) {
 		// 由添加成员触发
 		$('#teamId').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('id'));
 		$('#teamMaster').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('master'));
+	} else if ($(e.relatedTarget).hasClass('group-manage')) {
+		// 由管理群组触发
+		var data = {
+			'teamId': $(e.relatedTarget).parents('.group-item').find('.group-name').data('id')
+		};
+		$.post('data/show_group_member.php', data, function (result) {
+			var html = '<span class="memberObj">' + result[0]['name'] + '</span>';
+			$('.memberNum').text(result.length);
+			$('p:nth-child(2)').append(html);
+		}, 'json');
 	}
 }
 
@@ -478,13 +488,16 @@ function noteDeleteClick() {
 }
 
 /*
- *	nboxPanelBodyClick：点击笔记预览框
+ *	boxPanelBodyClick：点击笔记预览框
  */
 function boxPanelBodyClick() {
 	$('.panel.box.note-active').removeClass('note-active');
 	$(this).parents('.box').addClass('note-active');
 }
 
+/*
+ *	teamNameBlur：创建新群组/重命名群组表单群组名输入框失去焦点
+ */
 function teamNameBlur() {
 	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
 }
