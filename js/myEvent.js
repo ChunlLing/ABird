@@ -96,9 +96,12 @@ function remoteModalShown(e) {
 			'teamId': $(e.relatedTarget).parents('.group-item').find('.group-name').data('id')
 		};
 		$.post('data/show_group_member.php', data, function (result) {
-			var html = '<span class="memberObj">' + result[0]['name'] + '</span>';
+			result.forEach(function (currentValue, index, array) {
+				$('.member-list').load('tpl/group-manage-item.html', '.btn-group', function (html) {
+					$('.dropdown-toggle').text(currentValue['name']);
+				});
+			});
 			$('.memberNum').text(result.length);
-			$('p:nth-child(2)').append(html);
 		}, 'json');
 	}
 }

@@ -355,3 +355,15 @@ nav#navbar-top ul.nav li a {
 #memberInvitation {
 	height: 80px;
 }
+
+/* 管理成员模态框 */
+.memberItem {
+	display: inline-block;
+	padding: 5px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px dashed #ccc;
+}
+.memberItem:hover {
+	background-color: rgba(64,155,205,.8);
+}
