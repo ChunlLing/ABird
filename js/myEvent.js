@@ -88,7 +88,6 @@ function remoteModalShown(e) {
 		$('#teamId').val($this.parents('.group-item').find('.group-name').data('id'));
 	} else if ($(e.relatedTarget).hasClass('group-invite')) {
 		// 由添加成员触发
-		console.log($(e.relatedTarget).parents('.group-item').find('.group-name').data());
 		$('#teamId').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('id'));
 		$('#teamMaster').val($(e.relatedTarget).parents('.group-item').find('.group-name').data('master'));
 	}
@@ -137,7 +136,7 @@ function addNotePanelShown() {
 			html = getContent(ue);
 			if (title || (label != 'default') || html) {
 				$('#tip-modal').modal('show')
-					.on('click', '.btn-default', function () {
+					.on('click', '.tip-left', function () {
 						clearContent(ue, $('#edit-form'));
 					})
 					.find('.modal-body p')
@@ -396,7 +395,7 @@ function editCancelClick() {
 		switch ($(this).parents('#addNote-panel').data('trigger')) {
 			case 'addNote' :
 				$('#tip-modal').modal('show')
-					.on('click', '.btn-primary', function () {
+					.on('click', '.tip-right', function () {
 						clearContent(ue, $('#edit-form'));
 					})
 					.find('.modal-body p')
@@ -407,7 +406,7 @@ function editCancelClick() {
 				var $panelBoxs = $('.panel.box.note-active');
 				if ((title != $panelBoxs.data('title')) || (label != $panelBoxs.data('label')) || (html != $panelBoxs.data('content'))) {
 					$('#tip-modal').modal('show')
-					.on('click', '.btn-primary', function () {
+					.on('click', '.tip-right', function () {
 						$('#edit-submit').trigger('click');
 					})
 					.find('.modal-body p')
@@ -462,19 +461,17 @@ function noteEditClick() {
 function noteDeleteClick() {
 	var $this = $(this);
 	$('#tip-modal').modal('show')
-	.on('click', '.btn-primary', function () {
+	.on('click', '.tip-right', function () {
 		var id = $this.parent().hasClass('panel-heading') ? $this.parents('.box.panel').data('id') : $('.panel.box.note-active').data('id');
 		var url = ($this.parents('.box').data('type') == 'personal') ? 'data/delete_note.php' : 'data/delete_noteG.php';
 		$.post(url, {id: id}, function () {
 			if ($this.parent().hasClass('panel-heading')) {
 				$this.parents('.box.panel').remove();
 			} else {
-				$('#remote-modal').modal('hide');
 				$('.panel.box.note-active').remove();
+				$('#remote-modal').modal('hide');
 			}
 		});
-	}).on('click', '.btn-default', function () {
-		$('#remote-modal').modal('hide');
 	})
 	.find('.modal-body p')
 	.text('是否要删除该笔记？');
@@ -643,17 +640,14 @@ function addGroupInviteClick() {
 */
 function groupDeleteClick() {
 	var $this = $(this);
-	$('#tip-modal').on('click', '.btn-primary', function () {
+	$('#tip-modal').on('click', '.tip-right', function () {
 		$.post('data/delete_group.php', {user: sessionStorage.name, id: $this.parents('.group-item').find('.group-name').data('id')}, function () {
 			$this.parents('.group-item').remove();
 			$('a.group-name').first().tab('show');
 		});
 	})
 	.find('.modal-body p')
-	.text('是否要退出该组？')
-	.end()
-	.find('.btn-primary')
-	.text('是的');
+	.text('是否要退出该组？');
 }
 
 /*
