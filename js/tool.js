@@ -1,9 +1,15 @@
+/*
+*	resetForm：重置表单
+*/
 function resetForm(form) {
 	form.trigger('reset');
 	form.find('.form-group').removeClass('has-success');
 	form.find('input:not([type="submit"])').next('span').remove();
 }
 
+/*
+*	formControllerFocus：表单控件得到焦点
+*/
 function formControllerFocus(obj) {
 	if (obj.next('span')) {
 		obj.next('span').remove();
@@ -12,6 +18,9 @@ function formControllerFocus(obj) {
 	obj.parents('.form-group').attr('class', 'form-group has-feedback');
 }
 
+/*
+*	formControllerBlur：表单控件失去焦点
+*/
 function formControllerBlur(obj, reg, text) {
 	var pattern = reg;
 	var condition = (typeof reg === 'string') ? eval(reg) : pattern.test(obj.val());
@@ -19,9 +28,6 @@ function formControllerBlur(obj, reg, text) {
 		formControllerFocus(obj);
 		obj.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 		obj.parents('.form-group').addClass('has-success');
-		if (text) {
-			obj.parents('.col-sm-10').after('<div class="col-sm-8 col-sm-offset-2"><p class="text-success">' + text + '</p></div>');
-		}
 		return true;
 	} else {
 		formControllerFocus(obj);
@@ -32,12 +38,18 @@ function formControllerBlur(obj, reg, text) {
 	}
 }
 
+/*
+*	setLoginMessage：向sessionStorage对象写入用户信息
+*/
 function setLoginMessage(msg) {
 	for (var item in msg) {
 		sessionStorage.setItem(item, msg[item]);
 	}
 }
 
+/*
+*	setUserLogin：将页面未注册UI隐藏，显示已注册UI
+*/
 function setUserLogin() {
 	$('#hasLogin').removeClass('hidden');
 	$('#unlogin').addClass('hidden');
@@ -52,6 +64,9 @@ function setUserLogin() {
 	$('.userSpace').val(sessionStorage.used);
 }
 
+/*
+*	isLogin：判断用户是否登录
+*/
 function isLogin() {
 	if (sessionStorage.getItem('name')) {
 		return true;
@@ -60,6 +75,9 @@ function isLogin() {
 	}
 }
 
+/*
+*	setUserExit：用户退出设置
+*/
 function setUserExit() {
 	$('#hasLogin').addClass('hidden');
 	$('#unlogin').removeClass('hidden');
@@ -77,19 +95,31 @@ function setUserExit() {
 	$('#groupNote-tabpanel').find('#groupNotes').html('').end().find('.tab-content').html('');
 }
 
+/*
+*	getContent：获取编辑器内容
+*/
 function getContent(obj) {
 	return obj.getContent();
 }
 
+/*
+*	getContentTxt：获取编辑器纯文本内容
+*/
 function getContentTxt(obj) {
 	return obj.getContentTxt();
 }
 
+/*
+*	clearContent：清空编辑器
+*/
 function clearContent(editor, form) {
 	form.trigger('reset');
 	editor.setContent('');
 }
 
+/*
+*	createNoteBox：创建笔记预览框
+*/
 function createNoteBox(info, index, infoArr, extra) {
 	var isNew = (index) ? false : true;	// 判断是显示新笔记还是显示已有笔记，为false表示显示已有笔记，此时index不为undefined
 	var index = index || 0;

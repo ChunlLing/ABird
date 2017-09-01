@@ -64,6 +64,10 @@ function navGroupNotesShow() {
 	}
 }
 
+/*
+ *	remoteModalShown：远程加载模态框显示完成后的回调函数
+ *	根据e.relatedTarget判断触发对话框的元素，执行相应的操作
+ */
 function remoteModalShown(e) {
 	if ($(e.relatedTarget).attr('id') == 'no-login-btn' || $(e.relatedTarget).attr('id') == 'login-reg-btn') {
 		// 由登录注册按钮触发
@@ -90,10 +94,19 @@ function remoteModalShown(e) {
 	}
 }
 
+/*
+ *	remoteModalHidden：远程加载模态框隐藏完成后的回调函数
+ *	清除远程加载模态框的内容，方便再次使用
+ */
 function remoteModalHidden() {
 	$(this).removeData('bs.modal');
 }
 
+/*
+ *	addNoteClick：点击添加（个人）笔记
+ *	若用户未登录，提示用户并打开登录注册框
+ *	若用户已登录，编辑编辑面板由添加（个人）笔记触发
+ */
 function addNoteClick() {
 		if (sessionStorage.name) {
 			$('.panel.box.note-active').removeClass('note-active');
@@ -108,6 +121,13 @@ function addNoteClick() {
 		}
 }
 
+/*
+ *	addNotePanelShown：编辑面板显示完成后的回调函数
+ *	若编辑面板由添加（个人）笔记触发
+ *		检测编辑面板是否有上次输入且未保存的内容，若有，询问是否继续编辑
+ *	若编辑面板由编辑（个人、群组）笔记触发
+ *		将被编辑笔记内容写入编辑面板
+ */
 function addNotePanelShown() {
 	var title, label, html, txt;
 	switch ($(this).data('trigger')) {
@@ -136,14 +156,25 @@ function addNotePanelShown() {
 	}
 }
 
+/*
+ *	toTabShow：跳转到指定标签页
+ */
 function toTabShow(e) {
 	e.data.target.tab('show');
 }
 
+/*
+ *	validateFocus：表单元素获取焦点，若有状态提示样式，清除已有状态提示样式
+ */
 function validateFocus(e) {
 	formControllerFocus($(this));
 }
 
+/*
+ *	regUsernameBlur：注册表单用户名输入框失去焦点验证函数
+ *	1 用户名只能为字母、数字、中文
+ *	2 用户名不能被重复注册
+ */
 function regUsernameBlur() {
 	var $this = $(this);
 	if (formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '用户名不得包含非法字符！')) {
@@ -155,10 +186,19 @@ function regUsernameBlur() {
 	}
 }
 
+/*
+ *	regUseremailBlur：注册表单邮箱输入框失去焦点验证函数
+ *	1 必须符合邮箱格式要求
+ */
 function regUseremailBlur() {
 	formControllerBlur($(this), /^[\w]+@[\w]{2,8}\.[\w]{2,3}$/, '邮箱格式不正确！');
 }
 
+/*
+ *	regUserPSWBlur：注册表单密码输入框失去焦点验证函数
+ *	1 密码长度必须在6-20位之间
+ *	若密码符合要求且确认密码已输入，对确认密码进行手动获取焦点和失去焦点操作（以验证两次密码是否一致）
+ */
 function regUserPSWBlur() {
 	formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 	if ($(this).val() && $('#reg-userPSWAgain').val() && formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！')) {
@@ -166,16 +206,29 @@ function regUserPSWBlur() {
 	}
 }
 
+/*
+ *	regUserPSWAgainBlur：注册表单确认密码输入框失去焦点验证函数
+ *	1 确认密码必须与密码一致
+ *	2 确认密码长度必须在6-20位之间
+ *	若密码符合要求且确认密码已输入，对确认密码进行手动获取焦点和失去焦点操作（以验证两次密码是否一致）
+ */
 function regUserPSWAgainBlur() {
 	if (formControllerBlur($(this), "$('#reg-userPSWAgain').val() == $('#reg-userPSW').val()", '两次输入密码不一致！')) {
 		formControllerBlur($(this), /^[\w]{6,20}$/, '密码长度必须在6-20位之间！');
 	}
 }
 
+/*
+ *	regUserAnswerBlur：注册表单密保问题回答输入框失去焦点验证函数
+ */
 function regUserAnswerBlur() {
 	formControllerBlur($(this), 'true');
 }
 
+/*
+ *	regSubmitClick：注册表单提交
+ *	若所有表单元素正确填写则可向服务器进行提交
+ */
 function regSubmitClick() {
 	var option = {
 		type: 'POST',
@@ -195,11 +248,14 @@ function regSubmitClick() {
 			};
 			$('#loading-alert p').remove();
 			$('#loading-alert').removeClass('alert-info').addClass('alert-success').append('<p>数据保存成功！ <i class="icon-ok"></i></p>');
+			// 向sessionStorage对象写入用户信息
 			setLoginMessage(msg);
 			setTimeout(function () {
 				$(':submit').removeAttr('disabled');
 				$('#loading-alert').addClass('hidden').removeClass('alert-success').find('p').remove();
+				// 将页面未注册UI隐藏，显示已注册UI
 				setUserLogin();
+				// 重新加载页面
 				location.reload();
 				$('#remote-modal').modal('hide');
 				resetForm($('#reg-form'));
@@ -221,6 +277,11 @@ function exitClick() {
 	setUserExit();
 }
 
+/*
+ *	loginSubmitClick：登录表单提交
+ *	若所有表单元素正确填写则可向服务器进行提交
+ *		若该用户存在数据库中则可登录，否则提示用户名或密码错误
+ */
 function loginSubmitClick() {
 	var option = {
 		type: 'POST',
@@ -270,6 +331,9 @@ function loginSubmitClick() {
 	}
 }
 
+/*
+ *	editSubmitClick：编辑表单提交
+ */
 function editSubmitClick() {
 	var option = {
 		type: 'POST',
@@ -316,9 +380,14 @@ function editSubmitClick() {
 	}
 	$('#edit-form').ajaxForm(option);
 
+	// 清除编辑面板的触发标记
 	$('#addNote-panel').removeData('trigger');
 }
 
+/*
+ *	editCancelClick：取消编辑
+ *	若内容发生改变，询问是否保存修改
+ */
 function editCancelClick() {
 	var title = $('.edit-title').val();
 	var label = $('.modal-title select').val();
@@ -349,6 +418,9 @@ function editCancelClick() {
 	}
 }
 
+/*
+ *	boxLoadMoreClick：我的笔记加载更多
+ */
 function boxLoadMoreClick() {
 	var $this = $(this);
 	var count = 5;
@@ -368,6 +440,9 @@ function boxLoadMoreClick() {
 	}, 'json');
 }
 
+/*
+ *	noteEditClick：笔记预览面板编辑按钮
+ */
 function noteEditClick() {
 	var $this = $(this);
 	switch ($('.box.note-active').data('type')) {
@@ -381,6 +456,9 @@ function noteEditClick() {
 	$('#remote-modal').modal('hide');
 }
 
+/*
+ *	noteDeleteClick：删除笔记按钮
+ */
 function noteDeleteClick() {
 	var $this = $(this);
 	$('#tip-modal').modal('show')
@@ -402,6 +480,9 @@ function noteDeleteClick() {
 	.text('是否要删除该笔记？');
 }
 
+/*
+ *	nboxPanelBodyClick：点击笔记预览框
+ */
 function boxPanelBodyClick() {
 	$('.panel.box.note-active').removeClass('note-active');
 	$(this).parents('.box').addClass('note-active');
@@ -411,6 +492,9 @@ function teamNameBlur() {
 	formControllerBlur($(this), /[\w\u4e00-\u9fa5]/, '群组名不得包含非法字符！');
 }
 
+/*
+ *	createGroupClick：点击创建新群组按钮
+ */
 function createGroupClick() {
 	if (!sessionStorage.name) {
 		$('#loading-alert').find('p').remove().end().addClass('alert-info').append('<p>请先登录...</p>').removeClass('hidden');
@@ -422,6 +506,9 @@ function createGroupClick() {
 	}
 }
 
+/*
+ *	addGroupNoteClick：点击添加群组笔记按钮
+ */
 function addGroupNoteClick() {
 	if (sessionStorage.name) {
 		$('#addNote-panel').data('trigger', 'note-group');
@@ -437,6 +524,9 @@ function addGroupNoteClick() {
 	}
 }
 
+/*
+ *	addGroupSubmitClick：创建新群组
+ */
 function addGroupSubmitClick() {
 	if ($('#teamName').val()) {
 		$('#teamMaster').val(sessionStorage.name);
@@ -474,6 +564,9 @@ function addGroupSubmitClick() {
 	}
 }
 
+/*
+ *	groupNameClick：（小屏）点击群组名称进入相应群组内查看该组笔记
+ */
 function groupNameClick() {
 	if ($(document).width() < 768) {
 		$('.groupNote-tabpanel-right').show();
@@ -481,9 +574,13 @@ function groupNameClick() {
 	}
 }
 
-function addGroupInviteBlur() {
+/*
+ *	memberNameBlur：添加成员表单成员输入框失去焦点回调函数
+ */
+function memberNameBlur() {
 	var $this = $(this);
 	if ($this.val() == sessionStorage.name) {
+		// 当前用户不能被添加
 		formControllerBlur($this, 'false', '你已经在群中啦~~~');
 	} else {
 		var option = {
@@ -492,8 +589,10 @@ function addGroupInviteBlur() {
 		};
 		$.post('data/add_group_member.php', option, function (response) {
 			if (!response['status']) {
+				// 该用户未注册
 				formControllerBlur($this, 'false', '查无此人，再检查一下...');
 			} else if (response['isMember']) {
+				// 该用户已在群组中
 				formControllerBlur($this, 'false', '这位少侠已经在群中了٩(๑❛ᴗ❛๑)۶');
 			} else {
 				formControllerBlur($this, 'true');
@@ -502,6 +601,9 @@ function addGroupInviteBlur() {
 	}
 }
 
+/*
+*	addGroupInviteClick：添加成员表单提交
+*/
 function addGroupInviteClick() {
 	if ($('#memberName').parents('.form-group').hasClass('has-success')) {
 		if (!$('#memberInvitation').val()) {
@@ -536,6 +638,9 @@ function addGroupInviteClick() {
 	}
 }
 
+/*
+*	groupDeleteClick：删除群组
+*/
 function groupDeleteClick() {
 	var $this = $(this);
 	$('#tip-modal').on('click', '.btn-primary', function () {
@@ -551,6 +656,9 @@ function groupDeleteClick() {
 	.text('是的');
 }
 
+/*
+*	backGroupListClick：（小屏）返回到群组页面
+*/
 function backGroupListClick() {
 	$('.groupNote-tabpanel-left').show();
 	$('.groupNote-tabpanel-right').hide();

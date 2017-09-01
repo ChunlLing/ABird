@@ -53,7 +53,7 @@ $(function () {
 	.on('click', '.add-group-note', addGroupNoteClick)
 	.on('click', '#groupNotes .group-name', groupNameClick)
 	.on('focus', '#memberName', validateFocus)
-	.on('blur', '#memberName', addGroupInviteBlur)
+	.on('blur', '#memberName', memberNameBlur)
 	.on('click', '#add-group-member-submit', addGroupInviteClick)
 	.on('click', '.group-delete', groupDeleteClick)
 	.on('click', '.back-group-list', backGroupListClick);
